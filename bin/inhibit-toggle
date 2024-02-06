@@ -1,0 +1,13 @@
+#!/bin/bash
+
+running=$(ps h -C xautolock | grep -wv $$ | wc -l);
+
+if [[ $running < 1 ]];
+then
+    notify-send "Inhibitor" "Deactivated"
+    xset s 500 &
+    xautolock -time 5 -locker "betterlockscreen -l" -notify 30 -notifier "notify-send 'Locker' 'Locking screen in 30 seconds'" -killtime 5 -killer "systemctl suspend"
+else
+    notify-send "Inhibitor" "Activated"
+    pkill xautolock && xset s 0
+fi

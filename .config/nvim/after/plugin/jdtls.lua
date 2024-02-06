@@ -1,0 +1,92 @@
+local jdtls = require('jdtls')
+
+local root_markers = { ".gradle", "gradlew", ".git" }
+local root_dir = jdtls.setup.find_root(root_markers)
+local home = os.getenv("HOME")
+local project_name = vim.fn.fnamemodify(root_dir, ":p:h:t")
+local workspace_dir = home .. "/.cache/jdtls/workspace/" .. project_name
+
+local jdtls_bin = vim.fn.stdpath("data") .. "/mason/bin/jdtls"
+
+local on_attach = function(client, bufnr)
+    require'jdtls.setup'.add_commands()
+    -- require'jdtls'.setup_dap({ hotcodereplace = 'auto' })
+    -- require("dapui").setup()
+--    require'lsp-status'.register_progress()
+end
+
+local config = {
+    on_attach = on_attach,
+    on_init = function(client)
+        if client.config.settings then
+            client.notify('workspace/didChangeConfiguration', { settings = client.config.settings })
+        end
+    end,
+    cmd = {
+        jdtls_bin,
+        '-data',
+        workspace_dir,
+    },
+    -- root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw' }, { upward = true })[1]),
+
+    capabilities = vim.lsp.protocol.make_client_capabilities(),
+
+    configuration = {
+        runtimes = {
+            {
+                name = "JavaSE-1.8",
+                path = "/Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home",
+                default = true,
+            },
+            {
+                name = "JavaSE-17",
+                path = "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home",
+            },
+            {
+                name = "JavaSE-19",
+                path = "/Library/Java/JavaVirtualMachines/jdk-19.jdk/Contents/Home",
+            },
+        },
+    },
+
+    settings = {
+        java = {
+            signatureHelp = { enabled = true },
+            contentProvider = { preferred = 'fernflower' };
+            completion = {
+                favoriteStaticMembers = {},
+                filteredTypes = {
+                    -- "com.sun.*",
+                    -- "io.micrometer.shaded.*",
+                    -- "java.awt.*",
+                    -- "jdk.*",
+                    -- "sun.*",
+                },
+            },
+            format = {
+                settings = {
+                    profile = "custom",
+                    url = '/home/utilizador/.config/java-formater/custom_config.xml'
+                }
+            },
+            sources = {
+                organizeImports = {
+                    starThreshold = 9999,
+                    staticStarThreshold = 9999,
+                },
+            },
+            codeGeneration = {
+                toString = {
+                    template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}",
+                },
+                useBlocks = true,
+            },
+        }
+    },
+}
+
+vim.api.nvim_create_user_command("Jdtls", function()
+    require('jdtls').start_or_attach(config)
+    require('jdtls.setup').add_commands()
+end, {})
+

@@ -1,0 +1,3 @@
+#!/bin/sh
+pactl get-source-volume @DEFAULT_SOURCE@ | grep Volume | awk '{print $5}' | cut -d '%' -f 1
+
