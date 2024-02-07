@@ -42,6 +42,6 @@ bspc rule -a 'Xmessage' state=floating
 
 discord &
 
-/home/utilizador/.config/xmonad/scripts/startup.sh
+/home/utilizador/.config/bspwm/startup.sh
 
 betterlockscreen -u $image --fx & #only renders normal image
