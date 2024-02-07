@@ -16,7 +16,7 @@ require("conform").setup({
         uncrustify = {
             command = '/home/utilizador/uncrustify/build/uncrustify',
             env = {
-                UNCRUSTIFY_CONFIG = "/home/utilizador/.config/nvim/custom.cfg",
+                UNCRUSTIFY_CONFIG = "/home/utilizador/.config/uncrustify/custom.cfg",
             }
 
         },
