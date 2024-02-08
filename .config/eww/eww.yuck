@@ -1,5 +1,3 @@
-
-  
   (defwidget player [] 
       (box :orientation "v" :space-evenly "false" 
               (box :class "musicart" :style "background-image: url('${cover}');" {art})
@@ -185,7 +183,7 @@
 
     ;; Battery charge vars
     (defpoll battery-remaining :interval "5s"  "cat /sys/class/power_supply/BAT0/capacity")
-    (defpoll bat-icon :interval "5s"  "~/.config/tint2/scripts/battery.sh")
+    (defpoll bat-icon :interval "5s"  "~/.config/eww/scripts/battery.sh")
 
     ;; Home-dir stuff
     (defpoll l1-processed :interval "20h"  "~/.config/eww/scripts/home-dir/l1-processed")

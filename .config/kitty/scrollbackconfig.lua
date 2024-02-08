@@ -6,7 +6,7 @@ require('kitty-scrollback').setup({
         return {
             status_window = {
                 icons = {
-                    nvim = '',
+                    nvim = 'a',
                 },
             },
         }
