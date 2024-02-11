@@ -205,6 +205,11 @@ _G.packer_plugins = {
     path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/mini.nvim",
     url = "https://github.com/echasnovski/mini.nvim"
   },
+  nerdtree = {
+    loaded = true,
+    path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/nerdtree",
+    url = "https://github.com/preservim/nerdtree"
+  },
   ["nightfox.nvim"] = {
     loaded = true,
     path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/nightfox.nvim",

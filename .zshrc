@@ -141,3 +141,5 @@ pokemon-colorscripts -r
 function zvm_after_init() {
     bindkey '^k' autosuggest-accept
 }
+
+bindkey "^P" up-line-or-search

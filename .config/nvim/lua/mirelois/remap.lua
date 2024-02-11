@@ -7,6 +7,9 @@ vim.keymap.set("n", "<leader><leader>h", ":Telescope help_tags<CR>")
 vim.keymap.set('n', '<leader><CR>', 'm`o<Esc>``')
 vim.keymap.set('n', '<leader><S-CR>', 'm`O<Esc>``')
 
+vim.keymap.set('n', '<C-w>-', ':split<CR>')
+vim.keymap.set('n', '<C-w>|', ':vsplit<CR>')
+
 --allowes moving selected code
 -- vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 -- vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")

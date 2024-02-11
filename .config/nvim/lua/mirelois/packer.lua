@@ -128,4 +128,6 @@ return require('packer').startup(function(use)
     -- use { "ggandor/leap.nvim" }
 
     -- use { "monaqa/dial.nvim" }
+    
+    use { 'preservim/nerdtree' }
 end)
