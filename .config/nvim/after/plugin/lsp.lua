@@ -79,15 +79,9 @@ vim.diagnostic.config({
     virtual_text = false,
 })
 
--- require 'lspconfig'.jdtls.setup {
---     cmd = { 'jdtls' },
---     settings = {
---         jdtls = {
---             compile = "full",
---             root_markers = { ".gradle", "gradlew", ".git" },
---         }
---     }
--- }
+require 'lspconfig'.pyright.setup {
+    root_dir=function() return vim.fn.getcwd() end
+}
 
 
 require 'lspconfig'.lua_ls.setup {

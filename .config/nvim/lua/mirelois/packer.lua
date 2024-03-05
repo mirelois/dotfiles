@@ -22,7 +22,11 @@ return require('packer').startup(function(use)
 
     use('nvim-treesitter/playground')
 
-    use('ThePrimeagen/harpoon')
+    use {
+        "ThePrimeagen/harpoon",
+        branch = "harpoon2",
+        requires = { { "nvim-lua/plenary.nvim" } }
+    }
 
     use('mbbill/undotree')
 
@@ -52,25 +56,20 @@ return require('packer').startup(function(use)
     -- use { 'jdhao/better-escape.vim', event = 'InsertEnter' }
     use { "tpope/vim-surround" }
     use { "tpope/vim-repeat" }
-    use { 'rockerBOO/boo-colorscheme-nvim' }
-    use { 'folke/tokyonight.nvim' }
-    use { "EdenEast/nightfox.nvim" }
-    use { "catppuccin/nvim", as = "catppuccin" }
-    use { "dracula/vim" }
     use { "rebelot/kanagawa.nvim" }
     use { 'nvim-lualine/lualine.nvim',
         requires = { 'nvim-tree/nvim-web-devicons', opt = true } }
-    use { 'echasnovski/mini.nvim', branch = 'stable' }
-    use { 'cesaralvarod/tokyogogh.nvim' }
-    use { "akinsho/toggleterm.nvim", tag = '*' }
+
+    use { 'AckslD/nvim-trevJ.lua' }
+
     use { "lukas-reineke/indent-blankline.nvim" }
     use { "wellle/targets.vim" }
+
     use { 'nvim-tree/nvim-web-devicons' }
+
     use { 'vimpostor/vim-tpipeline' }
-    use { 'arjunmahishi/flow.nvim' }
 
     use { 'numToStr/Comment.nvim' }
-    use { 'folke/twilight.nvim' }
 
     use { "HiPhish/rainbow-delimiters.nvim" }
 
@@ -100,19 +99,6 @@ return require('packer').startup(function(use)
         ft = { "markdown" },
     })
 
-    use({
-        'mikesmithgh/kitty-scrollback.nvim',
-        disable = false,
-        opt = true,
-        cmd = { 'KittyScrollbackGenerateKittens', 'KittyScrollbackCheckHealth' },
-        event = { 'User KittyScrollbackLaunch' },
-        -- tag = '*', -- latest stable version, may have breaking changes if major version changed
-        -- tag = 'v2.0.0', -- pin specific tag
-        config = function()
-            require('kitty-scrollback').setup()
-        end,
-    })
-
     use { "RaafatTurki/corn.nvim" }
 
     use { "ray-x/lsp_signature.nvim" }
@@ -123,11 +109,10 @@ return require('packer').startup(function(use)
 
     use { "aserowy/tmux.nvim" }
 
-    use { 'kovetskiy/sxhkd-vim' }
+    use { 'michaelb/sniprun',
+    run = 'sh ./install.sh 1'}
 
     -- use { "ggandor/leap.nvim" }
 
     -- use { "monaqa/dial.nvim" }
-    
-    use { 'preservim/nerdtree' }
 end)

@@ -37,6 +37,8 @@ vim.opt.colorcolumn = "0"
 
 vim.g.mapleader = " "
 
+vim.cmd('autocmd BufEnter * set formatoptions-=cro')
+vim.cmd('autocmd BufEnter * setlocal formatoptions-=cro')
 
 if vim.fn.has("termguicolors") then
     vim.opt.termguicolors = true

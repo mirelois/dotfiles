@@ -19,8 +19,9 @@ xdotool key Num_Lock
 xset s off -dpms
 setxkbmap pt nodeadkeys
 xsetroot -cursor_name left_ptr
-setxkbmap -option caps:ctrl_modifier
+# setxkbmap -option caps:ctrl_modifier
 setxkbmap -option compose:rctrl
+# setxkbmap -option shift:both_capslock
 
 #start tmux server
 tmux new-session -d &

@@ -16,16 +16,16 @@ ls.config.set_config {
 
 
 vim.keymap.set({ "i", "s" }, "<c-k>", function()
-    if ls.expandable() then
-        ls.expand()
+    if ls.expand_or_jumpable() then
+        ls.expand_or_jump()
     end
 end, { silent = true })
 
-vim.keymap.set({ "i", "s" }, "<c-l>", function()
-    if ls.jumpable(1) then
-        ls.jump(1)
-    end
-end, {silent = true})
+-- vim.keymap.set({ "i", "s" }, "<c-l>", function()
+--     if ls.jumpable(1) then
+--         ls.jump(1)
+--     end
+-- end, {silent = true})
 
 vim.keymap.set({ "i", "s" }, "<c-j>", function()
     if ls.jumpable(-1) then
@@ -33,7 +33,7 @@ vim.keymap.set({ "i", "s" }, "<c-j>", function()
     end
 end, { silent = true })
 
-vim.keymap.set("i", "<c-h>", function()
+vim.keymap.set("i", "<c-l>", function()
     if ls.choice_active() then
         ls.change_choice(1)
     end
@@ -60,6 +60,12 @@ ls.add_snippets("all", {
         f(
             function()
                 return os.getenv("PWD")
+            end
+        )),
+    s("currfile",
+        f(
+            function()
+                return vim.api.nvim_buf_get_name(0)
             end
         )),
 }
@@ -105,3 +111,20 @@ ls.add_snippets("cpp", {
     }}]], { i(1, "i"), rep(1), rep(1), i(2)})),
 }
 )
+
+ls.add_snippets("sh", {
+    s("tmuxsplitw", fmt([[tmux split-window -d -l {} -c {} "{}" ]], {i(1), i(2, "$DIR/class"), i(3)})),
+
+    s("tmuxtile", t("tmux select-layout tiled")),
+
+    s("tmuxkillp", t("tmux kill-pane -a -t 0")),
+
+    s("tmuxonexit", t("tmux setw remain-on-exit on")),
+
+    s("DIR", fmt([[DIR={}]], f( function() return os.getenv("PWD") .. "/" end))),
+
+    s("javac", fmt([[javac -d {} {}]], { i(1, "$DIR/classes/"), i(2,"$DIR/code/") })),
+
+    s("mvnexec", fmt([[mvn exec:java -Dexec.mainClass={}.{} -q]], {i(1), i(2, "$class_name")}))
+
+})

@@ -84,7 +84,7 @@ super + q
 super + w
 	bspc node -{c,k}
 
-# alternate between monocle and tall layouts
+# alternate between monocle, and tall layouts
 super + m
 	bsp-layout next --layouts tall,monocle | /home/utilizador/.config/bspwm/showLayout.sh
 

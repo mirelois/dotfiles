@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>pv", ":Oil<CR>")
+vim.keymap.set("n", "<leader>pv", ":Ex<CR>")
 vim.keymap.set("n", "-", ":Oil<CR>")
 
 vim.keymap.set("n", "<leader><leader>h", ":Telescope help_tags<CR>")
@@ -11,8 +11,8 @@ vim.keymap.set('n', '<C-w>-', ':split<CR>')
 vim.keymap.set('n', '<C-w>|', ':vsplit<CR>')
 
 --allowes moving selected code
--- vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
--- vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 vim.opt.formatoptions:remove { "c", "r", "o" }
 
@@ -41,10 +41,11 @@ vim.keymap.set("n", "Q", "<nop>") --disables Q
 vim.keymap.set("n", "<C-f>", ":silent !tmux neww tmux-sessionizer<CR>")
 
 --quickfix navigation ????
-vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
+vim.keymap.set("n", "<Tab>", "<cmd>cnext<CR>zz")
+vim.keymap.set("n", "<S-Tab>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+
 
 --start to replace word you are on
 vim.keymap.set("n", "<leader>*", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])

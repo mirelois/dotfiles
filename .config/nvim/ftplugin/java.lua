@@ -6,11 +6,11 @@ local opts = {
             completion = {
                 favoriteStaticMembers = {},
                 filteredTypes = {
-                    -- "com.sun.*",
-                    -- "io.micrometer.shaded.*",
-                    -- "java.awt.*",
-                    -- "jdk.*",
-                    -- "sun.*",
+                    "com.sun.*",
+                    "io.micrometer.shaded.*",
+                    "java.awt.*",
+                    "jdk.*",
+                    "sun.*",
                 },
             },
             sources = {
@@ -56,7 +56,7 @@ local function setup()
     -- local jdtls_path = vim.fn.stdpath("data") .. "/mason/packages/jdtls"
     local jdtls_bin = vim.fn.stdpath("data") .. "/mason/bin/jdtls"
 
-    local root_markers = { ".gradle", "gradlew", ".git" }
+    local root_markers = { ".gradle", "gradlew", ".git", "pom.xml" }
     local root_dir = jdtls.setup.find_root(root_markers)
     local home = os.getenv("HOME")
     local project_name = vim.fn.fnamemodify(root_dir, ":p:h:t")
@@ -87,7 +87,7 @@ local function setup()
     opts.init_options = {
         bundles = {
             vim.fn.glob(
-            "/home/utilizador/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-0.51.0.jar", 1)
+            "/home/utilizador/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-0.51.1.jar", 1)
         },
     }
 
@@ -115,3 +115,18 @@ if not pkg_status then
     return
 end
 jdtls.start_or_attach(jdtls_config)
+
+--keymaps
+vim.keymap.set("n", "<leader>oi", require'jdtls'.organize_imports())
+vim.keymap.set("n", "<leader>ev", require('jdtls').extract_variable())
+vim.keymap.set("n", "<leader>tev", require('jdtls').extract_variable(true))
+vim.keymap.set("n", "<leader>ec", require('jdtls').extract_constant())
+vim.keymap.set("n", "<leader>tec", require('jdtls').extract_constant(true))
+vim.keymap.set("n", "<leader>em", require('jdtls').extract_method(true))
+
+
+-- If using nvim-dap
+-- This requires java-debug and vscode-java-test bundles, see install steps in this README further below.
+-- vim.keymap.set("n", "<leader>df", require'jdtls'.test_class())
+-- vim.keymap.set("n", "<leader>dn", require'jdtls'.test_nearest_method())
+
