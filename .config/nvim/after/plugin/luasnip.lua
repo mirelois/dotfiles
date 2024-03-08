@@ -10,9 +10,18 @@ local types = require("luasnip.util.types")
 ls.config.set_config {
     history = true,
 
-    updateevents = "TextChanged,TextChangedI"
-}
+    updateevents = "TextChanged,TextChangedI",
 
+    enable_autosnippets = true,
+
+    ext_opts={
+        [types.choiceNode] = {
+            active = {
+                virt_text = {{"<-|", "Error"}}
+            }
+        }
+    }
+}
 
 
 vim.keymap.set({ "i", "s" }, "<c-k>", function()
@@ -38,8 +47,6 @@ vim.keymap.set("i", "<c-l>", function()
         ls.change_choice(1)
     end
 end)
-
-vim.keymap.set("n", "<leader><leader>s", "<cmd>source ~/.config/nvim/after/plugin/luasnip.lua<CR>")
 
 local s = ls.snippet
 local fmt = require("luasnip.extras.fmt").fmt
@@ -113,7 +120,14 @@ ls.add_snippets("cpp", {
 )
 
 ls.add_snippets("sh", {
-    s("tmuxsplitw", fmt([[tmux split-window -d -l {} -c {} "{}" ]], {i(1), i(2, "$DIR/class"), i(3)})),
+    s("tmuxsplitw", fmt([[tmux split-window -d -l {} {}{} ]], {
+        i(1,"10"),
+        c(2, {
+            sn(nil, fmt("-c $DIR/{} ", i(1))),
+            t(),
+        }),
+        c(3, {t("$CMD"), sn(nil, fmt([["{}"]],i(1)))})
+    })),
 
     s("tmuxtile", t("tmux select-layout tiled")),
 
@@ -121,10 +135,36 @@ ls.add_snippets("sh", {
 
     s("tmuxonexit", t("tmux setw remain-on-exit on")),
 
-    s("DIR", fmt([[DIR={}]], f( function() return os.getenv("PWD") .. "/" end))),
+    s("DIR", fmt([[DIR={}]], f( function() return os.getenv("PWD") end))),
 
-    s("javac", fmt([[javac -d {} {}]], { i(1, "$DIR/classes/"), i(2,"$DIR/code/") })),
+    s("javac", fmt([[javac {}{}]], {
+        c(1, {
+            t("-d $DIR/classes/ "),
+            t(),
+        }),
+        c(2, {
+            sn(nil, fmt("$DIR/code/{}", i(1))),
+            t(),
+        })
+    })),
 
-    s("mvnexec", fmt([[mvn exec:java -Dexec.mainClass={}.{} -q]], {i(1), i(2, "$class_name")}))
+    s("mvnexec", fmt([[mvn exec:java -Dexec.mainClass={}.{} -q]], {i(1), c(2, {t("$class_name"), i()})})),
+
+    s("tmuxsetup", fmt([[
+        #!/usr/bin/env bash
+
+        DIR={}
+        CMD=""
+
+        tmux kill-pane -a -t 0
+        tmux setw remain-on-exit on
+
+        tmux split-window -d -l 10 -c $DIR/ $CMD
+
+
+        tmux select-layout tiled
+    ]], f(function ()
+        return os.getenv('PWD')
+    end)))
 
 })

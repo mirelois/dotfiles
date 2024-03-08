@@ -4,7 +4,7 @@ pgrep -x sxhkd > /dev/null || sxhkd -c ~/.config/bspwm/sxhkdrc &
 
 ~/.screenlayout/dual_monitor.sh
 
-bspc monitor eDP-1-1 -d   󰉓     8 
+bspc monitor eDP-1-1 -d   󰈙      
 bspc monitor HDMI-1-1 -d 󱧐
 
 
@@ -24,25 +24,25 @@ bsp-layout set monocle 
 bsp-layout set monocle 
 bsp-layout set monocle 
 bsp-layout set monocle 󱧐
-bsp-layout set monocle 󰉓
-bsp-layout set monocle 8
+bsp-layout set monocle 
 
 bsp-layout set tall 
 bsp-layout set tall 
 bsp-layout set tall 
+bsp-layout set tall 󰈙
 
 #window rules
 #run "xprop | grep WM_CLASS" to find window class
-bspc rule -a 'discord' desktop=''
-bspc rule -a 'Spotify' desktop=''
-bspc rule -a 'VirtualBox Machine' desktop='8'
-bspc rule -a 'VirtualBox Manager' desktop='8'
+bspc rule -a 'discord' desktop='' follow=true
+bspc rule -a 'Spotify' desktop='' follow=true
+bspc rule -a 'VirtualBox Machine' desktop='' follow=true
+bspc rule -a 'VirtualBox Manager' desktop='' follow=true
+bspc rule -a 'Evince' desktop='󰈙' follow=true
+bspc rule -a 'Zathura' desktop='󰈙' follow=true
+bspc rule -a 'Org.gnome.Nautilus' follow=true desktop=''
 bspc rule -a 'Gnome-calculator' state=floating
 bspc rule -a 'Xmessage' state=floating
 bspc rule -a 'Zathura' state=tiled
 
-discord &
-
 /home/utilizador/.config/bspwm/startup.sh
 
-betterlockscreen -u $image --fx & #only renders normal image

@@ -29,9 +29,11 @@ tmux new-session -d &
 #compositor
 exec picom &
 
+discord &
+
+#screen blocker
+betterlockscreen -u $image --fx & #only renders normal image
+
 #eww start
 eww daemon &
-
-#lock screen
-# betterlockscreen -u $image --fx & #only renders normal image
 

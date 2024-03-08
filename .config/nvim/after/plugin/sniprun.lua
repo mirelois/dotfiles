@@ -4,10 +4,10 @@ require 'sniprun'.setup({
     --# to filter only sucessful runs (or errored-out runs respectively)
     display = {
         -- "Classic", --# display results in the command-line  area
-        -- "VirtualTextOk",              --# display ok results as virtual text (multiline is shortened)
+        "VirtualTextOk",              --# display ok results as virtual text (multiline is shortened)
 
         -- "VirtualText",             --# display results as virtual text
-        "TempFloatingWindow", --# display results in a floating window
+        -- "TempFloatingWindow", --# display results in a floating window
         -- "LongTempFloatingWindow",  --# same as above, but only long results. To use with VirtualText[Ok/Err]
         -- "Terminal",                --# display results in a vertical split
         -- "TerminalWithCode",        --# display results and code history in a vertical split
@@ -24,13 +24,16 @@ require 'sniprun'.setup({
 
     --# customize highlight groups (setting this overrides colorscheme)
     snipruncolors = {
-        SniprunVirtualTextOk  = { bg = "#54546D", fg = "#DCD7BA" },
-        SniprunFloatingWinOk  = { fg = "#DDDDDD", },
-        SniprunVirtualTextErr = { bg = "#881515", fg = "#000000", },
-        SniprunFloatingWinErr = { fg = "#881515", },
+        SniprunVirtualTextOk  = { bg = "#00000000", fg = "#727169" },
     },
 
 
-    borders = 'single', --# display borders around floating windows
+    borders = 'none', --# display borders around floating windows
     --# possible values are 'none', 'single', 'double', or 'shadow'
 })
+
+vim.api.nvim_set_keymap('v', '<leader>r', ':SnipRun<CR>', {silent = true})
+vim.api.nvim_set_keymap('n', '<leader>r', '<Plug>SnipRunOperator', {silent = true})
+vim.api.nvim_set_keymap('n', '<leader>rr', ':SnipRun<CR>', {silent = true})
+vim.api.nvim_set_keymap('n', '<leader>rx', ':SnipClose<CR>', {silent = true})
+
