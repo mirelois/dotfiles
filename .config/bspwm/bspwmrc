@@ -2,7 +2,7 @@
 
 pgrep -x sxhkd > /dev/null || sxhkd -c ~/.config/bspwm/sxhkdrc &
 
-~/.screenlayout/dual_monitor.sh
+~/.screenlayout/dual_monitor.sh &
 
 bspc monitor eDP-1-1 -d   󰈙      
 bspc monitor HDMI-1-1 -d 󱧐
@@ -44,5 +44,7 @@ bspc rule -a 'Gnome-calculator' state=floating
 bspc rule -a 'Xmessage' state=floating
 bspc rule -a 'Zathura' state=tiled
 
-/home/utilizador/.config/bspwm/startup.sh
+/home/utilizador/.config/bspwm/startup.sh &
+
+eww daemon
 

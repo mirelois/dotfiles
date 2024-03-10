@@ -35,5 +35,5 @@ discord &
 betterlockscreen -u $image --fx & #only renders normal image
 
 #eww start
-eww daemon &
+# eww daemon &
 
