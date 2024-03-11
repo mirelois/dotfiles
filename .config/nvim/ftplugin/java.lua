@@ -84,10 +84,16 @@ local function setup()
         workspace_dir,
 
     }
+
+    local extendedClientCapabilities = jdtls.extendedClientCapabilities;
+    extendedClientCapabilities.resolveAdditionalTextEditsSupport = true;
+
     opts.init_options = {
+        extendedClientCapabilities = extendedClientCapabilities,
         bundles = {
             vim.fn.glob(
-            "/home/utilizador/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-0.51.1.jar", 1)
+                "/home/utilizador/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-0.51.1.jar",
+                1)
         },
     }
 
@@ -98,7 +104,15 @@ local function setup()
         jdtls.setup_dap({ hotcodereplace = "auto" })
         -- jdtls.dap.setup_dap_main_class_configs()
 
+        --keymaps
+        vim.keymap.set("n", "<leader>oi", require 'jdtls'.organize_imports())
+        vim.keymap.set("n", "<leader>ev", require('jdtls').extract_variable())
+        vim.keymap.set("n", "<leader>tev", require('jdtls').extract_variable(true))
+        vim.keymap.set("n", "<leader>ec", require('jdtls').extract_constant())
+        vim.keymap.set("n", "<leader>tec", require('jdtls').extract_constant(true))
+        vim.keymap.set("n", "<leader>em", require('jdtls').extract_method(true))
         -- you may want to also run your generic on_attach() function used by your LSP config
+        vim.lsp.client.on_attach()
     end
 
     opts.on_attach = on_attach
@@ -116,17 +130,9 @@ if not pkg_status then
 end
 jdtls.start_or_attach(jdtls_config)
 
---keymaps
-vim.keymap.set("n", "<leader>oi", require'jdtls'.organize_imports())
-vim.keymap.set("n", "<leader>ev", require('jdtls').extract_variable())
-vim.keymap.set("n", "<leader>tev", require('jdtls').extract_variable(true))
-vim.keymap.set("n", "<leader>ec", require('jdtls').extract_constant())
-vim.keymap.set("n", "<leader>tec", require('jdtls').extract_constant(true))
-vim.keymap.set("n", "<leader>em", require('jdtls').extract_method(true))
 
 
 -- If using nvim-dap
 -- This requires java-debug and vscode-java-test bundles, see install steps in this README further below.
 -- vim.keymap.set("n", "<leader>df", require'jdtls'.test_class())
 -- vim.keymap.set("n", "<leader>dn", require'jdtls'.test_nearest_method())
-

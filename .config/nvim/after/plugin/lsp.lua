@@ -1,9 +1,9 @@
 local lsp = require("lsp-zero")
 
+
 lsp.preset("recommended")
 
-lsp.ensure_installed({
-})
+lsp.ensure_installed({})
 
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
@@ -25,7 +25,14 @@ cmp_mappings['<Up>'] = nil
 cmp_mappings['<Down>'] = nil
 
 lsp.setup_nvim_cmp({
-    mapping = cmp_mappings
+    mapping = cmp_mappings,
+    sources =  {
+        { name = "luasnip"},
+        { name = "path"},
+        { name = "buffer"},
+        { name = "nvim_lsp"},
+        { name = "nvim_lua"},
+    }
 })
 
 lsp.set_preferences({
@@ -58,6 +65,9 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
 end)
 
+
+lsp.setup()
+
 require'lspconfig'.ccls.setup {
     single_file_support = true,
     filetypes = {"cuda"},
@@ -71,13 +81,6 @@ require'lspconfig'.ccls.setup {
         },
     }
 }
-
-
-lsp.setup()
-
-vim.diagnostic.config({
-    virtual_text = false,
-})
 
 require 'lspconfig'.pyright.setup {
     root_dir=function() return vim.fn.getcwd() end
