@@ -22,6 +22,8 @@ return require('packer').startup(function(use)
 
     use('nvim-treesitter/playground')
 
+    use {'chentoast/marks.nvim'}
+
     use {
         "ThePrimeagen/harpoon",
         branch = "harpoon2",
