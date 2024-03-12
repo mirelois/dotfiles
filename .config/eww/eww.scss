@@ -37,7 +37,7 @@ button {
 }
 
 .musicbtn button:hover {
-  color: #D35D6E;
+  color: #E46876;
 }
 
 .music-slider scale trough {
@@ -64,7 +64,7 @@ button {
 .number_day {
   padding-top: 10px;
   font-size: 35px;
-  color: #c47eb7;
+  color: #957FB8;
 }
 
 .month {
@@ -81,7 +81,7 @@ button {
   padding-top: 10px;
   padding-bottom: 5px;
   font-weight: bold;
-  color: #c47eb7;
+  color: #957FB8;
 }
 
 .temperature-side {
@@ -119,10 +119,10 @@ button {
 }
 
 .musicbtn-side button:hover {
-  color: #D35D6E;
+  color: #E46876;
 }
 .pause-play-side {
-  color: #D35D6E;
+  color: #E46876;
 }
 .pause-play-side:hover {
   color: #ffd5cd;
@@ -133,15 +133,13 @@ button {
   font-size: 60px;
 }
 .minute-side {
-  color: #c47eb7;
+  color: #957FB8;
 }
 .day-side {
   font-size: 16px;
   font-weight: bold;
-  color: #90c861;
+  color: #98BB6C;
 }
-
-
 
 
 .sliders-side slider {
@@ -153,35 +151,50 @@ button {
 }
 .slider-vol-side scale trough highlight {
 	all: unset;
-	background-color: #c47eb7;
+	background-color: #957FB8;
+	color: #000000;
+	border-radius: 10px;
+}
+.slider-mic-side scale trough highlight {
+	all: unset;
+	background-color: #7AA89F;
 	color: #000000;
 	border-radius: 10px;
 }
 .slider-bright-side scale trough highlight {
   all: unset;
-	background-color: #84afdb;
+	background-color: #7FB4CA;
 	color: #000000;
 	border-radius: 10px;
 }
 .slider-ram-side scale trough highlight {
   all: unset;
-	background-color: #D35D6E;;
+	background-color: #E46876;
 	color: #000000;
 	border-radius: 10px;
 }
 .slider-CPU-side scale trough highlight {
   all: unset;
-	background-color: #da8548;;
+	background-color: #FFA066;
 	color: #000000;
 	border-radius: 10px;
 }
 .slider-battery-side scale trough highlight {
   all: unset;
-	background-color: #90c861;
+	background-color: #98BB6C;
 	color: #000000;
 	border-radius: 10px;
 }
 .slider-vol-side scale trough {
+	all: unset;
+	background-color: #4e4e4e;
+	border-radius: 50px;
+	min-height: 5px;
+  min-width: 170px;
+  margin-top: 10px;
+  margin-left: 18px;
+}
+.slider-mic-side scale trough {
 	all: unset;
 	background-color: #4e4e4e;
 	border-radius: 50px;
@@ -227,7 +240,7 @@ button {
   margin-left: 09px;
 }
 
-.label-battery-side, .label-bright-side, .label-vol-side, .label-CPU-side{
+.label-battery-side, .label-bright-side, .label-CPU-side{
   margin-top: 10px;
   font-family: Iosevka;
   margin-left: 35px;
@@ -236,23 +249,37 @@ button {
 .label-bright-side {
   color: #84afdb;
 }
+.label-mic-side {
+  margin-top: 10px;
+  font-family: Iosevka;
+  margin-left: 38px;
+  font-size: 26px;
+  color: #7AA89F;
+}
+.label-vol-side {
+  margin-top: 10px;
+  font-family: Iosevka;
+  margin-left: 37px;
+  font-size: 26px;
+  color: #7AA89F;
+}
 .label-ram-side {
   margin-top: 10px;
   font-family: Iosevka;
   margin-left: 38px;
   font-size: 20px;
-  color: #D35D6E;
+  color: #E46876;
 }
 .label-CPU-side {
   font-size: 30px;
-  color: #da8548;
+  color: #FFA066;
 }
 .label-battery-side {
   font-size: 18px;
-  color: #90c861;
+  color: #98BB6C;
 }
 .label-vol-side {
-  color: #c47eb7;
+  color: #957FB8;
 }
 
 .search-side {
@@ -261,16 +288,16 @@ button {
   margin: 20px 30px 20px 30px;
 }
 .search-side:hover {
-  color: #D35D6E;
+  color: #E46876;
 }
 .sysbtn button {
   font-size: 30px;
 }
 .shutdown-side ~ button:hover {
-  color: #D35D6E;
+  color: #E46876;
 }
 .shutdown-side{
-  color: #D35D6E;
+  color: #E46876;
 }
 .shutdown-side:hover{
   color: #ffd5cd;
@@ -282,10 +309,10 @@ button {
   color: #ffd5cd;
 }
 .suspend-side{
-  color: #c47eb7;
+  color: #957FB8;
 }
 .logout-side{
-  color: #90c861;
+  color: #98BB6C;
 }
 
 .calendar_title {
@@ -298,11 +325,11 @@ button {
   margin-right: 5px;
 }
 .search-full:hover {
-  color: #D35D6E;
+  color: #E46876;
 }
 .power-full {
   font-size: 60px;
-  color: #D35D6E;
+  color: #E46876;
 }
 .power-full:hover {
   color: #ffd5cd;
@@ -312,28 +339,28 @@ button {
   color: #84afdb
 }
 .reboot-full:hover {
-  color: #D35D6E
+  color: #E46876
 }
 .lock-full {
   font-size: 60px;
   color: #ffd5cd
 }
 .lock-full:hover {
-  color: #D35D6E
+  color: #E46876
 }
 .suspend-full {
   font-size: 60px;
-  color: #c47eb7
+  color: #957FB8
 }
 .suspend-full:hover {
-  color: #D35D6E
+  color: #E46876
 }
 .logout-full {
   font-size: 60px;
-  color: #90c861
+  color: #98BB6C
 }
 .logout-full:hover {
-  color: #D35D6E
+  color: #E46876
 }
 
 .pfp {
@@ -348,7 +375,7 @@ button {
 }
 .pfptxt {
   margin-top: 100px;
-  color: #D35D6E;
+  color: #E46876;
   font-size: 36px;
 }
 .subpfptxt {
@@ -366,7 +393,7 @@ button {
   padding-top: 50px;
   padding-bottom: 25px;
   font-weight: bold;
-  color: #D35D6E;
+  color: #E46876;
 }
 
 .temperature {
@@ -380,7 +407,7 @@ button {
 .weather-quote-head, .weather-quote-tail {
   font-size: 18px;
   // font-weight: bold;
-  // color: #90c861
+  // color: #98BB6C
 }
 
 .l1, .l2, .l3, .l4, .l5, .l6 {
@@ -391,7 +418,7 @@ button {
   margin: 10px;
 }
 .l1:hover, .l3:hover, .l4:hover, .l6:hover {
-  color: #D35D6E;
+  color: #E46876;
 }
 .l1, .l6 {
  color: #84afdb;
@@ -400,10 +427,10 @@ button {
  color: #ffd5cd;
 }
 .l3, .l4 {
- color: #c47eb7;
+ color: #957FB8;
 }
 .l5:hover, .l2:hover {
-  color: #D35D6E;
+  color: #E46876;
 }
 
 .quote-main {

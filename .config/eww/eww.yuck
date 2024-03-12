@@ -39,6 +39,9 @@
         (box :orientation "h" :class "slider-vol-side" :space-evenly "false" 
           (box :class "label-vol-side" "")
           (scale :min 0 :max 101 :value {volume} :onchange "amixer -D pulse sset Master {}%"))
+        (box :orientation "h" :class "slider-mic-side" :space-evenly "false" 
+          (box :class "label-mic-side" "")
+          (scale :min 0 :max 101 :value {mic} :onchange "amixer sset Capture {}%"))
         (box :orientation "h" :class "slider-bright-side" :space-evenly "false" 
           (box :class "label-bright-side" "")
           (scale :min 0 :max 101 :value {bright} :onchange "brightnessctl s {}%"))
@@ -231,7 +234,7 @@
 			    :geometry (geometry :x "10px" :y "407px" :width "300px" :height "230px")
 			     				(sliders_side))
     (defwindow sys_side 
-			    :geometry (geometry :x "10px" :y "642px" :width "300px" :height "153px")
+			    :geometry (geometry :x "10px" :y "659px" :width "300px" :height "153px")
 			     				(sys_side))
 
     ;; Main Stuff

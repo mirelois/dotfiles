@@ -28,10 +28,10 @@ lsp.setup_nvim_cmp({
     mapping = cmp_mappings,
     sources =  {
         { name = "luasnip"},
-        { name = "path"},
-        { name = "buffer"},
         { name = "nvim_lsp"},
         { name = "nvim_lua"},
+        { name = "path"},
+        { name = "buffer"},
     }
 })
 
