@@ -121,7 +121,12 @@ return require('packer').startup(function(use)
         }
     }
 
-    use { 'jpalardy/vim-slime' }
+    use {
+        'benlubas/molten-nvim',
+        requires = { { '3rd/image.nvim' } }
+    }
+
+    -- use { 'jpalardy/vim-slime' }
 
     -- use { "ggandor/leap.nvim" }
 

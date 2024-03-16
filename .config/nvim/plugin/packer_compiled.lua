@@ -129,6 +129,11 @@ _G.packer_plugins = {
     path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/harpoon",
     url = "https://github.com/ThePrimeagen/harpoon"
   },
+  ["image.nvim"] = {
+    loaded = true,
+    path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/image.nvim",
+    url = "https://github.com/3rd/image.nvim"
+  },
   ["indent-blankline.nvim"] = {
     loaded = true,
     path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
@@ -180,6 +185,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
+  },
+  ["molten-nvim"] = {
+    loaded = true,
+    path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/molten-nvim",
+    url = "https://github.com/benlubas/molten-nvim"
   },
   ["nvim-cmp"] = {
     loaded = true,
@@ -330,11 +340,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/vim-repeat",
     url = "https://github.com/tpope/vim-repeat"
-  },
-  ["vim-slime"] = {
-    loaded = true,
-    path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/vim-slime",
-    url = "https://github.com/jpalardy/vim-slime"
   },
   ["vim-surround"] = {
     loaded = true,
