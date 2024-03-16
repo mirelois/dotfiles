@@ -9,31 +9,29 @@ image=$(find ~/wallpapers/ -type f | shuf -n 1)
 feh --bg-scale $image &
 
 #turn on bar
-~/.config/polybar/bartoggle &
+~/.config/polybar/bartoggle 2> /dev/null
 
 #get weather
-~/.config/eww/scripts/getweather &
+~/.config/eww/scripts/getweather
 
 #key settings
 xdotool key Num_Lock 
 xset s off -dpms
-setxkbmap pt nodeadkeys
 xsetroot -cursor_name left_ptr
-# setxkbmap -option caps:ctrl_modifier
 setxkbmap -option compose:rctrl
-# setxkbmap -option shift:both_capslock
+setxkbmap pt nodeadkeys
 
 #start tmux server
-tmux new-session -d &
+tmux new-session -d
 
 #compositor
-exec picom &
+picom 2> /dev/null &
 
-discord &
-
-#screen blocker
-betterlockscreen -u $image --fx & #only renders normal image
+discord > /dev/null &
 
 #eww start
-# eww daemon &
+eww daemon
+
+#screen blocker
+betterlockscreen -u $image --fx #only renders normal image
 

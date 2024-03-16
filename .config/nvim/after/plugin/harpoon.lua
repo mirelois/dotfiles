@@ -49,13 +49,18 @@ vim.keymap.set("n", "<C-j>", function() harpoon:list():select(2) end)
 vim.keymap.set("n", "<C-k>", function() harpoon:list():select(3) end)
 vim.keymap.set("n", "<C-l>", function() harpoon:list():select(4) end)
 
-vim.keymap.set("n", "<leader>hc", function() harpoon:list("scripts"):append() end)
+vim.keymap.set("n", "<leader>hs", function() harpoon:list("scripts"):append() end)
 vim.keymap.set("n", "<M-C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list("scripts")) end)
 
 vim.keymap.set("n", "<M-C-h>", function() harpoon:list("scripts"):select(1) end)
 vim.keymap.set("n", "<M-C-j>", function() harpoon:list("scripts"):select(2) end)
 vim.keymap.set("n", "<M-C-k>", function() harpoon:list("scripts"):select(3) end)
 vim.keymap.set("n", "<M-C-l>", function() harpoon:list("scripts"):select(4) end)
+
+vim.api.nvim_create_user_command("PrepScript", function()
+    -- vim.cmd { cmd = {}, args = {[[%s/nvim/nvime]]}}
+    vim.api.nvim_command([[%s/\.\.\//$cwd/]])
+end, {})
 
 
 -- Toggle previous & next buffers stored within Harpoon list

@@ -26,7 +26,7 @@
                 (box :class "musicinfo-side" "${music3}${title}")
           (box :orientation "h" :halign "center" :class "musicbtn-side" :space-evenly "false" 
             (button :onclick "playerctl previous" "")
-             (button :class "pause-play-side" :onclick "playerctl play-pause" {musicstat})
+            (button :class "pause-play-side" :onclick "playerctl play-pause" {musicstat})
             (button :onclick "playerctl next" "")))))
     (defwidget time_side [] 
       (box :orientation "v" :space-evenly "false" 
@@ -152,7 +152,7 @@
     (defpoll volume :interval "16ms"  "~/.config/eww/scripts/getvol")
     (defpoll mic :interval "16ms"  "~/.config/eww/scripts/getmic")
     (defpoll bright :interval "16ms"  "~/.config/eww/scripts/getbri")
-    (defpoll musicstat :interval "1s"  "~/bin/spotifystatus")
+    (defpoll musicstat :interval "1s"  "~/.config/eww/scripts/generalStatus.sh")
     (defpoll cover :interval "2s"  "~/.config/eww/scripts/echoart")
     (defpoll title :interval "1s"  "~/.config/eww/scripts/echotitle")
     (defpoll artist :interval "1s"  "cat /tmp/xmonad/spotify/artist")

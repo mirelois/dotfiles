@@ -3,7 +3,7 @@ require 'sniprun'.setup({
     --# you can combo different display modes as desired and with the 'Ok' or 'Err' suffix
     --# to filter only sucessful runs (or errored-out runs respectively)
     display = {
-        -- "Classic", --# display results in the command-line  area
+        "Classic", --# display results in the command-line  area
         "VirtualTextOk",              --# display ok results as virtual text (multiline is shortened)
 
         -- "VirtualText",             --# display results as virtual text
@@ -32,8 +32,9 @@ require 'sniprun'.setup({
     --# possible values are 'none', 'single', 'double', or 'shadow'
 })
 
+vim.api.nvim_set_keymap('n', '<leader>rr', ':%SnipRun<CR>', {silent = true})
 vim.api.nvim_set_keymap('v', '<leader>r', ':SnipRun<CR>', {silent = true})
 vim.api.nvim_set_keymap('n', '<leader>r', '<Plug>SnipRunOperator', {silent = true})
-vim.api.nvim_set_keymap('n', '<leader>rr', ':SnipRun<CR>', {silent = true})
+vim.api.nvim_set_keymap('n', '<leader>R', ':SnipRun<CR>', {silent = true})
 vim.api.nvim_set_keymap('n', '<leader>rx', ':SnipClose<CR>', {silent = true})
 

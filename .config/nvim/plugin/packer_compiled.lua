@@ -251,6 +251,11 @@ _G.packer_plugins = {
     path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/oil.nvim",
     url = "https://github.com/stevearc/oil.nvim"
   },
+  ["otter.nvim"] = {
+    loaded = true,
+    path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/otter.nvim",
+    url = "https://github.com/jmbuhr/otter.nvim"
+  },
   ["packer.nvim"] = {
     loaded = true,
     path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/packer.nvim",
@@ -270,6 +275,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/promise-async",
     url = "https://github.com/kevinhwang91/promise-async"
+  },
+  ["quarto-nvim"] = {
+    loaded = true,
+    path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/quarto-nvim",
+    url = "https://github.com/quarto-dev/quarto-nvim"
   },
   ["rainbow-delimiters.nvim"] = {
     loaded = true,
@@ -320,6 +330,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/vim-repeat",
     url = "https://github.com/tpope/vim-repeat"
+  },
+  ["vim-slime"] = {
+    loaded = true,
+    path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/vim-slime",
+    url = "https://github.com/jpalardy/vim-slime"
   },
   ["vim-surround"] = {
     loaded = true,

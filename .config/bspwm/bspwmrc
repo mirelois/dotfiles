@@ -39,12 +39,12 @@ bspc rule -a 'VirtualBox Machine' desktop='' follow=true
 bspc rule -a 'VirtualBox Manager' desktop='' follow=true
 bspc rule -a 'Evince' desktop='󰈙' follow=true
 bspc rule -a 'Zathura' desktop='󰈙' follow=true
+bspc rule -a 'Vifm' desktop='' follow=true
 bspc rule -a 'Org.gnome.Nautilus' follow=true desktop=''
 bspc rule -a 'Gnome-calculator' state=floating
 bspc rule -a 'Xmessage' state=floating
 bspc rule -a 'Zathura' state=tiled
 
-/home/utilizador/.config/bspwm/startup.sh &
+/home/utilizador/.config/bspwm/startup.sh
 
-eww daemon
 

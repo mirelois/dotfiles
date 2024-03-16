@@ -114,6 +114,15 @@ return require('packer').startup(function(use)
     use { 'michaelb/sniprun',
     run = 'sh ./install.sh 1'}
 
+    use {
+        'quarto-dev/quarto-nvim',
+        requires = {
+            'jmbuhr/otter.nvim'
+        }
+    }
+
+    use { 'jpalardy/vim-slime' }
+
     -- use { "ggandor/leap.nvim" }
 
     -- use { "monaqa/dial.nvim" }

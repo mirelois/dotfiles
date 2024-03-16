@@ -27,6 +27,7 @@ cmp_mappings['<Down>'] = nil
 lsp.setup_nvim_cmp({
     mapping = cmp_mappings,
     sources =  {
+        { name = 'otter' },
         { name = "luasnip"},
         { name = "nvim_lsp"},
         { name = "nvim_lua"},

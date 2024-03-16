@@ -14,6 +14,10 @@ vim.keymap.set('n', '<C-w>|', ':vsplit<CR>')
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
+--keep selection with > and <
+vim.keymap.set("v", ">", ">gv")
+vim.keymap.set("v", "<", "<gv")
+
 vim.opt.formatoptions:remove { "c", "r", "o" }
 
 vim.keymap.set("n", "J", "mzJ`z") --change to regular J

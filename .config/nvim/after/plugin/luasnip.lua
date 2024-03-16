@@ -14,10 +14,10 @@ ls.config.set_config {
 
     enable_autosnippets = true,
 
-    ext_opts={
+    ext_opts = {
         [types.choiceNode] = {
             active = {
-                virt_text = {{"<-|", "Error"}}
+                virt_text = { { "<|", "Error" } }
             }
         }
     }
@@ -78,16 +78,45 @@ ls.add_snippets("all", {
 }
 )
 
+ls.add_snippets("python", {
+    s("print", fmt([[print({})]], c(1, {
+        i(1),
+        fmt([["{}"]], i(1))
+    }
+    )))
+})
+
+ls.add_snippets("quarto", {
+    s("header", fmt([[
+    ---
+    title: "{}"
+    format:
+      html:
+        code-fold: true
+    jupyter: python3
+    ---
+    ]], i(1))),
+
+    s("cell", fmt(
+    [[
+    ```{{python}}
+
+    {}
+
+    ```
+    ]], i(1)))
+})
+
 ls.add_snippets("lua", {
     s("req", fmt("local {} = require('{}')",
-    {f(function(import_name)
-        local parts = vim.split(import_name[1][1], ".", true)
-        return parts[#parts] or ""
-    end, {1}), i(1) })),
+        { f(function(import_name)
+            local parts = vim.split(import_name[1][1], ".", true)
+            return parts[#parts] or ""
+        end, { 1 }), i(1) })),
 
     s("use", fmt("use {{ '{}' }}", { i(1) })),
 
-    s("map", fmt([[vim.keymap.set("{}", "{}", "{}")]], {i(1), i(2), i(3)}))
+    s("map", fmt([[vim.keymap.set("{}", "{}", "{}")]], { i(1), i(2), i(3) }))
 }
 )
 
@@ -96,18 +125,18 @@ ls.add_snippets("c", {
     s("fori", fmt([[
     for(int {} = 0; {} < N; {}++){{
         {}
-    }}]], { i(1, "i"), rep(1), rep(1), i(2)})),
+    }}]], { i(1, "i"), rep(1), rep(1), i(2) })),
 
     s("print",
-    fmt(
-    [[
+        fmt(
+            [[
     printf({});
     ]]
-    , c(1, {fmt([["{}"]], i(1)),
-            fmt([["{}", {}]], {i(1), i(2)})
-           }
-        )
-    ))
+            , c(1, { fmt([["{}"]], i(1)),
+                fmt([["{}", {}]], { i(1), i(2) })
+            }
+            )
+        ))
 }
 )
 
@@ -115,18 +144,18 @@ ls.add_snippets("cpp", {
     s("fori", fmt([[
     for(int {} = 0; {} < N; {}++){{
         {}
-    }}]], { i(1, "i"), rep(1), rep(1), i(2)})),
+    }}]], { i(1, "i"), rep(1), rep(1), i(2) })),
 }
 )
 
 ls.add_snippets("sh", {
     s("tmuxsplitw", fmt([[tmux split-window -d -l {} {}{} ]], {
-        i(1,"10"),
+        i(1, "10"),
         c(2, {
             sn(nil, fmt("-c $DIR/{} ", i(1))),
             t(),
         }),
-        c(3, {t("$CMD"), sn(nil, fmt([["{}"]],i(1)))})
+        c(3, { t("$CMD"), sn(nil, fmt([["{}"]], i(1))) })
     })),
 
     s("tmuxtile", t("tmux select-layout tiled")),
@@ -135,7 +164,7 @@ ls.add_snippets("sh", {
 
     s("tmuxonexit", t("tmux setw remain-on-exit on")),
 
-    s("DIR", fmt([[DIR={}]], f( function() return os.getenv("PWD") end))),
+    s("DIR", fmt([[DIR={}]], f(function() return os.getenv("PWD") end))),
 
     s("javac", fmt([[javac {}{}]], {
         c(1, {
@@ -148,7 +177,7 @@ ls.add_snippets("sh", {
         })
     })),
 
-    s("mvnexec", fmt([[mvn exec:java -Dexec.mainClass={}.{} -q]], {i(1), c(2, {t("$class_name"), i()})})),
+    s("mvnexec", fmt([[mvn exec:java -Dexec.mainClass={}.{} -q]], { i(1), c(2, { t("$class_name"), i() }) })),
 
     s("tmuxsetup", fmt([[
         #!/usr/bin/env bash
@@ -163,7 +192,7 @@ ls.add_snippets("sh", {
 
 
         tmux select-layout tiled
-    ]], f(function ()
+    ]], f(function()
         return os.getenv('PWD')
     end)))
 
