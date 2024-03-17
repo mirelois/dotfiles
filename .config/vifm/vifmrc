@@ -509,6 +509,12 @@ nnoremap <c-f> :FZFlocate<CR>
 "
 let $VIFM_SERVER_NAME = v:servername
 
+command! extract extract %d %c
+command! extract! extract -f %d %c
+
+nnoremap E :extract<CR>
+nnoremap <c-e> :extract<CR>
+
 colorscheme new
 
 

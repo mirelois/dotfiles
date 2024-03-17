@@ -22,10 +22,17 @@ require('quarto').setup {
     },
 }
 
+
 vim.keymap.set("n", "<c-cr>", ":QuartoSend<CR>")
 vim.keymap.set("n", "<s-cr>", ":QuartoSend<CR>")
 
 vim.keymap.set("n", "<leader>qA", ":QuartoSendAll<CR>")
 vim.keymap.set("n", "<leader>qab", ":QuartoSendAll<CR>")
 vim.keymap.set("n", "<leader>qbl", ":QuartoSendAll<CR>")
+
+vim.api.nvim_create_user_command("QuartoToJupyter", function()
+    local cmd = "quarto convert " .. vim.api.nvim_buf_get_name(0)
+    local out = vim.fn.system(cmd)
+    print(out)
+end, {})
 

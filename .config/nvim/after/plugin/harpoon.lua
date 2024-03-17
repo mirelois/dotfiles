@@ -58,7 +58,6 @@ vim.keymap.set("n", "<M-C-k>", function() harpoon:list("scripts"):select(3) end)
 vim.keymap.set("n", "<M-C-l>", function() harpoon:list("scripts"):select(4) end)
 
 vim.api.nvim_create_user_command("PrepScript", function()
-    -- vim.cmd { cmd = {}, args = {[[%s/nvim/nvime]]}}
     vim.api.nvim_command([[%s/\.\.\//$cwd/]])
 end, {})
 
