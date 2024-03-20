@@ -25,9 +25,9 @@ setxkbmap pt nodeadkeys
 tmux new-session -d
 
 #compositor
-picom 2> /dev/null &
+picom & disown
 
-discord > /dev/null &
+discord & disow& disown
 
 #eww start
 eww daemon

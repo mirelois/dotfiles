@@ -34,13 +34,23 @@ bsp-layout set tall 󰈙
 #window rules
 #run "xprop | grep WM_CLASS" to find window class
 bspc rule -a 'discord' desktop='' follow=true
+
 bspc rule -a 'Spotify' desktop='' follow=true
+
 bspc rule -a 'VirtualBox Machine' desktop='' follow=true
 bspc rule -a 'VirtualBox Manager' desktop='' follow=true
+
 bspc rule -a 'Evince' desktop='󰈙' follow=true
 bspc rule -a 'Zathura' desktop='󰈙' follow=true
+
 bspc rule -a 'Vifm' desktop='' follow=true
-bspc rule -a 'Org.gnome.Nautilus' follow=true desktop=''
+bspc rule -a 'Org.gnome.Nautilus' desktop='' follow=true
+
+bspc rule -a 'Youtube' desktop='' follow=true
+
+bspc rule -a 'firefox' desktop='' follow=true
+
+
 bspc rule -a 'Gnome-calculator' state=floating
 bspc rule -a 'Xmessage' state=floating
 bspc rule -a 'Zathura' state=tiled

@@ -25,7 +25,7 @@ super + b
 	firefox
 
 super + y
-	firefox --new-window https://www.youtube.com/
+	firefox --class "Youtube" --new-window https://www.youtube.com/
 
 super + c
 	gnome-calculator

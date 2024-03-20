@@ -20,7 +20,6 @@ vim.keymap.set("v", "<", "<gv")
 
 vim.opt.formatoptions:remove { "c", "r", "o" }
 
-vim.keymap.set("n", "J", "mzJ`z") --change to regular J
 --change to regular C-d, C-u
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")

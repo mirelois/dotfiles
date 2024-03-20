@@ -22,7 +22,7 @@ return require('packer').startup(function(use)
 
     use('nvim-treesitter/playground')
 
-    use {'chentoast/marks.nvim'}
+    use { 'chentoast/marks.nvim' }
 
     use {
         "ThePrimeagen/harpoon",
@@ -79,7 +79,7 @@ return require('packer').startup(function(use)
         'kevinhwang91/nvim-fundo', requires = 'kevinhwang91/promise-async',
         run = function() require('fundo').install() end
     }
-    use { 'mfussenegger/nvim-dap' }
+    use { 'mfussenegger/nvim-dap', requires = { 'nvim-neotest/nvim-nio' } }
     use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
     use { 'theHamsta/nvim-dap-virtual-text' }
     use { 'jay-babu/mason-nvim-dap.nvim' }
@@ -112,7 +112,7 @@ return require('packer').startup(function(use)
     use { "aserowy/tmux.nvim" }
 
     use { 'michaelb/sniprun',
-    run = 'sh ./install.sh 1'}
+        run = 'sh ./install.sh 1' }
 
     use {
         'quarto-dev/quarto-nvim',
@@ -124,6 +124,10 @@ return require('packer').startup(function(use)
     use {
         'benlubas/molten-nvim',
         requires = { { '3rd/image.nvim' } }
+    }
+
+    use {
+        "LunarVim/bigfile.nvim",
     }
 
     -- use { 'jpalardy/vim-slime' }

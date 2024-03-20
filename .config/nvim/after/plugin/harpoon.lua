@@ -8,6 +8,16 @@ local function get_class_name(str)
     return string.gsub(str, ".-/(.-)%..*" , "%1")
 end
 
+local function get_parent_dir(str)
+    return string.gsub(str, "(.*/).*", "%1")
+end
+
+local function get_file_name(str)
+    return string.gsub(str, ".-/(.-)", "%1")
+end
+
+local show_output = false
+
 -- REQUIRED
 harpoon:setup({
     -- Setting up custom behavior for a list named "cmd"
@@ -23,7 +33,11 @@ harpoon:setup({
 
             local cwd = trim_spaces(vim.fn.system("pwd"))
 
+            local file_name = get_file_name(list_item.value)
+
             local class_name = get_class_name(list_item.value)
+
+            local script_dir = get_parent_dir(list_item.value)
 
             local vars = ""
 
@@ -31,11 +45,16 @@ harpoon:setup({
             vars = vars .. string.format("%s='%s' ", "curr_file", curr_file)
             vars = vars .. string.format("%s='%s' ", "class_name", class_name)
 
-            local command = vars .. "./" .. list_item.value
+            -- command is of format: cd <FILE_PARENT_DIR> && <VARS_DEFINITION> ./<FILE_NAME>
+
+            local command = "cd " .. script_dir .. " && " .. vars .. "./" .. file_name
+            -- local command = vars .. "./" .. list_item.value
             
             local output =  vim.fn.system(command)
 
-            print(output)
+            if show_output then
+                vim.notify(command .. output)
+            end
         end
 
     }
@@ -49,7 +68,7 @@ vim.keymap.set("n", "<C-j>", function() harpoon:list():select(2) end)
 vim.keymap.set("n", "<C-k>", function() harpoon:list():select(3) end)
 vim.keymap.set("n", "<C-l>", function() harpoon:list():select(4) end)
 
-vim.keymap.set("n", "<leader>hs", function() harpoon:list("scripts"):append() end)
+vim.keymap.set("n", "<leader>hc", function() harpoon:list("scripts"):append() end)
 vim.keymap.set("n", "<M-C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list("scripts")) end)
 
 vim.keymap.set("n", "<M-C-h>", function() harpoon:list("scripts"):select(1) end)
@@ -59,6 +78,11 @@ vim.keymap.set("n", "<M-C-l>", function() harpoon:list("scripts"):select(4) end)
 
 vim.api.nvim_create_user_command("PrepScript", function()
     vim.api.nvim_command([[%s/\.\.\//$cwd/]])
+end, {})
+
+vim.api.nvim_create_user_command("HarpoonToggleShow", function()
+    show_output = not show_output
+    print(show_output)
 end, {})
 
 

@@ -84,6 +84,11 @@ _G.packer_plugins = {
     path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
+  ["bigfile.nvim"] = {
+    loaded = true,
+    path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/bigfile.nvim",
+    url = "https://github.com/LunarVim/bigfile.nvim"
+  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/cmp-buffer",
@@ -230,6 +235,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
+  },
+  ["nvim-nio"] = {
+    loaded = true,
+    path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/nvim-nio",
+    url = "https://github.com/nvim-neotest/nvim-nio"
   },
   ["nvim-treesitter"] = {
     loaded = true,
