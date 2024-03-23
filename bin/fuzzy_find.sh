@@ -1,4 +1,5 @@
 find \
+~/                                                 \
 ~/Documents                                        \
 ~/Documents/Mestrado_1_ano/                        \
 ~/Documents/Mestrado_1_ano/2_semestre/             \
