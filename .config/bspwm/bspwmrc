@@ -46,9 +46,9 @@ bspc rule -a 'Zathura' desktop='󰈙' follow=true
 bspc rule -a 'Vifm' desktop='' follow=true
 bspc rule -a 'Org.gnome.Nautilus' desktop='' follow=true
 
-bspc rule -a 'Youtube' desktop='' follow=true
+# bspc rule -a 'Youtube' desktop='' follow=true
 
-bspc rule -a 'firefox' desktop='' follow=true
+bspc rule -a 'Firefox' desktop='' follow=true
 
 
 bspc rule -a 'Gnome-calculator' state=floating

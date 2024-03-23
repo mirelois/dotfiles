@@ -17,7 +17,7 @@ ls.config.set_config {
     ext_opts = {
         [types.choiceNode] = {
             active = {
-                virt_text = { { "<|", "Error" } }
+                virt_text = { { "󰌑", "Error" } }
             }
         }
     }
@@ -194,6 +194,13 @@ ls.add_snippets("sh", {
         tmux select-layout tiled
     ]], f(function()
         return os.getenv('PWD')
-    end)))
+    end))),
+
+    s("tmuxsend", fmt([[tmux send-keys -t {} {} ]], {i(1, "1"), c(2,{
+        fmt([["{}" Enter]], i(1)),
+        fmt([["{}" Enter \
+            "{}" Enter \ ]], {i(1), i(2)}),
+
+    })}))
 
 })

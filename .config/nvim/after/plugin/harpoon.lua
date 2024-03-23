@@ -5,7 +5,7 @@ local function trim_spaces(str)
 end
 
 local function get_class_name(str)
-    return string.gsub(str, ".-/(.-)%..*" , "%1")
+    return string.gsub(str, ".-/(.-)%..*", "%1")
 end
 
 local function get_parent_dir(str)
@@ -16,7 +16,13 @@ local function get_file_name(str)
     return string.gsub(str, ".-/(.-)", "%1")
 end
 
+local function get_extention(str)
+    return string.gsub(str, ".-/.-%.(.-)", "%1")
+end
+
 local show_output = false
+
+local input_cond = false
 
 -- REQUIRED
 harpoon:setup({
@@ -47,13 +53,26 @@ harpoon:setup({
 
             -- command is of format: cd <FILE_PARENT_DIR> && <VARS_DEFINITION> ./<FILE_NAME>
 
-            local command = "cd " .. script_dir .. " && " .. vars .. "./" .. file_name
+            local input_str
+
+            if input_cond then
+                input_str = " " .. vim.fn.input("Input: ")
+            else
+                input_str = ""
+            end
+
+            local command = "cd " .. script_dir .. " && " .. vars .. "./" .. file_name .. input_str
             -- local command = vars .. "./" .. list_item.value
-            
-            local output =  vim.fn.system(command)
+
+            local output = vim.fn.system(command)
 
             if show_output then
-                vim.notify(command .. output)
+
+                local len = string.len(command)
+
+                local s = "\n\n" .. string.rep("-", len) .. "\n\n[Output]\n"
+
+                vim.notify("[Command]\n" .. command .. s .. output)
             end
         end
 
@@ -82,8 +101,42 @@ end, {})
 
 vim.api.nvim_create_user_command("HarpoonToggleShow", function()
     show_output = not show_output
-    print(show_output)
+    print("Show outputset to:", show_output)
 end, {})
+
+vim.api.nvim_create_user_command("HarpoonToggleInput", function()
+    input_cond = not input_cond
+    print("Input set to: ", input_cond)
+end, {})
+
+
+vim.api.nvim_create_user_command("HarpoonRunOnSave", function()
+
+    local file_name = vim.api.nvim_buf_get_name(0)
+
+    local script = vim.fn.input("Script: ")
+
+    local extention = get_extention(file_name)
+
+    vim.api.nvim_create_autocmd("BufWritePost", {
+
+        group = vim.api.nvim_create_augroup("AutoRun", { clear = true }),
+        pattern = "c",
+        callback = function()
+            harpoon:list("scripts"):select(script)
+            vim.notify("lmao")
+        end,
+    })
+end, {})
+
+vim.keymap.set("n", "<leader>ho", function()
+    show_output = not show_output
+    print("Show outputset to:", show_output)
+end)
+vim.keymap.set("n", "<leader>hi", function()
+    input_cond = not input_cond
+    print("Input set to :", input_cond)
+end)
 
 
 -- Toggle previous & next buffers stored within Harpoon list

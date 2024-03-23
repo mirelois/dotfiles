@@ -20,10 +20,6 @@ return require('packer').startup(function(use)
         requires = "nvim-treesitter/nvim-treesitter",
     })
 
-    use('nvim-treesitter/playground')
-
-    use { 'chentoast/marks.nvim' }
-
     use {
         "ThePrimeagen/harpoon",
         branch = "harpoon2",
@@ -49,6 +45,8 @@ return require('packer').startup(function(use)
             { 'saadparwaiz1/cmp_luasnip' },
             { 'hrsh7th/cmp-nvim-lsp' },
             { 'hrsh7th/cmp-nvim-lua' },
+            { 'hrsh7th/cmp-cmdline' },
+            { 'hrsh7th/cmp-calc' },
 
             -- Snippets
             { 'L3MON4D3/LuaSnip' },
@@ -91,15 +89,7 @@ return require('packer').startup(function(use)
 
     use { 'tpope/vim-abolish' }
 
-    use({
-        "iamcco/markdown-preview.nvim",
-        run = "cd app && npm install",
-        setup = function()
-            vim.g.mkdp_filetypes = {
-                "markdown" }
-        end,
-        ft = { "markdown" },
-    })
+    use { 'chentoast/marks.nvim' }
 
     use { "RaafatTurki/corn.nvim" }
 
@@ -126,13 +116,4 @@ return require('packer').startup(function(use)
         requires = { { '3rd/image.nvim' } }
     }
 
-    use {
-        "LunarVim/bigfile.nvim",
-    }
-
-    -- use { 'jpalardy/vim-slime' }
-
-    -- use { "ggandor/leap.nvim" }
-
-    -- use { "monaqa/dial.nvim" }
 end)

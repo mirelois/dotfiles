@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [[ $1 = "on" ]]; then
+    openvpn3 session-start --config ~/Documents/HasLab/DL/HASLab.ovpn
+    exit 0
+fi
+
+
+if [[ $1 = "off" ]]; then
+    openvpn3 session-manage -c ~/Documents/HasLab/DL/HASLab.ovpn -D
+    exit 0
+fi
+

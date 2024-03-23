@@ -25,13 +25,13 @@ setxkbmap pt nodeadkeys
 tmux new-session -d
 
 #compositor
-picom & disown
+picom 2> /dev/null &
 
-discord & disow& disown
-
-#eww start
-eww daemon
+discord > /dev/null &
 
 #screen blocker
 betterlockscreen -u $image --fx #only renders normal image
+
+#eww start
+eww daemon
 

@@ -231,10 +231,10 @@
 			    :geometry (geometry :x "10px" :y "140px" :width "300px" :height "135px")
 			     				(time_side))
     (defwindow sliders_side 
-			    :geometry (geometry :x "10px" :y "407px" :width "300px" :height "230px")
+			    :geometry (geometry :x "10px" :y "407px" :width "300px" :height "280px")
 			     				(sliders_side))
     (defwindow sys_side 
-			    :geometry (geometry :x "10px" :y "659px" :width "300px" :height "153px")
+			    :geometry (geometry :x "10px" :y "692px" :width "300px" :height "153px")
 			     				(sys_side))
 
     ;; Main Stuff

@@ -112,7 +112,8 @@ export LANG=en_US.UTF-8
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias n="nvim ."
 alias :q="exit"
-alias vpn="openvpn3 session-start --config ~/Documents/Haslab/HASLab.ovpn"
+
+# alias vpn="openvpn3 session-start --config ~/Documents/Haslab/HASLab.ovpn"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -143,3 +144,5 @@ function zvm_after_init() {
 }
 
 bindkey "^P" up-line-or-search
+
+aurora="gsd@aurora01.cluster.lsd.di.uminho.pt"

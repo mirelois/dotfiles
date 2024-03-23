@@ -22,10 +22,10 @@ super + d
 	discord
 
 super + b
-	firefox
+	firefox --class="Firefox"
 
 super + y
-	firefox --class "Youtube" --new-window https://www.youtube.com/
+	firefox --new-window https://www.youtube.com/
 
 super + c
 	gnome-calculator

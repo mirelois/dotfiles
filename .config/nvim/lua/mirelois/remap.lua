@@ -43,7 +43,7 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "Q", "<nop>") --disables Q
 vim.keymap.set("n", "<C-f>", ":silent !tmux neww tmux-sessionizer<CR>")
 
---quickfix navigation ????
+--quickfix navigation 
 vim.keymap.set("n", "<Tab>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<S-Tab>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")

@@ -28,6 +28,7 @@ lsp.setup_nvim_cmp({
     mapping = cmp_mappings,
     sources =  {
         { name = 'otter' },
+        { name = 'calc' },
         { name = "luasnip"},
         { name = "nvim_lsp"},
         { name = "nvim_lua"},

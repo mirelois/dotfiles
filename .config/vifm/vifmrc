@@ -515,6 +515,14 @@ command! extract! extract -f %d %c
 nnoremap E :extract<CR>
 nnoremap <c-e> :extract<CR>
 
+" cringe <C-S-L> and <C-S-H> keycodes
+nnoremap [108;6u <c-w>l
+nnoremap [104;6u <c-w>h
+
+nnoremap - :cd ..
+
+sync /home/utilizador/Downloads/
+
 colorscheme new
 
 
