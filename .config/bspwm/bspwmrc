@@ -25,11 +25,11 @@ bsp-layout set monocle 
 bsp-layout set monocle 
 bsp-layout set monocle 󱧐
 bsp-layout set monocle 
+bsp-layout set monocle 󰈙
 
 bsp-layout set tall 
 bsp-layout set tall 
 bsp-layout set tall 
-bsp-layout set tall 󰈙
 
 #window rules
 #run "xprop | grep WM_CLASS" to find window class

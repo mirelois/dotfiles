@@ -3,6 +3,6 @@
 if [[ -n $(pgrep tmux) ]]; then
     $1 -e tmux new-session tmux-sessionizer ~/
 else
-    $1 -e tmux
+    $1 -e tmux-sessionizer ~/
 fi
 

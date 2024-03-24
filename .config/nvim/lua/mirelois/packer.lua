@@ -31,6 +31,20 @@ return require('packer').startup(function(use)
     use('tpope/vim-fugitive')
 
     use {
+        'MeanderingProgrammer/markdown.nvim',
+        name = 'render-markdown', -- Only needed if you have another plugin named markdown.nvim
+        requires = {
+            'nvim-treesitter/nvim-treesitter',
+            'ixru/nvim-markdown',
+        },
+        config = function()
+            require('render-markdown').setup({
+                file_types = { 'markdown', 'quarto' },
+            })
+        end,
+    }
+
+    use {
         'VonHeikemen/lsp-zero.nvim',
         requires = {
             -- LSP Support

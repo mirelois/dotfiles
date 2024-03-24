@@ -13,7 +13,11 @@ function Kanagawa(trans)
         terminalColors = false, -- define vim.g.terminal_color_{0,17}
         colors = {
             -- add/modify theme and palette colors
-            palette = {},
+            palette = {
+                -- change all usages of these colors
+                -- sumiInk0 = "#000000",
+                -- fujiWhite = "#DCDCDC",
+            },
             theme = {
                 all = {
                     ui = {
@@ -26,6 +30,9 @@ function Kanagawa(trans)
         overrides = function(colors)
             local theme = colors.theme
             return {
+
+                Normal = {fg = "#DCDCDC"},
+
                 Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 }, -- add `blend = vim.o.pumblend` to enable transparency
                 PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
                 PmenuSbar = { bg = theme.ui.bg_m1 },
