@@ -22,7 +22,7 @@ setxkbmap -option compose:rctrl
 setxkbmap pt nodeadkeys
 
 #start tmux server
-tmux new-session -d
+# tmux new-session -d
 
 #compositor
 picom 2> /dev/null &
