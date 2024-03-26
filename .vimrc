@@ -14,7 +14,7 @@ set undofile
 set nohlsearch
 set incsearch
 
-set notermguicolors
+set termguicolors
 
 set scrolloff=8
 
