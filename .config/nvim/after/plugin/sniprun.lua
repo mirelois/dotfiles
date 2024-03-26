@@ -24,7 +24,7 @@ require 'sniprun'.setup({
 
     --# customize highlight groups (setting this overrides colorscheme)
     snipruncolors = {
-        SniprunVirtualTextOk  = { bg = "#00000000", fg = "#727169" },
+        SniprunVirtualTextOk  = { bg = "#000000", fg = "#727169" },
     },
 
 

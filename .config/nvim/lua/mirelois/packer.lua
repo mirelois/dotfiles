@@ -129,5 +129,4 @@ return require('packer').startup(function(use)
         'benlubas/molten-nvim',
         requires = { { '3rd/image.nvim' } }
     }
-
 end)

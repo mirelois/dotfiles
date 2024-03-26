@@ -60,10 +60,6 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 --changing words cycling
 vim.keymap.set("n", "<leader><Tab>", "ncw")
 
---splits
-vim.keymap.set("n", "<leader>-", ':split<CR>')
-vim.keymap.set("n", "<leader>|", ':vsplit<CR>')
-
 --Keymaps for surround
 --vim.keymap.set("v", [[<leader>(]], [[c(<C-r>")<Esc>]])
 --vim.keymap.set("v", [[<leader>{]], [[c{<C-r>"}<Esc>]])

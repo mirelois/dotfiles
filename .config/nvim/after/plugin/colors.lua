@@ -13,11 +13,7 @@ function Kanagawa(trans)
         terminalColors = false, -- define vim.g.terminal_color_{0,17}
         colors = {
             -- add/modify theme and palette colors
-            palette = {
-                -- change all usages of these colors
-                -- sumiInk0 = "#000000",
-                -- fujiWhite = "#DCDCDC",
-            },
+            palette = {},
             theme = {
                 all = {
                     ui = {
