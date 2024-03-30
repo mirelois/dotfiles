@@ -34,7 +34,7 @@ super + f
 	kitty --class Vifm vifm
 
 super + p
-	eww open-many weather_side time_side smol_calendar player_side sys_side sliders_side
+	eww open-many --no-daemonize weather_side time_side smol_calendar player_side sys_side sliders_side
 
 super + Escape
 	eww close-all

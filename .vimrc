@@ -40,6 +40,7 @@ nnoremap N Nzzzv
 
 xnoremap <leader>p "_dP
 
+" isto probs not funfa depende se tens clipboard
 nnoremap <leader>y "+y
 vnoremap <leader>y "+y
 nnoremap <leader>Y "+Y

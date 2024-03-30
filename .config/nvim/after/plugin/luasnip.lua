@@ -2,6 +2,11 @@
 --    return
 --end
 
+local function get_parent_dir(str)
+    return string.gsub(str, "(.*/).*", "%1")
+end
+
+
 require("luasnip.loaders.from_vscode").lazy_load() --friendly snippets
 
 local ls = require("luasnip")
@@ -98,7 +103,7 @@ ls.add_snippets("quarto", {
     ]], i(1))),
 
     s("cell", fmt(
-    [[
+        [[
     ```{{python}}
 
     {}
@@ -149,7 +154,8 @@ ls.add_snippets("cpp", {
 )
 
 ls.add_snippets("sh", {
-    s("tmuxsplitw", fmt([[tmux split-window -d -l {} {}{} ]], {
+
+    s("tmuxsplitw", fmt([[PANE_ID=$(tmux split-window -d -P -F "#{{pane_id}}" -l {} {}{})]], {
         i(1, "10"),
         c(2, {
             sn(nil, fmt("-c $DIR/{} ", i(1))),
@@ -183,24 +189,45 @@ ls.add_snippets("sh", {
         #!/usr/bin/env bash
 
         DIR={}
-        CMD=""
+        CMD="{}"
 
         tmux kill-pane -a -t 0
         tmux setw remain-on-exit on
 
-        tmux split-window -d -l 10 -c $DIR/ $CMD
-
+        PANE_ID=$(tmux split-window -d -P -F "#{{pane_id}}" -l 10 -c $DIR/ $CMD)
 
         tmux select-layout tiled
-    ]], f(function()
+
+        # enviroment variables
+        # $curr_file             : current file path
+        # $curr_file_no_ext      : current file path without extention
+        # $cwd                   : current working directory
+        # $curr_file_name        : name from current file
+        # $curr_file_name_no_ext : name from current file with no extention
+    ]], { f(function()
         return os.getenv('PWD')
-    end))),
+    end), i(1) })),
 
-    s("tmuxsend", fmt([[tmux send-keys -t {} {} ]], {i(1, "1"), c(2,{
-        fmt([["{}" Enter]], i(1)),
-        fmt([["{}" Enter \
-            "{}" Enter \ ]], {i(1), i(2)}),
+    s("tmuxsend", fmt([[tmux send-keys -t {} {} ]], {
+        c(1, {
+            t("$PANE_ID"),
+            i(1),
+        }),
 
-    })}))
+        c(2, {
+            fmt([["{}" Enter]], i(1)),
+            fmt([["{}" Enter \
+                "{}" Enter \ ]], { i(1), i(2) }),
+        })
+    })),
+
+    s("envvars", t({
+        "# enviroment variables",
+        "# $curr_file             : current file path",
+        "# $curr_file_no_ext      : current file path without extention",
+        "# $cwd                   : current working directory",
+        "# $curr_file_name        : name from current file",
+        "# $curr_file_name_no_ext : name from current file with no extention",
+    }))
 
 })

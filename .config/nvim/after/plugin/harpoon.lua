@@ -4,8 +4,8 @@ local function trim_spaces(str)
     return string.gsub(str, "^%s*(.-)%s*$", "%1")
 end
 
-local function get_class_name(str)
-    return string.gsub(str, ".-/(.-)%..*", "%1")
+local function get_name(str)
+    return string.gsub(str, ".*/(.-)%..*", "%1")
 end
 
 local function get_parent_dir(str)
@@ -13,7 +13,11 @@ local function get_parent_dir(str)
 end
 
 local function get_file_name(str)
-    return string.gsub(str, ".-/(.-)", "%1")
+    return string.gsub(str, ".*/(.-)", "%1")
+end
+
+local function remove_extention(str)
+    return string.gsub(str, "(.-)%..*", "%1")
 end
 
 local function get_extention(str)
@@ -35,13 +39,18 @@ harpoon:setup({
         -- @param list { ... }
         -- @param option any
         select = function(list_item, list, option)
+
             local curr_file = vim.api.nvim_buf_get_name(0)
+
+            local curr_file_no_ext = remove_extention(curr_file)
 
             local cwd = trim_spaces(vim.fn.system("pwd"))
 
             local file_name = get_file_name(list_item.value)
 
-            local class_name = get_class_name(list_item.value)
+            local name = get_file_name(curr_file)
+
+            local name_no_ext = get_name(curr_file)
 
             local script_dir = get_parent_dir(list_item.value)
 
@@ -49,7 +58,9 @@ harpoon:setup({
 
             vars = vars .. string.format("%s='%s' ", "cwd", cwd)
             vars = vars .. string.format("%s='%s' ", "curr_file", curr_file)
-            vars = vars .. string.format("%s='%s' ", "class_name", class_name)
+            vars = vars .. string.format("%s='%s' ", "curr_file_no_ext", curr_file_no_ext)
+            vars = vars .. string.format("%s='%s' ", "curr_file_name", name)
+            vars = vars .. string.format("%s='%s' ", "curr_file_name_no_ext", name_no_ext)
 
             -- command is of format: cd <FILE_PARENT_DIR> && <VARS_DEFINITION> ./<FILE_NAME>
 
