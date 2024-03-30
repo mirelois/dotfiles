@@ -30,6 +30,8 @@ return require('packer').startup(function(use)
 
     use('tpope/vim-fugitive')
 
+    -- use { 'mirelois/flow.nvim' }
+
     use {
         'MeanderingProgrammer/markdown.nvim',
         name = 'render-markdown', -- Only needed if you have another plugin named markdown.nvim
