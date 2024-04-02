@@ -159,11 +159,6 @@ _G.packer_plugins = {
     path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim",
     url = "https://github.com/VonHeikemen/lsp-zero.nvim"
   },
-  ["lsp_signature.nvim"] = {
-    loaded = true,
-    path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/lsp_signature.nvim",
-    url = "https://github.com/ray-x/lsp_signature.nvim"
-  },
   ["lualine.nvim"] = {
     loaded = true,
     path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/lualine.nvim",
@@ -224,11 +219,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/nvim-dap-virtual-text",
     url = "https://github.com/theHamsta/nvim-dap-virtual-text"
-  },
-  ["nvim-fundo"] = {
-    loaded = true,
-    path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/nvim-fundo",
-    url = "https://github.com/kevinhwang91/nvim-fundo"
   },
   ["nvim-jdtls"] = {
     loaded = true,
@@ -294,11 +284,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
-  },
-  ["promise-async"] = {
-    loaded = true,
-    path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/promise-async",
-    url = "https://github.com/kevinhwang91/promise-async"
   },
   ["quarto-nvim"] = {
     loaded = true,

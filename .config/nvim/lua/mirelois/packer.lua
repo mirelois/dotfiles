@@ -89,10 +89,6 @@ return require('packer').startup(function(use)
 
     use { "HiPhish/rainbow-delimiters.nvim" }
 
-    use {
-        'kevinhwang91/nvim-fundo', requires = 'kevinhwang91/promise-async',
-        run = function() require('fundo').install() end
-    }
     use { 'mfussenegger/nvim-dap', requires = { 'nvim-neotest/nvim-nio' } }
     use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
     use { 'theHamsta/nvim-dap-virtual-text' }
@@ -108,8 +104,6 @@ return require('packer').startup(function(use)
     use { 'chentoast/marks.nvim' }
 
     use { "RaafatTurki/corn.nvim" }
-
-    use { "ray-x/lsp_signature.nvim" }
 
     use { "stevearc/oil.nvim" }
 

@@ -21,7 +21,6 @@ local function remove_extention(str)
 end
 
 local function default_list_behaviour(list_item, list, options)
-
     options = options or {}
     if list_item == nil then
         return
@@ -56,7 +55,6 @@ local function default_list_behaviour(list_item, list, options)
             list_item.context.col or 0,
         })
     end
-
 end
 
 local show_output = true
@@ -76,8 +74,7 @@ harpoon:setup({
         -- @param list { ... }
         -- @param option any
         select = function(list_item, list, options)
-
-            if options.edit then
+            if options and options.edit then
                 default_list_behaviour(list_item, list, options)
                 return
             end
@@ -201,6 +198,7 @@ vim.api.nvim_create_user_command("HarpoonRunOnSave", function()
     else
         script = vim.fn.input "Script(no default): "
     end
+
     local pattern = vim.fn.input("Pattern(defaults to file name): " or file_name)
 
     vim.api.nvim_create_autocmd("BufWritePost", {
