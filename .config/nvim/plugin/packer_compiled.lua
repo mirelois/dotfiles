@@ -260,6 +260,11 @@ _G.packer_plugins = {
     path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/nvim-trevJ.lua",
     url = "https://github.com/AckslD/nvim-trevJ.lua"
   },
+  ["nvim-ts-autotag"] = {
+    loaded = true,
+    path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/nvim-ts-autotag",
+    url = "https://github.com/windwp/nvim-ts-autotag"
+  },
   ["nvim-web-devicons"] = {
     loaded = true,
     path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",

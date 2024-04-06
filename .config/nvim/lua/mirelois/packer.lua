@@ -121,6 +121,8 @@ return require('packer').startup(function(use)
         }
     }
 
+    use { 'windwp/nvim-ts-autotag' }
+
     use {
         'benlubas/molten-nvim',
         requires = { { '3rd/image.nvim' } }
