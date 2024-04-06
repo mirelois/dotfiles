@@ -8,7 +8,7 @@ set shiftwidth=4
 
 set noswapfile
 set nobackup
-set undodir=$HOME/.vim/undodir
+set undodir=$HOME/.vim(1)/undodir
 set undofile
 
 set nohlsearch

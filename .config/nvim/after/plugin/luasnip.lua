@@ -155,6 +155,8 @@ ls.add_snippets("cpp", {
 
 ls.add_snippets("sh", {
 
+    s("firefox", fmt([[firefox --no-remote -P float --class "Float" {}]], i(1))),
+
     s("tmuxsplitw", fmt([[PANE_ID=$(tmux split-window -d -P -F "#{{pane_id}}" -l {} {}{})]], {
         i(1, "10"),
         c(2, {
@@ -194,7 +196,7 @@ ls.add_snippets("sh", {
         tmux kill-pane -a -t 0
         tmux setw remain-on-exit on
 
-        PANE_ID=$(tmux split-window -d -P -F "#{{pane_id}}" -l 10 -c $DIR/ $CMD)
+        PANE_ID=$(tmux split-window -d -P -F "#{{pane_id}}" -l 10 -c $DIR/ "$CMD")
 
         tmux select-layout tiled
 
@@ -213,11 +215,10 @@ ls.add_snippets("sh", {
             t("$PANE_ID"),
             i(1),
         }),
-
         c(2, {
-            fmt([["{}" Enter]], i(1)),
-            fmt([["{}" Enter \
-                "{}" Enter \ ]], { i(1), i(2) }),
+            fmt([[{} Enter]], i(1)),
+            fmt([[{} Enter \
+                {} Enter \ ]], { i(1), i(2) }),
         })
     })),
 

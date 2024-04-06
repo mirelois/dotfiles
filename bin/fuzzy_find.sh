@@ -7,6 +7,7 @@ find \
 ~/Documents/Mestrado_1_ano/2_semestre/PSD/         \
 ~/Documents/Mestrado_1_ano/2_semestre/AA/          \
 ~/Documents/Mestrado_1_ano/2_semestre/SDGE/        \
+~/Documents/Mestrado_1_ano/2_semestre/SIC/         \
 ~/Documents/HasLab/                                \
 ~/dotfiles/.config                                 \
 ~/dotfiles/                                        \

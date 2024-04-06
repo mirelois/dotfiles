@@ -68,12 +68,22 @@ harpoon:setup({
     -- Setting up custom behavior for a list named "cmd"
     scripts = {
 
+
         -- This function gets invoked with the options being passed in from
         -- list:select(index, <...options...>)
         -- @param list_item {value: any, context: any}
         -- @param list { ... }
         -- @param option any
         select = function(list_item, list, options)
+
+            -- for key, value in pairs(list) do
+            --     print(key, value)
+            -- end
+
+            if options and options.index then
+                last_script = options.index
+            end
+
             if options and options.edit then
                 default_list_behaviour(list_item, list, options)
                 return
@@ -129,6 +139,10 @@ harpoon:setup({
     }
 })
 
+local function select_scripts(n)
+    harpoon:list("scripts"):select(n, {index=n})
+end
+
 vim.keymap.set("n", "<leader>ha", function() harpoon:list():append() end)
 vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 
@@ -140,22 +154,10 @@ vim.keymap.set("n", "<C-l>", function() harpoon:list():select(4) end)
 vim.keymap.set("n", "<leader>hc", function() harpoon:list("scripts"):append() end)
 vim.keymap.set("n", "<M-C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list("scripts")) end)
 
-vim.keymap.set("n", "<M-C-h>", function()
-    harpoon:list("scripts"):select(1)
-    last_script = 1
-end)
-vim.keymap.set("n", "<M-C-j>", function()
-    harpoon:list("scripts"):select(2)
-    last_script = 2
-end)
-vim.keymap.set("n", "<M-C-k>", function()
-    harpoon:list("scripts"):select(3)
-    last_script = 3
-end)
-vim.keymap.set("n", "<M-C-l>", function()
-    harpoon:list("scripts"):select(4)
-    last_script = 4
-end)
+vim.keymap.set("n", "<M-C-h>", function() select_scripts(1) end)
+vim.keymap.set("n", "<M-C-j>", function() select_scripts(2) end)
+vim.keymap.set("n", "<M-C-k>", function() select_scripts(3) end)
+vim.keymap.set("n", "<M-C-l>", function() select_scripts(4) end)
 
 vim.api.nvim_create_user_command("PrepScript", function()
     vim.api.nvim_command([[%s/\.\.\//$cwd/]])
@@ -189,24 +191,30 @@ vim.api.nvim_create_user_command("HarpoonRunLastCmd", function()
 end, {})
 
 vim.api.nvim_create_user_command("HarpoonRunOnSave", function()
+
     local file_name = vim.api.nvim_buf_get_name(0)
 
     local script
 
     if last_script ~= nil then
-        script = vim.fn.input "Script(defaults to last used): " or last_script
+        script = tonumber(vim.fn.input "Script(defaults to last used): ") or last_script
     else
-        script = vim.fn.input "Script(no default): "
+        script = ""
+        while script == "" do
+            script = vim.fn.input "Script(no default): "
+        end
     end
 
-    local pattern = vim.fn.input("Pattern(defaults to file name): " or file_name)
+    local pattern = vim.fn.input("Pattern(defaults to file name): ")
+
+    if pattern=="" then pattern = file_name end
 
     vim.api.nvim_create_autocmd("BufWritePost", {
 
         group = vim.api.nvim_create_augroup("AutoRun", { clear = true }),
         pattern = pattern,
         callback = function()
-            harpoon:list("scripts"):select(tonumber(script))
+            harpoon:list("scripts"):select(script)
         end,
     })
 end, {})

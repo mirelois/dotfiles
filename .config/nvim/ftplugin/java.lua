@@ -145,10 +145,14 @@ local config = {
                     --     path = "/Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home",
                     --     default = true,
                     -- },
-                    -- {
-                    --     name = "JavaSE-17",
-                    --     path = "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home",
-                    -- },
+                    {
+                        name = "JavaSE-17",
+                        path = "/usr/lib/jvm/java-17-openjdk-amd64/",
+                    },
+                    {
+                        name = "JavaSE-21",
+                        path = "/usr/lib/jvm/java-21-openjdk-amd64/",
+                    },
                     -- {
                     --     name = "JavaSE-19",
                     --     path = "/Library/Java/JavaVirtualMachines/jdk-19.jdk/Contents/Home",

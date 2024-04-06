@@ -1,6 +1,8 @@
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/.cabal/bin:PATH=$HOME/bin:/usr/local/bin:$PATH
 
+export EDITOR='nvim'
+
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 
@@ -112,6 +114,7 @@ export LANG=en_US.UTF-8
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias n="nvim ."
 alias :q="exit"
+alias fuzzy="nvim ~/bin/fuzzy_find.sh"
 
 # alias vpn="openvpn3 session-start --config ~/Documents/Haslab/HASLab.ovpn"
 

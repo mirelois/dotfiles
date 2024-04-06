@@ -4,6 +4,8 @@ pgrep -x sxhkd > /dev/null || sxhkd -c ~/.config/bspwm/sxhkdrc &
 
 ~/.screenlayout/dual_monitor.sh &
 
+bspc rule -r "*"
+
 bspc monitor eDP-1-1 -d   󰈙      
 bspc monitor HDMI-1-1 -d 󱧐
 
@@ -25,8 +27,8 @@ bsp-layout set monocle 
 bsp-layout set monocle 
 bsp-layout set monocle 󱧐
 bsp-layout set monocle 
-bsp-layout set monocle 󰈙
 
+bsp-layout set tall 󰈙
 bsp-layout set tall 
 bsp-layout set tall 
 bsp-layout set tall 
@@ -47,12 +49,11 @@ bspc rule -a 'Shotwell' desktop='󰈙' follow=true
 bspc rule -a 'Vifm' desktop='' follow=true
 bspc rule -a 'Org.gnome.Nautilus' desktop='' follow=true
 
-# bspc rule -a 'Youtube' desktop='' follow=true
-
+bspc rule -a 'Youtube' desktop='' follow=true
 bspc rule -a 'Firefox' desktop='' follow=true
 
-
 bspc rule -a 'Gnome-calculator' state=floating
+bspc rule -a 'Float' state=floating follow=off
 bspc rule -a 'Xmessage' state=floating
 bspc rule -a 'Gnome-control-center' state=floating
 bspc rule -a 'Zathura' state=tiled
