@@ -80,8 +80,11 @@ ls.add_snippets("all", {
                 return vim.api.nvim_buf_get_name(0)
             end
         )),
-}
-)
+})
+
+ls.add_snippets("erlang", {
+    s("spawnfun", fmt([[spawn(fun() -> {} end,)]], i(1)))
+})
 
 ls.add_snippets("python", {
     s("print", fmt([[print({})]], c(1, {

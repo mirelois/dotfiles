@@ -1,6 +1,5 @@
 local lsp = require("lsp-zero")
 
-
 lsp.preset("recommended")
 
 lsp.ensure_installed({})
@@ -26,14 +25,14 @@ cmp_mappings['<Down>'] = nil
 
 lsp.setup_nvim_cmp({
     mapping = cmp_mappings,
-    sources =  {
+    sources = {
         { name = 'otter' },
         { name = 'calc' },
-        { name = "luasnip"},
-        { name = "nvim_lsp"},
-        { name = "nvim_lua"},
-        { name = "path"},
-        { name = "buffer"},
+        { name = "luasnip" },
+        { name = "nvim_lsp" },
+        { name = "nvim_lua" },
+        { name = "path" },
+        { name = "buffer" },
     }
 })
 
@@ -49,6 +48,11 @@ lsp.set_preferences({
 
 lsp.on_attach(function(client, bufnr)
     local opts = { buffer = bufnr, remap = false }
+
+    -- use when nvim version 0.10
+    -- if client.server_capabilities.inlayHintProvider then
+    --     vim.lsp.buf.inlay_hint(bufnr, true)
+    -- end
 
     if client.name == "eslint" then
         vim.cmd.LspStop('eslint')
@@ -70,9 +74,9 @@ end)
 
 lsp.setup()
 
-require'lspconfig'.ccls.setup {
+require 'lspconfig'.ccls.setup {
     single_file_support = true,
-    filetypes = {"cuda"},
+    filetypes = { "cuda" },
     init_options = {
         compilationDatabaseDirectory = "build",
         index = {
@@ -85,13 +89,16 @@ require'lspconfig'.ccls.setup {
 }
 
 require 'lspconfig'.pyright.setup {
-    root_dir=function() return vim.fn.getcwd() end
+    root_dir = function() return vim.fn.getcwd() end
 }
 
 
 require 'lspconfig'.lua_ls.setup {
     settings = {
         Lua = {
+            -- hint = {
+            --     enable = true
+            -- },
             diagnostics = {
                 -- Get the language server to recognize the `vim` global
                 globals = { 'vim' },
@@ -99,3 +106,7 @@ require 'lspconfig'.lua_ls.setup {
         },
     },
 }
+
+-- require("inlay-hints").setup({
+--     only_current_line = true,
+-- })

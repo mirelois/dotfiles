@@ -29,8 +29,15 @@ picom 2> /dev/null &
 
 discord > /dev/null &
 
+#for password promts
+usr/lib/polkit-kde-authentication-agent-1 &
+
 #screen blocker
 betterlockscreen -u $image --fx #only renders normal image
+
+#set both mic and vol to mute
+pactl set-sink-mute @DEFAULT_SINK@ 1
+pactl set-source-mute @DEFAULT_SOURCE@ 1
 
 #eww start
 eww daemon

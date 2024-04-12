@@ -143,7 +143,7 @@ local function select_scripts(n)
     harpoon:list("scripts"):select(n, {index=n})
 end
 
-vim.keymap.set("n", "<leader>ha", function() harpoon:list():append() end)
+vim.keymap.set("n", "<leader>ha", function() harpoon:list():add() end)
 vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 
 vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
@@ -151,7 +151,7 @@ vim.keymap.set("n", "<C-j>", function() harpoon:list():select(2) end)
 vim.keymap.set("n", "<C-k>", function() harpoon:list():select(3) end)
 vim.keymap.set("n", "<C-l>", function() harpoon:list():select(4) end)
 
-vim.keymap.set("n", "<leader>hc", function() harpoon:list("scripts"):append() end)
+vim.keymap.set("n", "<leader>hc", function() harpoon:list("scripts"):add() end)
 vim.keymap.set("n", "<M-C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list("scripts")) end)
 
 vim.keymap.set("n", "<M-C-h>", function() select_scripts(1) end)

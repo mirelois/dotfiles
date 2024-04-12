@@ -5,7 +5,7 @@ vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
     -- Packer can manage itself
-    use 'wbthomason/packer.nvim'
+    use { 'wbthomason/packer.nvim' }
 
     use {
         'nvim-telescope/telescope.nvim',
@@ -79,9 +79,6 @@ return require('packer').startup(function(use)
     use { 'AckslD/nvim-trevJ.lua' }
 
     use { "lukas-reineke/indent-blankline.nvim" }
-    use { "wellle/targets.vim" }
-
-    use { 'nvim-tree/nvim-web-devicons' }
 
     use { 'vimpostor/vim-tpipeline' }
 
@@ -127,4 +124,5 @@ return require('packer').startup(function(use)
         'benlubas/molten-nvim',
         requires = { { '3rd/image.nvim' } }
     }
+
 end)
