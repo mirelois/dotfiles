@@ -8,6 +8,7 @@ find \
 ~/Documents/Mestrado_1_ano/2_semestre/AA/          \
 ~/Documents/Mestrado_1_ano/2_semestre/SDGE/        \
 ~/Documents/Mestrado_1_ano/2_semestre/SIC/         \
+~/Documents/Mestrado_1_ano/2_semestre/FTDS/        \
 ~/Documents/HasLab/                                \
 ~/dotfiles/.config                                 \
 ~/dotfiles/                                        \

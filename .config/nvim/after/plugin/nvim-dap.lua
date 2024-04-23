@@ -7,7 +7,7 @@ vim.keymap.set("n", "<C-F12>", ":lua require'dap'.step_out()<CR>")
 vim.keymap.set("n", "<leader>b", ":lua require'dap'.toggle_breakpoint()<CR>")
 vim.keymap.set("n", "<leader>B", ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoitn condition: '))<CR>")
 vim.keymap.set("n", "<leader>lp", ":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: ))<CR>")
-vim.keymap.set("n", "<leader>dr", ":lua require'dap'.repl_open()<CR>")
+-- vim.keymap.set("n", "<leader>dr", ":lua require'dap'.repl_open()<CR>")
 
 require("nvim-dap-virtual-text").setup()
 

@@ -173,15 +173,6 @@ vim.api.nvim_create_user_command("HarpoonToggleInput", function()
     print("Input set to: ", input_cond)
 end, {})
 
-vim.api.nvim_create_user_command("HarpoonEditLastCmd", function()
-    if last_script ~= nil then
-        vim.cmd("split")
-        harpoon:list("scripts"):select(last_script)
-    else
-        vim.notify("No last script")
-    end
-end, {})
-
 vim.api.nvim_create_user_command("HarpoonRunLastCmd", function()
     if last_script ~= nil then
         harpoon:list("scripts"):select(last_script)
@@ -229,14 +220,6 @@ vim.keymap.set("n", "<leader>hi", function()
 end)
 vim.keymap.set("n", "<leader>hp", function()
     if last_script ~= nil then
-        harpoon:list("scripts"):select(last_script)
-    else
-        vim.notify("No last script")
-    end
-end)
-vim.keymap.set("n", "<leader>he", function()
-    if last_script ~= nil then
-        vim.cmd("split")
         harpoon:list("scripts"):select(last_script)
     else
         vim.notify("No last script")

@@ -30,7 +30,7 @@ picom 2> /dev/null &
 discord > /dev/null &
 
 #for password promts
-usr/lib/polkit-kde-authentication-agent-1 &
+lxpolkit &
 
 #screen blocker
 betterlockscreen -u $image --fx #only renders normal image

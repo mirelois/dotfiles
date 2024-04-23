@@ -2,7 +2,7 @@ function Kanagawa(trans)
     -- Default options:
     require('kanagawa').setup({
         compile = false,  -- enable compiling the colorscheme
-        undercurl = true, -- enable undercurls
+        undercurl = false, -- enable undercurls
         commentStyle = { italic = true },
         functionStyle = {},
         keywordStyle = { italic = true },
@@ -28,7 +28,7 @@ function Kanagawa(trans)
             return {
 
                 Normal = {fg = "#DCDCDC"},
-
+                Visual = {bg = theme.ui.bg_p1},
                 Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 }, -- add `blend = vim.o.pumblend` to enable transparency
                 PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
                 PmenuSbar = { bg = theme.ui.bg_m1 },

@@ -36,15 +36,17 @@ lsp.setup_nvim_cmp({
     }
 })
 
-lsp.set_preferences({
-    suggest_lsp_servers = true,
-    sign_icons = {
-        error = 'E',
-        warn = 'W',
-        hint = 'H',
-        info = 'I'
-    }
+vim.diagnostic.config({
+    underline =  false
 })
+
+lsp.set_sign_icons({
+  error = '>>',
+  warn  = '>>',
+  hint  = '>>',
+  info  = '>>'
+})
+
 
 lsp.on_attach(function(client, bufnr)
     local opts = { buffer = bufnr, remap = false }
@@ -73,6 +75,11 @@ end)
 
 
 lsp.setup()
+
+require('mason-lspconfig').setup_handlers {
+    ['jdtls'] = function ()
+    end
+}
 
 require 'lspconfig'.ccls.setup {
     single_file_support = true,
@@ -106,7 +113,3 @@ require 'lspconfig'.lua_ls.setup {
         },
     },
 }
-
--- require("inlay-hints").setup({
---     only_current_line = true,
--- })

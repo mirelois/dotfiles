@@ -1,4 +1,6 @@
 # If you come from bash you might have to change your $PATH.
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
 export PATH=$HOME/.cabal/bin:PATH=$HOME/bin:/usr/local/bin:$PATH
 
 export EDITOR='nvim'
@@ -80,6 +82,7 @@ plugins=(
   zsh-autosuggestions
   zsh-vi-mode
   asdf
+  golang
 )
 
 source $ZSH/oh-my-zsh.sh

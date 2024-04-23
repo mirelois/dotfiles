@@ -96,7 +96,7 @@ local function setup()
         -- jdtls.setup.add_commands() -- important to ensure you can update configs when build is updated
         -- if you setup DAP according to https://github.com/mfussenegger/nvim-jdtls#nvim-dap-configuration you can uncomment below
         jdtls.setup_dap({ hotcodereplace = "auto" })
-        -- jdtls.dap.setup_dap_main_class_configs()
+        jdtls.dap.setup_dap_main_class_configs()
 
         -- you may want to also run your generic on_attach() function used by your LSP config
     end
@@ -117,12 +117,12 @@ end
 jdtls.start_or_attach(jdtls_config)
 
 --keymaps
-vim.keymap.set("n", "<leader>oi", require'jdtls'.organize_imports())
-vim.keymap.set("n", "<leader>ev", require('jdtls').extract_variable())
-vim.keymap.set("n", "<leader>tev", require('jdtls').extract_variable(true))
-vim.keymap.set("n", "<leader>ec", require('jdtls').extract_constant())
-vim.keymap.set("n", "<leader>tec", require('jdtls').extract_constant(true))
-vim.keymap.set("n", "<leader>em", require('jdtls').extract_method(true))
+-- vim.keymap.set("n", "<leader>oi", require'jdtls'.organize_imports())
+-- vim.keymap.set("n", "<leader>ev", require('jdtls').extract_variable())
+-- vim.keymap.set("n", "<leader>tev", require('jdtls').extract_variable(true))
+-- vim.keymap.set("n", "<leader>ec", require('jdtls').extract_constant())
+-- vim.keymap.set("n", "<leader>tec", require('jdtls').extract_constant(true))
+-- vim.keymap.set("n", "<leader>em", require('jdtls').extract_method(true))
 
 
 -- If using nvim-dap
