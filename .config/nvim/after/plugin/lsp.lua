@@ -81,24 +81,13 @@ require('mason-lspconfig').setup_handlers {
     end
 }
 
-require 'lspconfig'.ccls.setup {
-    single_file_support = true,
-    filetypes = { "cuda" },
-    init_options = {
-        compilationDatabaseDirectory = "build",
-        index = {
-            threads = 0,
-        },
-        clang = {
-            excludeArgs = { "-frounding-math" },
-        },
-    }
-}
-
 require 'lspconfig'.pyright.setup {
     root_dir = function() return vim.fn.getcwd() end
 }
 
+-- require 'lspconfig'.clangd.setup {
+--     root_dir = function() return vim.fn.getcwd() end
+-- }
 
 require 'lspconfig'.lua_ls.setup {
     settings = {

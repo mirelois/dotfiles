@@ -29,5 +29,5 @@ autocmd("BufWinEnter", {
     end,
 })
 
-vim.keymap.set("n", "<leader>gH", "<cmd>diffget //2<CR>")
-vim.keymap.set("n", "<leader>gL", "<cmd>diffget //3<CR>")
+vim.keymap.set("n", "<leader>H", "<cmd>diffget //2<CR>")
+vim.keymap.set("n", "<leader>L", "<cmd>diffget //3<CR>")

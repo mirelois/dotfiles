@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/home/utilizador/.cache/nvim/packer_hererocks/2.1.1692716794/share/lua/5.1/?.lua;/home/utilizador/.cache/nvim/packer_hererocks/2.1.1692716794/share/lua/5.1/?/init.lua;/home/utilizador/.cache/nvim/packer_hererocks/2.1.1692716794/lib/luarocks/rocks-5.1/?.lua;/home/utilizador/.cache/nvim/packer_hererocks/2.1.1692716794/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/home/utilizador/.cache/nvim/packer_hererocks/2.1.1692716794/lib/lua/5.1/?.so"
+local package_path_str = "/home/utilizador/.cache/nvim/packer_hererocks/2.1.1713484068/share/lua/5.1/?.lua;/home/utilizador/.cache/nvim/packer_hererocks/2.1.1713484068/share/lua/5.1/?/init.lua;/home/utilizador/.cache/nvim/packer_hererocks/2.1.1713484068/lib/luarocks/rocks-5.1/?.lua;/home/utilizador/.cache/nvim/packer_hererocks/2.1.1713484068/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/home/utilizador/.cache/nvim/packer_hererocks/2.1.1713484068/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -165,7 +165,7 @@ _G.packer_plugins = {
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
   ["markdown.nvim"] = {
-    config = { "\27LJ\2\nk\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\15file_types\1\0\0\1\3\0\0\rmarkdown\vquarto\nsetup\20render-markdown\frequire\0" },
+    config = { "\27LJ\2\nw\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\15file_types\1\0\1\15file_types\0\1\3\0\0\rmarkdown\vquarto\nsetup\20render-markdown\frequire\0" },
     loaded = true,
     path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/markdown.nvim",
     url = "https://github.com/MeanderingProgrammer/markdown.nvim"
@@ -219,11 +219,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/nvim-dap-virtual-text",
     url = "https://github.com/theHamsta/nvim-dap-virtual-text"
-  },
-  ["nvim-jdtls"] = {
-    loaded = true,
-    path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/nvim-jdtls",
-    url = "https://github.com/mfussenegger/nvim-jdtls"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -345,18 +340,13 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/vim-surround",
     url = "https://github.com/tpope/vim-surround"
-  },
-  ["vim-tpipeline"] = {
-    loaded = true,
-    path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/vim-tpipeline",
-    url = "https://github.com/vimpostor/vim-tpipeline"
   }
 }
 
 time([[Defining packer_plugins]], false)
 -- Config for: markdown.nvim
 time([[Config for markdown.nvim]], true)
-try_loadstring("\27LJ\2\nk\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\15file_types\1\0\0\1\3\0\0\rmarkdown\vquarto\nsetup\20render-markdown\frequire\0", "config", "markdown.nvim")
+try_loadstring("\27LJ\2\nw\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\15file_types\1\0\1\15file_types\0\1\3\0\0\rmarkdown\vquarto\nsetup\20render-markdown\frequire\0", "config", "markdown.nvim")
 time([[Config for markdown.nvim]], false)
 
 _G._packer.inside_compile = false

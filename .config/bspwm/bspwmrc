@@ -6,8 +6,8 @@ pgrep -x sxhkd > /dev/null || sxhkd -c ~/.config/bspwm/sxhkdrc &
 
 bspc rule -r "*"
 
-bspc monitor eDP-1-1 -d   󰈙      
-bspc monitor HDMI-1-1 -d 󱧐
+bspc monitor eDP-1 -d   󰈙      
+bspc monitor HDMI-1 -d 󱧐
 
 bspc config border_width         2
 bspc config window_gap           8

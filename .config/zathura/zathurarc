@@ -1,3 +1,7 @@
 set selection-clipboard clipboard
 set adjust-open "best-fit"
 set sandbox none
+
+nnoremap l J
+nnoremap h K
+

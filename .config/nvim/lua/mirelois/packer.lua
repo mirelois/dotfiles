@@ -30,8 +30,6 @@ return require('packer').startup(function(use)
 
     use('tpope/vim-fugitive')
 
-    -- use { 'mirelois/flow.nvim' }
-
     use {
         'MeanderingProgrammer/markdown.nvim',
         name = 'render-markdown', -- Only needed if you have another plugin named markdown.nvim
@@ -69,7 +67,7 @@ return require('packer').startup(function(use)
             { 'rafamadriz/friendly-snippets' },
         }
     }
-    -- use { 'jdhao/better-escape.vim', event = 'InsertEnter' }
+
     use { "tpope/vim-surround" }
     use { "tpope/vim-repeat" }
     use { "rebelot/kanagawa.nvim" }
@@ -80,7 +78,7 @@ return require('packer').startup(function(use)
 
     use { "lukas-reineke/indent-blankline.nvim" }
 
-    use { 'vimpostor/vim-tpipeline' }
+    -- use { 'vimpostor/vim-tpipeline' }
 
     use { 'numToStr/Comment.nvim' }
 
@@ -91,7 +89,6 @@ return require('packer').startup(function(use)
     use { 'theHamsta/nvim-dap-virtual-text' }
     use { 'jay-babu/mason-nvim-dap.nvim' }
 
-    use { 'mfussenegger/nvim-jdtls' }
     use { 'nvim-telescope/telescope-ui-select.nvim' }
 
     use { 'norcalli/nvim-colorizer.lua' }
