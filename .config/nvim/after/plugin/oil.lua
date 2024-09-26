@@ -50,7 +50,7 @@ require("oil").setup({
         ["<C-t>"] = "actions.select_tab",
         ["gp"] = "actions.preview",
         ["<C-c>"] = "actions.close",
-        -- ["<C-l>"] = "actions.refresh",
+        ["gr"] = "actions.refresh",
         ["-"] = "actions.parent",
         ["_"] = "actions.open_cwd",
         ["`"] = "actions.cd",

@@ -31,3 +31,7 @@ require("image").setup({
 vim.g.molten_image_provider = "image.nvim"
 -- vim.g.molten_copy_output = true
 vim.g.molten_cover_empty_lines = true
+
+vim.g.molten_enter_output_behavior = "open_and_enter"
+
+vim.api.nvim_set_hl(0, "MoltenCell", {bg = 00000000})

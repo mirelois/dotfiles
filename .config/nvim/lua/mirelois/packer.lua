@@ -122,4 +122,6 @@ return require('packer').startup(function(use)
         requires = { { '3rd/image.nvim' } }
     }
 
+    use { 'jpalardy/vim-slime' }
+
 end)

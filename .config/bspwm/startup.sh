@@ -21,6 +21,10 @@ xsetroot -cursor_name left_ptr
 setxkbmap -option compose:rctrl
 setxkbmap pt nodeadkeys
 
+#set both mic and vol to mute
+pactl set-sink-mute @DEFAULT_SINK@ 1
+pactl set-source-mute @DEFAULT_SOURCE@ 1
+
 #start tmux server
 # tmux new-session -d
 
@@ -34,10 +38,6 @@ lxpolkit &
 
 #screen blocker
 betterlockscreen -u $image --fx #only renders normal image
-
-#set both mic and vol to mute
-pactl set-sink-mute @DEFAULT_SINK@ 1
-pactl set-source-mute @DEFAULT_SOURCE@ 1
 
 #eww start
 eww daemon
