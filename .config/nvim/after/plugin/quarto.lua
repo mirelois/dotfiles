@@ -1,5 +1,5 @@
 require('quarto').setup {
-    debug = false,
+    debug = true,
     closePreviewOnExit = false,
     lspFeatures = {
         enabled = true,
@@ -26,18 +26,25 @@ require('quarto').setup {
 vim.keymap.set("n", "<c-cr>", ":QuartoSend<CR>")
 vim.keymap.set("n", "<s-cr>", ":QuartoSend<CR>")
 
-vim.keymap.set("n", "<leader>qA", ":QuartoSendAll<CR>")
+vim.keymap.set("n", "<leader>Q", ":QuartoSendAll<CR>")
 vim.keymap.set("n", "<leader>qa", ":QuartoSendAbove<CR>")
 vim.keymap.set("n", "<leader>qb", ":QuartoSendBelow<CR>")
+vim.keymap.set("n", "<leader>qq", ":QuartoSendLine<CR>")
+-- vim.keymap.set("v", "<leader>q", ":QuartoSendRange<CR>")
 
-vim.keymap.set("n", "<leader>qho", ":MoltenHideOutput<CR>",
-    { silent = true, desc = "hide output" })
-vim.keymap.set("n", "<leader>qe", ":noautocmd MoltenEnterOutput<CR>",
-    { silent = true, desc = "show/enter output" })
+-- vim.keymap.set("n", "<leader>qho", ":MoltenHideOutput<CR>",
+--     { silent = true, desc = "hide output" })
+-- vim.keymap.set("n", "<leader>qe", ":noautocmd MoltenEnterOutput<CR>",
+--     { silent = true, desc = "show/enter output" })
 
 vim.api.nvim_create_user_command("QuartoToJupyter", function()
     local cmd = "quarto convert " .. vim.api.nvim_buf_get_name(0)
     local out = vim.fn.system(cmd)
     print(out)
+end, {})
+
+vim.api.nvim_create_user_command("QuartoInit", function()
+    local cmd = "kitty @launch --keep-focus --cwd=current ipython"
+    vim.fn.system(cmd)
 end, {})
 

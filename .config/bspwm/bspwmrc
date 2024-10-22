@@ -9,6 +9,8 @@ bspc rule -r "*"
 bspc monitor eDP-1 -d   󰈙      
 bspc monitor HDMI-1 -d 󱧐
 
+bspc wm -O eDP-1 HDMI-2 HDMI-1
+
 bspc config border_width         2
 bspc config window_gap           8
 
@@ -44,6 +46,7 @@ bspc rule -a 'VirtualBox Manager' desktop='' follow=true
 bspc rule -a 'Evince' desktop='󰈙' follow=true
 bspc rule -a 'Zathura' desktop='󰈙' follow=true
 bspc rule -a 'Shotwell' desktop='󰈙' follow=true
+bspc rule -a 'sioyek' desktop='󰈙' follow=true
 
 bspc rule -a 'Vifm' desktop='' follow=true
 bspc rule -a 'Org.gnome.Nautilus' desktop='' follow=true

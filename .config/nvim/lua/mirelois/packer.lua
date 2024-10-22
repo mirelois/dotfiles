@@ -103,10 +103,25 @@ return require('packer').startup(function(use)
 
     use { "stevearc/conform.nvim" }
 
-    use { "aserowy/tmux.nvim" }
+    -- use { "aserowy/tmux.nvim" }
 
-    use { 'michaelb/sniprun',
-        run = 'sh ./install.sh 1' }
+    use { 'knubie/vim-kitty-navigator' }
+
+    use({
+        'mikesmithgh/kitty-scrollback.nvim',
+        disable = false,
+        opt = true,
+        cmd = { 'KittyScrollbackGenerateKittens', 'KittyScrollbackCheckHealth' },
+        event = { 'User KittyScrollbackLaunch' },
+        -- tag = '*', -- latest stable version, may have breaking changes if major version changed
+        -- tag = 'v5.0.0', -- pin specific tag
+        config = function()
+            require('kitty-scrollback').setup()
+        end,
+    })
+
+    -- use { 'michaelb/sniprun',
+    --     run = 'sh ./install.sh 1' }
 
     use {
         'quarto-dev/quarto-nvim',
@@ -117,11 +132,15 @@ return require('packer').startup(function(use)
 
     use { 'windwp/nvim-ts-autotag' }
 
+    -- use {
+    --     'benlubas/molten-nvim',
+    --     requires = { { '3rd/image.nvim' } }
+    -- }
+
     use {
-        'benlubas/molten-nvim',
+        'jpalardy/vim-slime',
         requires = { { '3rd/image.nvim' } }
     }
 
-    use { 'jpalardy/vim-slime' }
-
+    use { 'mrjones2014/smart-splits.nvim' }
 end)

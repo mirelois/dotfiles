@@ -32,7 +32,7 @@ require('render-markdown').setup({
         --  normal:   adds highlight group to code blocks & inline code, adds padding to code blocks
         --  language: adds language icon to sign column if enabled and icon + name above code blocks
         --  full:     normal + language
-        style = 'language',
+        style = 'full',
         -- Determines where language icon is rendered:
         --  right: right side of code block
         --  left:  left side of code block
@@ -64,5 +64,45 @@ require('render-markdown').setup({
         highlight = 'RenderMarkdownCode',
         -- Highlight for inline code
         highlight_inline = 'RenderMarkdownCodeInline',
+    },
+    pipe_table = {
+        -- Turn on / off pipe table rendering
+        enabled = true,
+        -- Pre configured settings largely for setting table border easier
+        --  heavy:  use thicker border characters
+        --  double: use double line border characters
+        --  round:  use round border corners
+        --  none:   does nothing
+        preset = 'round',
+        -- Determines how the table as a whole is rendered:
+        --  none:   disables all rendering
+        --  normal: applies the 'cell' style rendering to each row of the table
+        --  full:   normal + a top & bottom line that fill out the table when lengths match
+        style = 'full',
+        -- Determines how individual cells of a table are rendered:
+        --  overlay: writes completely over the table, removing conceal behavior and highlights
+        --  raw:     replaces only the '|' characters in each row, leaving the cells unmodified
+        --  padded:  raw + cells are padded to maximum visual width for each column
+        --  trimmed: padded except empty space is subtracted from visual width calculation
+        cell = 'trimmed',
+        -- Minimum column width to use for padded or trimmed cell
+        min_width = 0,
+        -- Characters used to replace table border
+        -- Correspond to top(3), delimiter(3), bottom(3), vertical, & horizontal
+        -- stylua: ignore
+        border = {
+            '┌', '┬', '┐',
+            '├', '┼', '┤',
+            '└', '┴', '┘',
+            '│', '─',
+        },
+        -- Gets placed in delimiter row for each column, position is based on alignmnet
+        alignment_indicator = '━',
+        -- Highlight for table heading, delimiter, and the line above
+        head = 'RenderMarkdownTableHead',
+        -- Highlight for everything else, main table rows and the line below
+        row = 'RenderMarkdownTableRow',
+        -- Highlight for inline padding used to add back concealed space
+        filler = 'RenderMarkdownTableFill',
     },
 })

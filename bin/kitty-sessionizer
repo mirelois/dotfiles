@@ -1,12 +1,9 @@
 #!/usr/bin/env bash
 
-psw="SGDFfgsdh53537_.,ccqiue("
-
-
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/Documents ~/ ~/Documents/3_ano/2_semestre/ ~/Documents/Haslab/ ~/.config  -mindepth 1 -maxdepth 1 -type d | fzf)
+    selected=$(fuzzy_find.sh | fzf)
 fi
 
 if [[ -z $selected ]]; then
@@ -15,10 +12,6 @@ fi
 
 selected_name=$(basename "$selected" | tr . _)
 
-kitty @ --password=$psw launch --type=tab --tab-title $selected_name  --cwd=$selected zsh
-
-#kitty @ --password=$psw send-text --match-tab state:active 'cd' $selected '\n'
-
-#kitty @ focus-tab --match title:'$selected_name'
-
+kitty @ launch --type=tab --tab-title $selected_name  --cwd=$selected zsh
+kitten @ close-tab --self
 

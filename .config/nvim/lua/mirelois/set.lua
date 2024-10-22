@@ -10,6 +10,8 @@ vim.opt.softtabstop    = 4
 vim.opt.shiftwidth     = 4
 vim.opt.expandtab      = true
 
+vim.opt.foldmethod     = "marker"
+
 --splits
 vim.opt.splitright     = true
 vim.opt.splitbelow     = true

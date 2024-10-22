@@ -41,7 +41,7 @@ vim.keymap.set("v", "<leader>d", [["_d]])
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
 vim.keymap.set("n", "Q", "<nop>") --disables Q
-vim.keymap.set("n", "<C-f>", ":silent !tmux neww tmux-sessionizer<CR>")
+-- vim.keymap.set("n", "<C-f>", ":silent !tmux neww tmux-sessionizer<CR>")
 
 --quickfix navigation 
 vim.keymap.set("n", "<Tab>", "<cmd>cnext<CR>zz")
@@ -59,10 +59,6 @@ vim.keymap.set("n", "<leader>+", [[yiw:/<C-r>"<CR>]])
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 --changing words cycling
 vim.keymap.set("n", "<leader><Tab>", "ncw")
-
-vim.keymap.set("n", "<leader><leader>e", [[iif err != nil{
-    return nil
-}<Esc>V2k=]])
 
 --Keymaps for surround
 --vim.keymap.set("v", [[<leader>(]], [[c(<C-r>")<Esc>]])

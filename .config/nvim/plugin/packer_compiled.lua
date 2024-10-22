@@ -154,6 +154,15 @@ _G.packer_plugins = {
     path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/kanagawa.nvim",
     url = "https://github.com/rebelot/kanagawa.nvim"
   },
+  ["kitty-scrollback.nvim"] = {
+    commands = { "KittyScrollbackGenerateKittens", "KittyScrollbackCheckHealth" },
+    config = { "\27LJ\2\n>\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\21kitty-scrollback\frequire\0" },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/utilizador/.local/share/nvim/site/pack/packer/opt/kitty-scrollback.nvim",
+    url = "https://github.com/mikesmithgh/kitty-scrollback.nvim"
+  },
   ["lsp-zero.nvim"] = {
     loaded = true,
     path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim",
@@ -189,11 +198,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
-  },
-  ["molten-nvim"] = {
-    loaded = true,
-    path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/molten-nvim",
-    url = "https://github.com/benlubas/molten-nvim"
   },
   ["nvim-cmp"] = {
     loaded = true,
@@ -296,10 +300,10 @@ _G.packer_plugins = {
     path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/rainbow-delimiters.nvim",
     url = "https://github.com/HiPhish/rainbow-delimiters.nvim"
   },
-  sniprun = {
+  ["smart-splits.nvim"] = {
     loaded = true,
-    path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/sniprun",
-    url = "https://github.com/michaelb/sniprun"
+    path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/smart-splits.nvim",
+    url = "https://github.com/mrjones2014/smart-splits.nvim"
   },
   ["telescope-ui-select.nvim"] = {
     loaded = true,
@@ -310,11 +314,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
-  },
-  ["tmux.nvim"] = {
-    loaded = true,
-    path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/tmux.nvim",
-    url = "https://github.com/aserowy/tmux.nvim"
   },
   undotree = {
     loaded = true,
@@ -330,6 +329,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
+  },
+  ["vim-kitty-navigator"] = {
+    loaded = true,
+    path = "/home/utilizador/.local/share/nvim/site/pack/packer/start/vim-kitty-navigator",
+    url = "https://github.com/knubie/vim-kitty-navigator"
   },
   ["vim-repeat"] = {
     loaded = true,
@@ -353,6 +357,32 @@ time([[Defining packer_plugins]], false)
 time([[Config for markdown.nvim]], true)
 try_loadstring("\27LJ\2\nw\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\15file_types\1\0\1\15file_types\0\1\3\0\0\rmarkdown\vquarto\nsetup\20render-markdown\frequire\0", "config", "markdown.nvim")
 time([[Config for markdown.nvim]], false)
+
+-- Command lazy-loads
+time([[Defining lazy-load commands]], true)
+pcall(vim.api.nvim_create_user_command, 'KittyScrollbackCheckHealth', function(cmdargs)
+          require('packer.load')({'kitty-scrollback.nvim'}, { cmd = 'KittyScrollbackCheckHealth', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'kitty-scrollback.nvim'}, {}, _G.packer_plugins)
+          return vim.fn.getcompletion('KittyScrollbackCheckHealth ', 'cmdline')
+      end})
+pcall(vim.api.nvim_create_user_command, 'KittyScrollbackGenerateKittens', function(cmdargs)
+          require('packer.load')({'kitty-scrollback.nvim'}, { cmd = 'KittyScrollbackGenerateKittens', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'kitty-scrollback.nvim'}, {}, _G.packer_plugins)
+          return vim.fn.getcompletion('KittyScrollbackGenerateKittens ', 'cmdline')
+      end})
+time([[Defining lazy-load commands]], false)
+
+vim.cmd [[augroup packer_load_aucmds]]
+vim.cmd [[au!]]
+  -- Event lazy-loads
+time([[Defining lazy-load event autocommands]], true)
+vim.cmd [[au User KittyScrollbackLaunch ++once lua require("packer.load")({'kitty-scrollback.nvim'}, { event = "User KittyScrollbackLaunch" }, _G.packer_plugins)]]
+time([[Defining lazy-load event autocommands]], false)
+vim.cmd("augroup END")
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

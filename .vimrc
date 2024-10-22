@@ -2,14 +2,14 @@ set relativenumber
 
 set number
 
+set nowrap
+
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 
 set noswapfile
 set nobackup
-set undodir=$HOME/.vim(1)/undodir
-set undofile
 
 set nohlsearch
 set incsearch

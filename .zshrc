@@ -119,6 +119,8 @@ alias n="nvim ."
 alias :q="exit"
 alias fuzzy="nvim ~/bin/fuzzy_find.sh"
 
+[ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
+
 # alias vpn="openvpn3 session-start --config ~/Documents/Haslab/HASLab.ovpn"
 
 # >>> conda initialize >>>

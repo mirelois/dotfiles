@@ -31,7 +31,7 @@ super + c
 	gnome-calculator
 
 super + f
-	kitty --class Vifm vifm
+	kitty --config ~/.config/kitty/kitty_vifm.conf --class Vifm vifm
 
 super + p
 	eww open-many --no-daemonize weather_side time_side smol_calendar player_side sys_side sliders_side
