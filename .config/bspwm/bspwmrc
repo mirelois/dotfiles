@@ -8,6 +8,7 @@ bspc rule -r "*"
 
 bspc monitor eDP-1 -d   󰈙      
 bspc monitor HDMI-1 -d 󱧐
+bspc monitor HDMI-2 -d 
 
 bspc wm -O eDP-1 HDMI-2 HDMI-1
 

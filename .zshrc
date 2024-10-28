@@ -118,6 +118,7 @@ export LANG=en_US.UTF-8
 alias n="nvim ."
 alias :q="exit"
 alias fuzzy="nvim ~/bin/fuzzy_find.sh"
+alias icat="kitten icat"
 
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 
@@ -152,5 +153,3 @@ function zvm_after_init() {
 }
 
 bindkey "^P" up-line-or-search
-
-aurora="gsd@aurora01.cluster.lsd.di.uminho.pt"
