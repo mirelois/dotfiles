@@ -5,8 +5,8 @@
 #xrandr --output eDP-1-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-1-1 --mode 1080x2160 --pos 0x1080 --rotate right --output HDMI-1-2 --off
 
 #set random wallpaper from ~/wallpapers/
-image=$(find ~/wallpapers/ -type f | shuf -n 1)
-feh --bg-scale $image &
+# image=$(find ~/wallpapers/ -type f | shuf -n 1)
+# feh --bg-scale $image &
 
 #turn on bar
 ~/.config/polybar/bartoggle 2> /dev/null

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+exec polybar example --config=~/.config/polybar/workspaces.ini &
+exec polybar example --config=~/.config/polybar/icons.ini &
+exec polybar example --config=~/.config/polybar/utilities.ini &
+exec polybar example --config=~/.config/polybar/clock.ini &
+

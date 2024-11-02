@@ -1,4 +1,3 @@
-vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
 
 local Fugitive = vim.api.nvim_create_augroup("Fugitive", {})
 
@@ -29,5 +28,15 @@ autocmd("BufWinEnter", {
     end,
 })
 
-vim.keymap.set("n", "<leader>H", "<cmd>diffget //2<CR>")
-vim.keymap.set("n", "<leader>L", "<cmd>diffget //3<CR>")
+
+return {
+    'tpope/vim-fugitive',
+    keys = {
+        { "<leader>gs", vim.cmd.Git },
+        {"<leader>H", "<cmd>diffget //2<CR>"},
+        {"<leader>L", "<cmd>diffget //3<CR>"}
+
+
+    }
+
+}

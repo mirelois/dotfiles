@@ -45,3 +45,4 @@ vim.cmd('autocmd BufEnter * setlocal formatoptions-=cro')
 if vim.fn.has("termguicolors") then
     vim.opt.termguicolors = true
 end
+
