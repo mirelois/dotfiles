@@ -96,6 +96,7 @@ return {
     },
     {
         'williamboman/mason.nvim',
+        opts = {},
     },
     { "williamboman/mason-lspconfig.nvim" },
     {
@@ -129,6 +130,7 @@ return {
     },
     {
         "RaafatTurki/corn.nvim",
+        event = "BufWinEnter",
         init = function() vim.diagnostic.config { virtual_text = false } end,
         opts = {
             item_preprocess_func = function(item)
@@ -139,6 +141,7 @@ return {
     },
     {
         "stevearc/conform.nvim",
+        event = "BufWinEnter",
         keys = {
             { "<leader>f", function()
                 require('conform').format({
@@ -182,8 +185,12 @@ return {
                         -- "--squeeze-lines=3",
                         "--max-continuation-indent=120",
                     }
+
                 }
+
             }
+
         }
-    }
+    },
+
 }

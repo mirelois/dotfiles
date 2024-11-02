@@ -1,26 +1,7 @@
 return {
     {
-        'knubie/vim-kitty-navigator',
-        init = function()
-            vim.g.kitty_navigator_no_mappings = 1
-        end,
-        keys = {
-            { "<C-S-l>", ":KittyNavigateRight<CR>" },
-            { "<C-S-k>", ":KittyNavigateUp<CR>" },
-            { "<C-S-j>", ":KittyNavigateDown<CR>" },
-            { "<C-S-h>", ":KittyNavigateLeft<CR>" },
-        }
-    },
-    {
-        'mikesmithgh/kitty-scrollback.nvim',
-        enabled = true,
-        lazy = true,
-        cmd = { 'KittyScrollbackGenerateKittens', 'KittyScrollbackCheckHealth' },
-        event = { 'User KittyScrollbackLaunch' },
-
-    },
-    {
-        'mrjones2014/smart-splits.nvim',
+        "mrjones2014/smart-splits.nvim",
+        build = './kitty/install-kittens.bash',
         opts = {
             -- Ignored buffer types (only while resizing)
             ignored_buftypes = {
@@ -114,13 +95,33 @@ return {
             kitty_password = nil,
             -- default logging level, one of: 'trace'|'debug'|'info'|'warn'|'error'|'fatal'
             log_level = 'info',
-
+        
         },
+        -- keys = {
+        --     { '<A-h>', require('smart-splits').resize_left },
+        --     { '<A-j>', require('smart-splits').resize_down },
+        --     { '<A-k>', require('smart-splits').resize_up },
+        --     { '<A-l>', require('smart-splits').resize_right }
+        -- }
+    },
+    {
+        'knubie/vim-kitty-navigator',
+        init = function()
+            vim.g.kitty_navigator_no_mappings = 1
+        end,
         keys = {
-            {'<A-h>', require('smart-splits').resize_left},
-            {'<A-j>', require('smart-splits').resize_down},
-            {'<A-k>', require('smart-splits').resize_up},
-            {'<A-l>', require('smart-splits').resize_right}
+            { "<C-S-l>", ":KittyNavigateRight<CR>" },
+            { "<C-S-k>", ":KittyNavigateUp<CR>" },
+            { "<C-S-j>", ":KittyNavigateDown<CR>" },
+            { "<C-S-h>", ":KittyNavigateLeft<CR>" },
         }
-    }
+    },
+    {
+        'mikesmithgh/kitty-scrollback.nvim',
+        enabled = true,
+        lazy = true,
+        cmd = { 'KittyScrollbackGenerateKittens', 'KittyScrollbackCheckHealth' },
+        event = { 'User KittyScrollbackLaunch' },
+
+    },
 }
