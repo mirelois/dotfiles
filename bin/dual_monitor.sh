@@ -6,8 +6,6 @@ bspc monitor HDMI-2 -d 
 bspc monitor HDMI-1 -d 󱧐 
 bspc wm -O eDP-1 HDMI-2 HDMI-1
 
-bspc config -m eDP-1 top_monocle_padding 8
-bspc config -m HDMI-1 top_monocle_padding 0
-bspc config -m HDMI-2 top_monocle_padding 0
+bspc config -m top_monocle_padding 8
 
 ~/.config/bspwm/set_wallpaper.sh

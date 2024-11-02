@@ -1,7 +1,6 @@
 #!/bin/sh
 
-bspc config -m eDP-1 top_monocle_padding 8
-bspc config -m HDMI-1 top_monocle_padding 0
+bspc config top_monocle_padding 8
 
 xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-1 --mode 1080x2160 --pos 0x1080 --rotate right --output HDMI-2 --off
 

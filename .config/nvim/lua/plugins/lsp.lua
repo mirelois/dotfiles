@@ -1,15 +1,5 @@
 vim.opt.signcolumn = 'yes'
 
--- Add cmp_nvim_lsp capabilities settings to lspconfig
--- This should be executed before you configure any language server
-local lspconfig_defaults = require('lspconfig').util.default_config
-
-lspconfig_defaults.capabilities = vim.tbl_deep_extend(
-    'force',
-    lspconfig_defaults.capabilities,
-    require('cmp_nvim_lsp').default_capabilities()
-)
-
 return {
     {
         "hrsh7th/nvim-cmp",
@@ -106,14 +96,20 @@ return {
     },
     {
         'williamboman/mason.nvim',
-        lazy = false,
-        opts = {},
     },
-    { "williamboman/mason-lspconfig.nvim", lazy = false },
+    { "williamboman/mason-lspconfig.nvim" },
     {
         "neovim/nvim-lspconfig",
-        lazy = false,
         config = function()
+            -- Add cmp_nvim_lsp capabilities settings to lspconfig
+            -- This should be executed before you configure any language server
+            local lspconfig_defaults = require('lspconfig').util.default_config
+
+            lspconfig_defaults.capabilities = vim.tbl_deep_extend(
+                'force',
+                lspconfig_defaults.capabilities,
+                require('cmp_nvim_lsp').default_capabilities()
+            )
             require 'lspconfig'.pyright.setup {
                 root_dir = function() return vim.fn.getcwd() end
             }
@@ -144,11 +140,11 @@ return {
     {
         "stevearc/conform.nvim",
         keys = {
-            {"<leader>f", function()
-            require('conform').format({
-                lsp_fallback = true
-            })
-        end}
+            { "<leader>f", function()
+                require('conform').format({
+                    lsp_fallback = true
+                })
+            end }
         },
         opts = {
             will_fallback_lsp = true,
@@ -186,12 +182,8 @@ return {
                         -- "--squeeze-lines=3",
                         "--max-continuation-indent=120",
                     }
-
                 }
-
             }
-
         }
-
     }
 }
