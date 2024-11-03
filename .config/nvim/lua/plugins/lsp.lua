@@ -54,7 +54,6 @@ return {
             })
 
 
-
             lsp_zero.set_sign_icons({
                 error = '>>',
                 warn  = '>>',
@@ -98,7 +97,28 @@ return {
         'williamboman/mason.nvim',
         opts = {},
     },
-    { "williamboman/mason-lspconfig.nvim" },
+    {
+        "williamboman/mason-lspconfig.nvim",
+        opts = {
+            ensure_installed = { "lua_ls", "rust_analyzer", "bashls", "pyright" },
+        },
+        -- see :h mason-lspconfig.setup_handlers()
+        -- config = function()
+        --     require("mason-lspconfig").setup_handlers {
+        --         -- The first entry (without a key) will be the default handler
+        --         -- and will be called for each installed server that doesn't have
+        --         -- a dedicated handler.
+        --         function(server_name) -- default handler (optional)
+        --             require("lspconfig")[server_name].setup {}
+        --         end,
+        --         -- Next, you can provide a dedicated handler for specific servers.
+        --         -- For example, a handler override for the `rust_analyzer`:
+        --         ["lua_ls"] = function()
+        --             require("rust-tools").setup {}
+        --         end
+        --     }
+        -- end
+    },
     {
         "neovim/nvim-lspconfig",
         config = function()
@@ -116,6 +136,11 @@ return {
             }
 
             require('lspconfig').lua_ls.setup({
+
+                on_init = function(client)
+                    require("lsp-zero").nvim_lua_settings(client, {})
+                end,
+
                 settings = {
                     Lua = {
                         diagnostics = {
