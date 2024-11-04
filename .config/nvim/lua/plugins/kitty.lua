@@ -2,6 +2,15 @@ return {
     {
         "mrjones2014/smart-splits.nvim",
         build = './kitty/install-kittens.bash',
+        keys = function()
+            local split = require('smart-splits')
+            return {
+                { '<A-h>', split.resize_left },
+                { '<A-j>', split.resize_down },
+                { '<A-k>', split.resize_up },
+                { '<A-l>', split.resize_right }
+            }
+        end,
         opts = {
             -- Ignored buffer types (only while resizing)
             ignored_buftypes = {
@@ -95,14 +104,8 @@ return {
             kitty_password = nil,
             -- default logging level, one of: 'trace'|'debug'|'info'|'warn'|'error'|'fatal'
             log_level = 'info',
-        
+
         },
-        -- keys = {
-        --     { '<A-h>', require('smart-splits').resize_left },
-        --     { '<A-j>', require('smart-splits').resize_down },
-        --     { '<A-k>', require('smart-splits').resize_up },
-        --     { '<A-l>', require('smart-splits').resize_right }
-        -- }
     },
     {
         'knubie/vim-kitty-navigator',

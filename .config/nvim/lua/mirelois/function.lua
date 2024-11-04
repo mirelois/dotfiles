@@ -2,6 +2,11 @@ vim.api.nvim_create_user_command("W", function()
     vim.cmd('w')
 end, {})
 
+vim.api.nvim_create_user_command("Q", function()
+    vim.cmd('q')
+end, {})
+
+
 
 
 -- Open binary files
