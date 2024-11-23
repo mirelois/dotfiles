@@ -1,3 +1,14 @@
+-- Declare a global function to retrieve the current directory
+function _G.get_oil_winbar()
+    local dir = require("oil").get_current_dir()
+    if dir then
+        return vim.fn.fnamemodify(dir, ":~")
+    else
+        -- If there is no current directory (e.g. over ssh), just show the buffer name
+        return vim.api.nvim_buf_get_name(0)
+    end
+end
+
 return {
     "stevearc/oil.nvim",
 
@@ -20,6 +31,7 @@ return {
         },
         -- Window-local options to use for oil buffers
         win_options = {
+            winbar = "%!v:lua.get_oil_winbar()",
             wrap = false,
             signcolumn = "no",
             cursorcolumn = false,
@@ -29,6 +41,8 @@ return {
             conceallevel = 3,
             concealcursor = "nvic",
         },
+        -- Set to true to watch the filesystem for changes and reload oil
+        watch_for_changes = true,
         -- Send deleted files to the trash instead of permanently deleting them (:help oil-trash)
         delete_to_trash = true,
         -- Skip the confirmation popup for simple operations
@@ -59,13 +73,15 @@ return {
             ["`"] = "actions.cd",
             ["~"] = "actions.tcd",
             ["gs"] = "actions.change_sort",
-            ["gx"] = "actions.open_external",
+            ["<leader>a"] = "actions.open_external",
+            ["gy"] = "actions.copy_entry_path",
             ["g."] = "actions.toggle_hidden",
             ["g\\"] = "actions.toggle_trash",
         },
         -- Set to false to disable all of the above keymaps
         use_default_keymaps = false,
         view_options = {
+            natural_order = true,
             -- Show files and directories that start with "."
             show_hidden = true,
             -- This function defines what is considered a "hidden" file
@@ -136,6 +152,5 @@ return {
                 winblend = 0,
             },
         },
-
-    }
+    },
 }

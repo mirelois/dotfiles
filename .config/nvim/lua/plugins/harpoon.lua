@@ -23,7 +23,7 @@ return {
         end
 
         return {
-            { "<leader>ha", function() harpoon:list():add() end },
+            { "<leader>a", function() harpoon:list():add() end },
             { "<C-e>",      function() harpoon.ui:toggle_quick_menu(harpoon:list()) end },
 
             { "<C-h>",      function() harpoon:list():select(1) end },
@@ -31,7 +31,7 @@ return {
             { "<C-k>",      function() harpoon:list():select(3) end },
             { "<C-l>",      function() harpoon:list():select(4) end },
 
-            { "<leader>hc", function() harpoon:list("scripts"):add() end },
+            { "<leader>A", function() harpoon:list("scripts"):add() end },
             { "<M-C-e>",    function() harpoon.ui:toggle_quick_menu(harpoon:list("scripts")) end },
             { "<M-C-h>",    function() select_scripts(1) end },
             { "<M-C-j>",    function() select_scripts(2) end },

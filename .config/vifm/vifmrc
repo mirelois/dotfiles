@@ -165,6 +165,10 @@ command! reload :write | restart full
 " You can also add %CLEAR if you want to clear screen before running FUSE
 " program.
 
+" Pickle
+
+filextype {*.pkl} ~/pickle_viewer.py %f
+
 " Pdf
 filextype {*.pdf},<application/pdf> sioyek %c %i &, apvlv %c, xpdf %c
 fileviewer {*.pdf},<application/pdf> pdftotext -nopgbrk %c -

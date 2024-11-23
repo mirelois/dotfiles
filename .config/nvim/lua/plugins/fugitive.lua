@@ -35,8 +35,5 @@ return {
         { "<leader>gs", vim.cmd.Git },
         {"<leader>H", "<cmd>diffget //2<CR>"},
         {"<leader>L", "<cmd>diffget //3<CR>"}
-
-
     }
-
 }

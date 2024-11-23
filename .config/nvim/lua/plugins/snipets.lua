@@ -1,4 +1,3 @@
-
 return {
     'L3MON4D3/LuaSnip',
     dependencies = { 'rafamadriz/friendly-snippets' },
@@ -133,7 +132,9 @@ return {
 
             s("use", fmt("use {{ '{}' }}", { i(1) })),
 
-            s("map", fmt([[vim.keymap.set("{}", "{}", "{}")]], { i(1), i(2), i(3) }))
+            s("map", fmt([[vim.keymap.set("{}", "{}", "{}")]], { i(1), i(2), i(3) })),
+
+            s("key", fmt([[awful.key({{modkey}}, "{}", {})]], {i(1), i(2)}))
         }
         )
 
@@ -159,9 +160,9 @@ return {
 
         ls.add_snippets("cpp", {
             s("fori", fmt([[
-    for(int {} = 0; {} < N; {}++){{
-        {}
-    }}]], { i(1, "i"), rep(1), rep(1), i(2) })),
+                            for(int {} = 0; {} < N; {}++){{
+                                {}
+                            }}]], { i(1, "i"), rep(1), rep(1), i(2) })),
         }
         )
 

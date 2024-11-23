@@ -278,49 +278,34 @@ return {
     {
         'jpalardy/vim-slime',
         ft = "quarto",
-        dependencies = {
-            '3rd/image.nvim',
-            ft = "quarto",
-            opts = {
-                backend = "kitty",                        -- Kitty will provide the best experience, but you need a compatible terminal
-                integrations = {},                        -- do whatever you want with image.nvim's integrations
-                max_width = 1000,                         -- tweak to preference
-                max_height = 12000,                       -- ^
-                max_height_window_percentage = math.huge, -- this is necessary for a good experience
-                max_width_window_percentage = math.huge,
-                window_overlap_clear_enabled = true,
-                window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
-
-            }
-        },
         init = function()
             vim.b['quarto_is_python_chunk'] = false
             vim.g.slime_no_mappings = true
             vim.g.slime_target = "kitty"
-            vim.g.slime_bracketed_paste = 0
+            vim.g.slime_bracketed_paste = 1
             vim.g.slime_python_ipython = 1
         end,
-        config = function()
-            Quarto_is_in_python_chunk = function()
-                require('otter.tools.functions').is_otter_language_context 'python'
-            end
-
-            vim.cmd [[
-                      let g:slime_dispatch_ipython_pause = 100
-                      function SlimeOverride_EscapeText_quarto(text)
-                      call v:lua.Quarto_is_in_python_chunk()
-                      if exists('g:slime_python_ipython') && len(split(a:text,"\n")) > 1 && b:quarto_is_python_chunk && !(exists('b:quarto_is_r_mode') && b:quarto_is_r_mode)
-                      return ["%cpaste -q\n", g:slime_dispatch_ipython_pause, a:text, "--", "\n"]
-                      else
-                      if exists('b:quarto_is_r_mode') && b:quarto_is_r_mode && b:quarto_is_python_chunk
-                      return [a:text, "\n"]
-                      else
-                      return [a:text]
-                      end
-                      end
-                      endfunction
-                      ]]
-        end
+        -- config = function()
+        --     Quarto_is_in_python_chunk = function()
+        --         require('otter.tools.functions').is_otter_language_context 'python'
+        --     end
+        --
+        --     vim.cmd [[
+        --               let g:slime_dispatch_ipython_pause = 100
+        --               function SlimeOverride_EscapeText_quarto(text)
+        --               call v:lua.Quarto_is_in_python_chunk()
+        --               if exists('g:slime_python_ipython') && len(split(a:text,"\n")) > 1 && b:quarto_is_python_chunk && !(exists('b:quarto_is_r_mode') && b:quarto_is_r_mode)
+        --               return ["%cpaste -q\n", g:slime_dispatch_ipython_pause, a:text, "--", "\n"]
+        --               else
+        --               if exists('b:quarto_is_r_mode') && b:quarto_is_r_mode && b:quarto_is_python_chunk
+        --               return [a:text, "\n"]
+        --               else
+        --               return [a:text]
+        --               end
+        --               end
+        --               endfunction
+        --               ]]
+        -- end
     }
 
 

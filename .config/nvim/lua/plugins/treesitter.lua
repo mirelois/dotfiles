@@ -36,7 +36,7 @@ return {
                     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
                     -- Using this option may slow down your editor, and you may see some duplicate highlights.
                     -- Instead of true it can also be a list of languages
-                    additional_vim_regex_highlighting = false,
+                    additional_vim_regex_highlighting = true,
                 },
                 textobjects = {
                     select = {
@@ -57,8 +57,11 @@ return {
                             ["al"] = "@loop.outer",
                             ["in"] = "@number.inner",
                             ["an"] = "@number.outer",
+                            ["ib"] = "@cell.inner",
+                            ["ab"] = "@cell.outer",
                             -- You can also use captures from other query groups like `locals.scm`
                             ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
+                            ["is"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
                         },
                         -- You can choose the select mode (default is charwise 'v')
                         --
@@ -70,7 +73,7 @@ return {
                         selection_modes = {
                             ['@parameter.outer'] = 'v', -- charwise
                             ['@function.outer'] = 'V',  -- linewise
-                            ['@class.outer'] = '<c-v>', -- blockwise
+                            ['@class.outer'] = 'V', -- blockwise
                         },
                         -- If you set this to `true` (default is `false`) then any textobject is
                         -- extended to include preceding or succeeding whitespace. Succeeding
@@ -87,10 +90,10 @@ return {
                     swap = {
                         enable = true,
                         swap_next = {
-                            ["<leader>a"] = "@parameter.inner",
+                            ["<leader>a["] = "@parameter.inner",
                         },
                         swap_previous = {
-                            ["<leader>A"] = "@parameter.inner",
+                            ["<leader>a]"] = "@parameter.inner",
                         },
                     },
 
@@ -121,7 +124,8 @@ return {
         end,
         dependencies = {
             'nvim-treesitter/nvim-treesitter-context',
-            "nvim-treesitter/nvim-treesitter-textobjects"
+            "nvim-treesitter/nvim-treesitter-textobjects",
+            'nvim-treesitter/playground'
         }
     },
 }

@@ -46,7 +46,7 @@ return {
                 return {
 
                     Normal = { fg = "#DCDCDC" },
-                    Visual = { bg = theme.ui.bg_p1 },
+                    Visual = { bg = theme.ui.bg_p2 },
                     Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 }, -- add `blend = vim.o.pumblend` to enable transparency
                     PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
                     PmenuSbar = { bg = theme.ui.bg_m1 },
@@ -67,6 +67,8 @@ return {
                     RenderMarkdownH6Bg = { fg = palette.autumnRed },
 
                     RenderMarkdownBullet = { fg = palette.oniViolet },
+
+                    -- RenderMarkdownCode = { fg = "00000000",  bg = "NONE"},
 
                     RenderMarkdownTableHead = { fg = palette.autumnGreen },
                     RenderMarkdownTableRow = { fg = palette.autumnGreen },
@@ -188,7 +190,5 @@ return {
 
             }
         end
-    }
-
-
+    },
 }

@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    selected=$( (fuzzy_find.sh; zoxide query -l) | fzf)
+fi
+
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+selected_name=$(basename "$selected" | tr . _)
+
+kitty @ launch --type=tab --tab-title $selected_name  --cwd=$selected zsh
+zoxide add $selected
+kitten @ close-tab --self
+
