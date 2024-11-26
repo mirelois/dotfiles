@@ -1,0 +1,8 @@
+#!/bin/bash
+
+wget 'https://discord.com/api/download/stable?platform=linux&format=deb' -O ~/Downloads/discord.deb
+
+sudo apt install ~/Downloads/discord.deb
+
+rm ~/Downloads/discord.deb
+

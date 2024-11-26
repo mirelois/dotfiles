@@ -103,21 +103,40 @@ return {
             ensure_installed = { "lua_ls", "rust_analyzer", "bashls", "pyright" },
         },
         -- see :h mason-lspconfig.setup_handlers()
-        -- config = function()
-        --     require("mason-lspconfig").setup_handlers {
-        --         -- The first entry (without a key) will be the default handler
-        --         -- and will be called for each installed server that doesn't have
-        --         -- a dedicated handler.
-        --         function(server_name) -- default handler (optional)
-        --             require("lspconfig")[server_name].setup {}
-        --         end,
-        --         -- Next, you can provide a dedicated handler for specific servers.
-        --         -- For example, a handler override for the `rust_analyzer`:
-        --         ["lua_ls"] = function()
-        --             require("rust-tools").setup {}
-        --         end
-        --     }
-        -- end
+        config = function()
+            require("mason-lspconfig").setup_handlers {
+                -- The first entry (without a key) will be the default handler
+                -- and will be called for each installed server that doesn't have
+                -- a dedicated handler.
+                function(server_name) -- default handler (optional)
+                    require("lspconfig")[server_name].setup {}
+                end,
+                ["pyright"] = function()
+                    require 'lspconfig'.pyright.setup {
+                        root_dir = function() return vim.fn.getcwd() end
+                    }
+                end,
+                -- Next, you can provide a dedicated handler for specific servers.
+                -- For example, a handler override for the `rust_analyzer`:
+                ["lua_ls"] = function()
+                    require('lspconfig').lua_ls.setup({
+                        on_init = function(client)
+                            require("lsp-zero").nvim_lua_settings(client, {})
+                        end,
+                        settings = {
+                            Lua = {
+                                diagnostics = {
+                                    -- Get the language server to recognize the `vim` global
+                                    globals = { 'vim' },
+                                },
+                            },
+                        },
+                    })
+                end
+                --     require("rust-tools").setup {}
+                -- end
+            }
+        end
     },
     {
         "neovim/nvim-lspconfig",
@@ -131,26 +150,6 @@ return {
                 lspconfig_defaults.capabilities,
                 require('cmp_nvim_lsp').default_capabilities()
             )
-            require 'lspconfig'.pyright.setup {
-                root_dir = function() return vim.fn.getcwd() end
-            }
-
-            require('lspconfig').lua_ls.setup({
-
-                on_init = function(client)
-                    require("lsp-zero").nvim_lua_settings(client, {})
-                end,
-
-                settings = {
-                    Lua = {
-                        diagnostics = {
-                            -- Get the language server to recognize the `vim` global
-                            globals = { 'vim' },
-                        },
-                    },
-                },
-
-            })
         end
     },
     {
