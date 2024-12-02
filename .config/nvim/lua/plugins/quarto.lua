@@ -20,7 +20,7 @@ return {
 
     {
         'MeanderingProgrammer/markdown.nvim',
-        ft = { "markdown", "quarto"},
+        ft = { "markdown", "quarto" },
         init = function()
             vim.g.mkdp_auto_start = 0
         end,
@@ -135,7 +135,12 @@ return {
                 -- Highlight for inline padding used to add back concealed space
                 filler = 'RenderMarkdownTableFill',
             },
-        }
+        },
+        config = function()
+            vim.opt.spell = true
+            vim.opt.spelllang = "en_us"
+            vim.opt.wrap = true
+        end
     },
 
     {
@@ -270,7 +275,7 @@ return {
                 buffer = buf,
                 callback = highlight_cells,
             })
-            
+
             require('quarto').setup(opts)
         end
     },

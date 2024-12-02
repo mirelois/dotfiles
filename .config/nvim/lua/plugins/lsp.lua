@@ -65,9 +65,9 @@ return {
             lsp_zero.on_attach(function(client, bufnr)
                 local opts = { buffer = bufnr, remap = false }
 
-                if client.server_capabilities.inlayHintProvider then
-                    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-                end
+                -- if client.server_capabilities.inlayHintProvider then
+                --     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+                -- end
 
 
                 if client.name == "eslint" then
@@ -119,7 +119,8 @@ return {
                 -- Next, you can provide a dedicated handler for specific servers.
                 -- For example, a handler override for the `rust_analyzer`:
                 ["lua_ls"] = function()
-                    require('lspconfig').lua_ls.setup({
+                    local lsp_zero = require('lsp-zero')
+                    local lua_opts = lsp_zero.nvim_lua_ls({
                         on_init = function(client)
                             require("lsp-zero").nvim_lua_settings(client, {})
                         end,
@@ -132,6 +133,7 @@ return {
                             },
                         },
                     })
+                    require('lspconfig').lua_ls.setup(lua_opts)
                 end
                 --     require("rust-tools").setup {}
                 -- end

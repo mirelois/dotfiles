@@ -2,6 +2,9 @@
 -- vim.opt.listchars      = {
 --     eol = "󰌑"
 -- }
+
+vim.opt_local.spelllang="en_us"
+
 --line numbers
 vim.opt.nu             = true
 vim.opt.relativenumber = true
