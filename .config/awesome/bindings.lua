@@ -14,28 +14,60 @@ local eww_window =
 --{{{ Window bindings
 local keys = gears.table.join(
     awful.key(
+        { modkey }, ",",
+        function()
+            local screen = awful.screen.focused()
+            awful.layout.inc(1, screen)
+            local tag_name = awful.layout.get().name
+            awful.spawn("notify-send " .. tag_name)
+        end,
+        { description = "cycle layout" }
+    ),
+    awful.key(
+        { modkey, "Shift" }, ",",
+        function()
+            local screen = awful.screen.focused()
+            awful.layout.inc(-1, screen)
+            local tag_name = awful.layout.get().name
+            awful.spawn("notify-send " .. tag_name)
+        end,
+        { description = "cycle layout" }
+    ),
+    awful.key(
         { modkey }, "Tab",
         awful.tag.history.restore,
         { description = "go back", group = "tag" }
     ),
     awful.key(
         { modkey }, "h",
-        function() awful.client.focus.bydirection("left") end,
+        function()
+            awful.client.focus.bydirection("left")
+            if client.focus then client.focus:raise() end
+        end,
         { description = "move focus to the left", group = "client" }
     ),
     awful.key(
         { modkey }, "j",
-        function() awful.client.focus.bydirection("down") end,
+        function()
+            awful.client.focus.bydirection("down")
+            if client.focus then client.focus:raise() end
+        end,
         { description = "move focus to the down", group = "client" }
     ),
     awful.key(
         { modkey }, "k",
-        function() awful.client.focus.bydirection("up") end,
+        function()
+            awful.client.focus.bydirection("up")
+            if client.focus then client.focus:raise() end
+        end,
         { description = "move focus to the up", group = "client" }
     ),
     awful.key(
         { modkey }, "l",
-        function() awful.client.focus.bydirection("right") end,
+        function()
+            awful.client.focus.bydirection("right")
+            if client.focus then client.focus:raise() end
+        end,
         { description = "move focus to the right", group = "client" }
     ),
     awful.key(
@@ -57,11 +89,68 @@ local keys = gears.table.join(
         { modkey, "Shift" }, "l",
         function() awful.client.swap.bydirection("right") end,
         { description = "move focus to the right", group = "client" }
+    ),
+    awful.key(
+        { modkey, "Control" }, "j",
+        function() awful.screen.focus_bydirection("down") end,
+        { description = "move focus to screen up", group = "screen" }
+    ),
+    awful.key(
+        { modkey, "Control" }, "k",
+        function() awful.screen.focus_bydirection("up") end,
+        { description = "move focus to screen down", group = "screen" }
+    ),
+    awful.key(
+        { modkey, "Control" }, "l",
+        function() awful.screen.focus_bydirection("right") end,
+        { description = "move focus to screen right", group = "screen" }
+    ),
+    awful.key(
+        { modkey, "Control" }, "h",
+        function() awful.screen.focus_bydirection("left") end,
+        { description = "move focus to screen left", group = "screen" }
     )
 )
+--}}}
 
-
-clientkeys = gears.table.join(
+--{{{ clientkeys
+local myclientkeys = gears.table.join(
+    awful.key(
+        { modkey, "Control", "Shift" }, "j",
+        function(c) 
+            local s = awful.screen.focused():get_next_in_direction("down")
+            c:move_to_screen(s)
+            -- awful.screen.focus_bydirection("down") 
+        end,
+        { description = "move focus to screen up", group = "screen" }
+    ),
+    awful.key(
+        { modkey, "Control", "Shift" }, "k",
+        function(c) 
+            local s = awful.screen.focused():get_next_in_direction("up")
+            c:move_to_screen(s)
+            -- awful.screen.focus_bydirection("down") 
+        end,
+        { description = "move focus to screen down", group = "screen" }
+    ),
+    awful.key(
+        { modkey, "Control", "Shift" }, "h",
+        function(c) 
+            local s = awful.screen.focused():get_next_in_direction("left")
+            c:move_to_screen(s)
+            -- awful.screen.focus_bydirection("down") 
+        end,
+        { description = "move focus to screen up", group = "screen" }
+    ),
+    awful.key(
+        { modkey, "Control", "Shift" }, "l",
+        function(c) 
+            local s = awful.screen.focused():get_next_in_direction("right")
+            c:move_to_screen(s)
+            -- awful.screen.focus_bydirection("down") 
+        end,
+        { description = "move client to screen", group = "screen" }
+    ),
     awful.key(
         {}, "F11",
         function(c)
@@ -91,6 +180,7 @@ clientkeys = gears.table.join(
 )
 --}}}
 
+--{{{spawn stuff
 keys = gears.table.join(keys,
 
     --Eww
@@ -107,6 +197,11 @@ keys = gears.table.join(keys,
     --
 
     awful.key(
+        { modkey }, "c",
+        function() awful.spawn("gnome-calculator") end,
+        { description = "lauch discord", group = "tag" }
+    ),
+    awful.key(
         { modkey }, "d",
         function() awful.spawn("discord") end,
         { description = "lauch discord", group = "tag" }
@@ -121,7 +216,7 @@ keys = gears.table.join(keys,
         function()
             awful.spawn(
                 [[firefox --no-remote -P youtube --class "Youtube" https://www.youtube.com/]]
-                )
+            )
         end,
         { description = "lauch discord", group = "tag" }
     ),
@@ -134,7 +229,7 @@ keys = gears.table.join(keys,
         { description = "lauch discord", group = "tag" }
     ),
     awful.key(
-        {"Shift"}, "Print",
+        { "Shift" }, "Print",
         function()
             awful.spawn(
                 [[gnome-screenshot -wi]]
@@ -144,44 +239,52 @@ keys = gears.table.join(keys,
     ),
 
     awful.key(
-    {}, "XF86MonBrightnessUp",
-    function()
-	awful.spawn("brightnessctl s +10%")end),
+        {}, "XF86MonBrightnessUp",
+        function()
+            awful.spawn("brightnessctl s +10%")
+        end),
 
     awful.key(
-    {}, "XF86MonBrightnessDown",
-    function()
-	awful.spawn("brightnessctl s 10-%")end),
+        {}, "XF86MonBrightnessDown",
+        function()
+            awful.spawn("brightnessctl s 10-%")
+        end),
 
     awful.key(
-    {}, "XF86AudioLowerVolume",
-    function()
-	awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%")end),
+        {}, "XF86AudioLowerVolume",
+        function()
+            awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%")
+        end),
 
     awful.key(
-    {}, "XF86AudioRaiseVolume",
-    function()
-	awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%")end),
+        {}, "XF86AudioRaiseVolume",
+        function()
+            awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%")
+        end),
 
     awful.key(
-    {}, "XF86AudioMute",
-    function()
-	awful.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")end),
+        {}, "XF86AudioMute",
+        function()
+            awful.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")
+        end),
 
     awful.key(
-    {}, "XF86AudioPlay",
-    function()
-	awful.spawn("playerctl play-pause")end),
+        {}, "XF86AudioPlay",
+        function()
+            awful.spawn("playerctl play-pause")
+        end),
 
     awful.key(
-    {}, "XF86AudioPrev",
-    function()
-	awful.spawn("playerctl previous")end),
+        {}, "XF86AudioPrev",
+        function()
+            awful.spawn("playerctl previous")
+        end),
 
     awful.key(
-    {}, "XF86AudioNext",
-    function()
-	awful.spawn("playerctl next")end),
+        {}, "XF86AudioNext",
+        function()
+            awful.spawn("playerctl next")
+        end),
 
 
 
@@ -204,15 +307,17 @@ keys = gears.table.join(keys,
     ),
     awful.key(
         { modkey }, "q",
-        function() awful.spawn([[~/.config/eww/scripts/shutdown.sh]]) end,
+        function() awful.spawn([[/home/utilizador/.config/eww/scripts/shutdown.sh]]) end,
         { description = "quit awesome", group = "awesome" }
     )
 )
+--}}}
 
-
+--{{{ tag bindings
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it work on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
+
 for i = 1, 9 do
     keys = gears.table.join(keys,
         -- View tag only.
@@ -259,6 +364,27 @@ for i = 1, 9 do
             { description = "toggle focused client on tag #" .. i, group = "tag" })
     )
 end
+--}}}
 
+--{{{ clientbuttons
+local myclientbuttons = gears.table.join(
+    awful.button({}, 1, function(c)
+        c:emit_signal("request::activate", "mouse_click", { raise = true })
+    end),
+    awful.button({ modkey }, 1, function(c)
+        c:emit_signal("request::activate", "mouse_click", { raise = true })
+        awful.mouse.client.move(c)
+    end),
+    awful.button({ modkey }, 3, function(c)
+        c:emit_signal("request::activate", "mouse_click", { raise = true })
+        awful.mouse.client.resize(c)
+    end)
+)
+-- }}}
 
-return keys
+root.keys(keys)
+
+return {
+    clientbuttons = myclientbuttons,
+    clientkeys = myclientkeys,
+}

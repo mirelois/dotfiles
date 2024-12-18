@@ -119,6 +119,7 @@ alias n="nvim ."
 alias :q="exit"
 alias fuzzy="nvim ~/bin/fuzzy_find.sh"
 alias icat="kitten icat"
+alias ksh="kitten ssh"
 
 # [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 

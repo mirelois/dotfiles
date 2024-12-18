@@ -11,6 +11,7 @@ return {
             "hrsh7th/cmp-nvim-lua",
             "hrsh7th/cmp-cmdline",
             "hrsh7th/cmp-calc",
+            "f3fora/cmp-spell",
         },
 
         opts = function(Spec, opts)
@@ -29,8 +30,9 @@ return {
                 ['<Down>'] = nil,
             }
             opts.sources = {
-                -- { name = 'otter' },
                 { name = 'calc' },
+                { name = 'otter' },
+                { name = "spell" },
                 { name = "luasnip" },
                 { name = "nvim_lsp" },
                 { name = "nvim_lua" },

@@ -38,7 +38,7 @@
       (box :orientation "v" :space-evenly "false" :class "sliders-side" 
         (box :orientation "h" :class "slider-vol-side" :space-evenly "false" 
           (box :class "label-vol-side" "")
-          (scale :min 0 :max 101 :value {volume} :onchange "amixer -D pulse sset Master {}%"))
+          (scale :min 0 :max 101 :value {volume} :onchange "pactl set-source-volume @DEFAULT_SOURCE@ {}%"))
         (box :orientation "h" :class "slider-mic-side" :space-evenly "false" 
           (box :class "label-mic-side" "")
           (scale :min 0 :max 101 :value {mic} :onchange "amixer sset Capture {}%"))
