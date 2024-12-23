@@ -42,7 +42,7 @@ function setup(clientkeys, clientbuttons)
             },
             properties = {
                 tag = screen[1].tags[7],
-                switch_to_tags = true
+                switch_to_tags = false
             }
         },
         {

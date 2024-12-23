@@ -5,21 +5,21 @@ local gears = require('gears')
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme.lua")
 
 function setpadding()
-    local screen = awful.screen.focused()
+    local s = awful.screen.focused()
 
-    if screen.index == 1 then
-        if #screen.tiled_clients >= 2 then
-            screen.padding = {
+    if s == screen.primary then
+        if #s.tiled_clients >= 2 then
+            s.padding = {
                 left = 0,
                 right = 0,
-                top = -(2 * beautiful.bar_height) + beautiful.bar_top_gap,
+                top = 0,
                 bottom = 0
             }
         else
-            screen.padding = {
+            s.padding = {
                 left = 0,
                 right = 0,
-                top = -(2 * beautiful.bar_height) + beautiful.useless_gap * 2 + beautiful.bar_top_gap,
+                top = beautiful.bar_top_gap,
                 bottom = 0
             }
         end
@@ -32,7 +32,6 @@ client.connect_signal("unmanage", function(c)
 end)
 
 client.connect_signal("manage", function(c)
-
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
     if not awesome.startup then awful.client.setslave(c) end

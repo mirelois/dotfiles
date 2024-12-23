@@ -14,13 +14,13 @@ end
 
 local random_index = math.random(1, l)
 
-local set_random_wallpaper = function(s)
+local get_random_wallpaper = function()
 
     local chosen_wallpaper = wallpaper_dir .. wallpapers[random_index]
 
-    gears.wallpaper.maximized(chosen_wallpaper, s)
+    return chosen_wallpaper
 end
 
 return {
-    set_random_wallpaper = set_random_wallpaper
+    get_random_wallpaper = get_random_wallpaper
 }

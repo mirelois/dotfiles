@@ -1,7 +1,8 @@
 local awful = require("awful")
 local gears = require("gears")
 
-local terminal = "kitty"
+local terminal = "wezterm connect unix"
+local terminal_no_connect = "wezterm start --always-new-process"
 local modkey = "Mod4"
 
 local rofi =
@@ -298,6 +299,11 @@ keys = gears.table.join(keys,
     awful.key(
         { modkey, }, "Return",
         function() awful.spawn(terminal) end,
+        { description = "open a terminal", group = "launcher" }
+    ),
+    awful.key(
+        { modkey, "CTRL"}, "Return",
+        function() awful.spawn(terminal_no_connect) end,
         { description = "open a terminal", group = "launcher" }
     ),
     awful.key(

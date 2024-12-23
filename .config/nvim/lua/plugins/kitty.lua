@@ -8,7 +8,11 @@ return {
                 { '<A-h>', split.resize_left },
                 { '<A-j>', split.resize_down },
                 { '<A-k>', split.resize_up },
-                { '<A-l>', split.resize_right }
+                { '<A-l>', split.resize_right },
+                { '<C-S-k>', function() split.move_cursor_up({ same_row = true, at_edge = 'stop' }) end },
+                { '<C-S-j>', split.move_cursor_down },
+                { '<C-S-h>', split.move_cursor_left},
+                { '<C-S-l>', split.move_cursor_right },
             }
         end,
         opts = {
@@ -93,32 +97,27 @@ return {
             -- automatically determined, unless explicitly disabled or set,
             -- by checking the $TERM_PROGRAM environment variable,
             -- and the $KITTY_LISTEN_ON environment variable for Kitty
-            multiplexer_integration = "kitty",
+            multiplexer_integration = "wezterm",
             -- disable multiplexer navigation if current multiplexer pane is zoomed
             -- this functionality is only supported on tmux and Wezterm due to kitty
             -- not having a way to check if a pane is zoomed
             disable_multiplexer_nav_when_zoomed = true,
-            -- Supply a Kitty remote control password if needed,
-            -- or you can also set vim.g.smart_splits_kitty_password
-            -- see https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.remote_control_password
-            kitty_password = nil,
             -- default logging level, one of: 'trace'|'debug'|'info'|'warn'|'error'|'fatal'
             log_level = 'info',
 
         },
     },
-    {
-        'knubie/vim-kitty-navigator',
-        init = function()
-            vim.g.kitty_navigator_no_mappings = 1
-        end,
-        keys = {
-            { "<C-S-l>", ":KittyNavigateRight<CR>" },
-            { "<C-S-k>", ":KittyNavigateUp<CR>" },
-            { "<C-S-j>", ":KittyNavigateDown<CR>" },
-            { "<C-S-h>", ":KittyNavigateLeft<CR>" },
-        }
-    },
+
+    -- {
+    --     'numToStr/Navigator.nvim',
+    --     keys = {
+    --         { '<C-S-h>', '<CMD>NavigatorLeft<CR>' },
+    --         { '<C-S-l>', '<CMD>NavigatorRight<CR>' },
+    --         { '<C-S-k>', '<CMD>NavigatorUp<CR>' },
+    --         { '<C-S-j>', '<CMD>NavigatorDown<CR>' },
+    --         { '<C-S-p>', '<CMD>NavigatorPrevious<CR>' },
+    --     }
+    -- },
     {
         'mikesmithgh/kitty-scrollback.nvim',
         enabled = true,

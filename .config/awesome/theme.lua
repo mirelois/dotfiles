@@ -19,7 +19,7 @@ local theme        = {
     gap_single_client                    = false,
 
     useless_gap                          = 4,
-    border_width                         = dpi(5),
+    border_width                         = 5,
     border_normal                        = "#242424",
     border_focus                         = '#957FB8',
     border_marked                        = "#FFFFFF",
@@ -33,7 +33,7 @@ local theme        = {
     taglist_underline_color              = "#938AA9",
     taglist_underline_thicknes           = 3,
     taglist_mouse_hover_background_color = "#212121",
-    taglist_bar_width                    = 360,
+    taglist_bar_width                    = 370,
     taglist_workspace_padding            = 11,
 
     bar_top_gap                          = 8,
@@ -44,7 +44,7 @@ local theme        = {
     clock_font                           = "Ubunto 13",
     clock_fg                             = "#7FB4CA",
 
-    utilities_width                      = 290,
+    utilities_width                      = 270,
 
     calendar_width                       = 200,
     calendar_height                      = 200,

@@ -18,10 +18,10 @@ require("awful.hotkeys_popup.keys")
 
 -- {{{ workspaces
 -- Create a textclock widget
-local screen = awful.screen.focused()
+local s = screen.primary
 
-local s_width = screen.geometry.width
-local s_height = screen.geometry.height
+local s_width = s.geometry.width
+local s_height = s.geometry.height
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -44,7 +44,7 @@ local taglist_buttons = gears.table.join(
 function set_underline(self, index)
     local focused = false
 
-    for _, x in pairs(awful.screen.focused().selected_tags) do
+    for _, x in pairs(s.selected_tags) do
         if x.index == index then
             focused = true
             break
@@ -59,7 +59,7 @@ end
 
 -- Create a taglist widget
 local taglist = awful.widget.taglist {
-    screen          = screen,
+    screen          = s,
     filter          = awful.widget.taglist.filter.all,
     buttons         = taglist_buttons,
     widget_template = {
@@ -102,25 +102,6 @@ local taglist = awful.widget.taglist {
             set_underline(self, index)
         end
     }
-}
-
-
--- Create the wibox
-local workspaces = awful.wibox({
-    position = "top",
-    screen = screen,
-    width = beautiful.taglist_bar_width,
-    height = beautiful.bar_height,
-    shape = gears.shape.rounded_bar,
-    bg = beautiful.bar_bg,
-})
-
-
--- Add widgets to the wibox
-workspaces:setup {
-    layout = wibox.container.place,
-    content_fill_vertical = true,
-    taglist,
 }
 -- }}}
 
@@ -189,13 +170,17 @@ local cal = wibox.widget {
 
 local calendar_bar = wibox({
     position = "top",
-    screen   = screen,
+    screen   = s,
     ontop    = true,
     width    = beautiful.calendar_width,
     height   = beautiful.calendar_height,
     -- shape = gears.shape.roun,
     bg       = beautiful.bar_bg,
     fg       = beautiful.calendar_fg,
+    x        = s_width - beautiful.calendar_width - beautiful.bar_horizontal_gap,
+    y        = beautiful.bar_height + 2 * beautiful.bar_top_gap,
+    visible  = false
+
 })
 
 calendar_bar:setup {
@@ -214,22 +199,6 @@ local clock = wibox.widget {
     widget = wibox.widget.textclock,
     font = beautiful.clock_font,
     buttons = clock_buttons,
-}
-
-local clock_bar = awful.wibar({
-    position = "top",
-    screen = screen,
-    width = beautiful.clock_width,
-    height = beautiful.bar_height,
-    shape = gears.shape.rounded_bar,
-    bg = beautiful.bar_bg,
-    fg = beautiful.clock_fg
-})
-
-clock_bar:setup {
-    layout = wibox.container.place,
-    content_fill_vertical = true,
-    clock,
 }
 
 --}}}
@@ -261,27 +230,51 @@ local update_battery_widget = function(widget, stdout, stderr, exitreason, exitc
         end
     end
 
-    output = string.format([[%s  󰇙  %d%%]], output, charge_str)
+    -- output = string.format([[%s  <span foreground="gray">󰇙</span>  %d%%]], output, charge_str)
 
-    widget:set_text(output)
+    widget:set_text(output, charge_str)
 end
 
 local battery_widget = wibox.widget {
     {
         {
-            id = "txt",
-            widget = wibox.widget.textbox,
-            font = "Symbols Nerd Font 12",
-            halign = "center",
-            valign = "center",
+            layout = wibox.layout.fixed.horizontal,
+            spacing = 9,
+            {
+                id = "icon",
+                widget = wibox.widget.textbox,
+                font = "Symbols Nerd Font 12",
+                halign = "center",
+                valign = "center",
+            },
+            {
+                {
+                    id = "sep",
+                    widget = wibox.widget.textbox,
+                    font = "Symbols Nerd Font 12",
+                    halign = "center",
+                    valign = "center",
+                    markup = [[<span foreground="gray" size="xx-large"></span>]]
+                },
+                widget = wibox.container.place,
+                content_fill_vertical = true
+            },
+            {
+                id = "number",
+                widget = wibox.widget.textbox,
+                font = "Symbols Nerd Font 12",
+                halign = "center",
+                valign = "center",
+            }
         },
         widget = wibox.container.place,
         -- forced_width = beautiful.bar_height * 3,
     },
     fg = beautiful.battery_fg,
     widget = wibox.container.background,
-    set_text = function(self, text)
-        self:get_children_by_id('txt')[1]:set_text(text)
+    set_text = function(self, icon, charge)
+        self:get_children_by_id('icon')[1]:set_markup(icon)
+        self:get_children_by_id('number')[1]:set_markup(charge .. "%")
     end,
 
 }
@@ -518,8 +511,9 @@ local vpn_widget = wibox.widget {
         -- forced_width = beautiful.bar_height/2,
 
     },
-    widget = wibox.container.background
+    widget = wibox.container.background,
 }
+
 
 vpn_widget:buttons(gears.table.join(
     awful.button({}, 1, function()
@@ -538,49 +532,95 @@ vpn_widget:buttons(gears.table.join(
 
 --}}}
 
-local utilities = awful.wibar {
-    screen = screen,
-    width = beautiful.utilities_width,
-    height = beautiful.bar_height,
-    shape = gears.shape.rounded_bar,
-    bg = beautiful.bar_bg,
+-- }}}
+
+
+-- bar definition {{{
+local main_bar = awful.wibar {
+    position = "top",
+    screen = s,
+    -- width = beautiful.utilities_width,
+    height = beautiful.bar_height + beautiful.bar_top_gap,
+    width = s.geometry.width - 2 * beautiful.bar_horizontal_gap,
+    shape = gears.shape.rectangle,
+    bg = "#00000000",
 }
 
-utilities:setup {
-    layout = wibox.container.place,
+main_bar:setup {
     {
-        layout = wibox.layout.fixed.horizontal,
-        vpn_widget,
-        network_widget,
-        mic_widget,
-        volume_widget,
-        battery_widget,
-        fill_space = true,
-        spacing = 15,
+        {
+            {
+                {
+                    widget = wibox.container.place,
+                    content_fill_vertical = true,
+                    taglist,
+                },
+                widget = wibox.container.background,
+                shape = gears.shape.rounded_bar,
+                bg = beautiful.bar_bg,
+                forced_width = beautiful.taglist_bar_width
+            },
+            widget = wibox.container.margin,
+            -- left = beautiful.bar_horizontal_gap
+        },
+        nil,
+        {
+            layout = wibox.layout.fixed.horizontal,
+            {
+                {
+                    {
+                        layout = wibox.container.place,
+                        {
+                            layout = wibox.layout.fixed.horizontal,
+                            vpn_widget,
+                            network_widget,
+                            mic_widget,
+                            volume_widget,
+                            battery_widget,
+                            fill_space = true,
+                            spacing = 15,
+                        },
+                    },
+                    widget = wibox.container.background,
+                    shape = gears.shape.rounded_bar,
+                    bg = beautiful.bar_bg,
+                    forced_width = beautiful.utilities_width
+                },
+                widget = wibox.container.margin,
+                left = beautiful.bar_horizontal_gap,
+                right = beautiful.bar_horizontal_gap
+            },
+            {
+                {
+                    {
+                        layout = wibox.container.place,
+                        clock,
+                    },
+                    widget = wibox.container.background,
+                    shape = gears.shape.rounded_bar,
+                    bg = beautiful.bar_bg,
+                    fg = beautiful.clock_fg,
+                    forced_width = beautiful.clock_width
+                },
+                widget = wibox.container.margin,
+                left = beautiful.bar_horizontal_gap,
+                -- right = beautiful.bar_horizontal_gap
+            },
+        },
+        layout = wibox.layout.align.horizontal
     },
+    widget = wibox.container.margin,
+    top = beautiful.bar_top_gap,
 }
+-- }}}
 
+
+-- watchers {{{
 
 awful.widget.watch("amixer -c 0 -D pulse sget Master", 5, update_volume_widget, volume_widget)
 awful.widget.watch("amixer -c 0 -D pulse sget Capture", 5, update_mic_widget, mic_widget)
 awful.widget.watch("openvpn3 sessions-list", 20, update_vpn_widget, vpn_widget)
 awful.widget.watch("iwconfig wlo1", 20, update_network_widget, network_widget)
 awful.widget.watch("acpi", 5, update_battery_widget, battery_widget)
+
 -- }}}
-
-
--- placements {{{
-
-calendar_bar.x = s_width - beautiful.calendar_width - beautiful.bar_horizontal_gap
-calendar_bar.y = beautiful.bar_height + 2 * beautiful.bar_top_gap
-calendar_bar.visible = false
-
-clock_bar.x = s_width - beautiful.clock_width - beautiful.bar_horizontal_gap
-clock_bar.y = beautiful.bar_top_gap
-
-workspaces.x = beautiful.bar_horizontal_gap
-workspaces.y = beautiful.bar_top_gap
-
-utilities.x = s_width - beautiful.utilities_width - 3 * beautiful.bar_horizontal_gap - beautiful.clock_width
-utilities.y = beautiful.bar_top_gap
---}}}

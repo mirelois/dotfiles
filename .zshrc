@@ -157,10 +157,6 @@ bindkey "^P" up-line-or-search
 
 
 
-
-
-
-
 # ==========  zoxide  ========= {{{
 _z_cd() {
     builtin cd "$@" || return "$?"

@@ -16,11 +16,11 @@ beautiful.init(gears.filesystem.get_configuration_dir() .. "theme.lua")
 -- Notification library
 -- local naughty = require("naughty")
 
+require("bar")
+
 require("screen")
 
 require("error")
-
-require("bar")
 
 -- Set keys
 local keys = require("bindings")
