@@ -1,18 +1,17 @@
 return {
     {
         "mrjones2014/smart-splits.nvim",
-        build = './kitty/install-kittens.bash',
         keys = function()
             local split = require('smart-splits')
             return {
-                { '<A-h>', split.resize_left },
-                { '<A-j>', split.resize_down },
-                { '<A-k>', split.resize_up },
-                { '<A-l>', split.resize_right },
-                { '<C-S-k>', function() split.move_cursor_up({ same_row = true, at_edge = 'stop' }) end },
-                { '<C-S-j>', split.move_cursor_down },
-                { '<C-S-h>', split.move_cursor_left},
-                { '<C-S-l>', split.move_cursor_right },
+                { '<A-h>', require('smart-splits').resize_left },
+                { '<A-j>', require('smart-splits').resize_down },
+                { '<A-k>', require('smart-splits').resize_up },
+                { '<A-l>', require('smart-splits').resize_right },
+                { '<C-K>', require('smart-splits').move_cursor_up },
+                { '<C-J>', require('smart-splits').move_cursor_down },
+                { '<C-H>', require('smart-splits').move_cursor_left},
+                { '<C-L>', require('smart-splits').move_cursor_right },
             }
         end,
         opts = {
@@ -97,7 +96,7 @@ return {
             -- automatically determined, unless explicitly disabled or set,
             -- by checking the $TERM_PROGRAM environment variable,
             -- and the $KITTY_LISTEN_ON environment variable for Kitty
-            multiplexer_integration = "wezterm",
+            multiplexer_integration = "tmux",
             -- disable multiplexer navigation if current multiplexer pane is zoomed
             -- this functionality is only supported on tmux and Wezterm due to kitty
             -- not having a way to check if a pane is zoomed

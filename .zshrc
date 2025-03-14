@@ -1,7 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-export PATH=$HOME/.cabal/bin:PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 export EDITOR='nvim'
 
@@ -80,7 +78,7 @@ plugins=(
   git
   zsh-syntax-highlighting
   zsh-autosuggestions
-  zsh-vi-mode
+  #zsh-vi-mode
   asdf
   golang
 )
@@ -120,6 +118,7 @@ alias :q="exit"
 alias fuzzy="nvim ~/bin/fuzzy_find.sh"
 alias icat="kitten icat"
 alias ksh="kitten ssh"
+alias a="tmux-sessionizer ~/"
 
 # [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 
@@ -142,65 +141,9 @@ alias ksh="kitten ssh"
 
 pokemon-colorscripts -r
 
-[ -f "/home/utilizador/.ghcup/env" ] && source "/home/utilizador/.ghcup/env" # ghcup-env
 
-# opam configuration
-[[ ! -r /home/utilizador/.opam/opam-init/init.zsh ]] || source /home/utilizador/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+bindkey '' autosuggest-accept
 
-
-# The plugin will auto execute this zvm_after_init function
-function zvm_after_init() {
-    bindkey '^k' autosuggest-accept
-}
-
-bindkey "^P" up-line-or-search
-
-
-
-# ==========  zoxide  ========= {{{
-_z_cd() {
-    builtin cd "$@" || return "$?"
-
-    if [ "$_ZO_ECHO" = "1" ]; then
-        echo "$PWD"
-    fi
-}
-
-cd() {
-    if [ "$#" -eq 0 ]; then
-        _z_cd ~
-    elif [ "$#" -eq 1 ] && [ "$1" = '-' ]; then
-        if [ -n "$OLDPWD" ]; then
-            _z_cd "$OLDPWD"
-        else
-            echo 'zoxide: $OLDPWD is not set'
-            return 1
-        fi
-    else
-        _zoxide_result="$(zoxide query -- "$@")" && _z_cd "$_zoxide_result"
-    fi
-}
-
-cdi() {
-    _zoxide_result="$(zoxide query -i -- "$@")" && _z_cd "$_zoxide_result"
-}
-
-
-alias cda='zoxide add'
-
-alias cdq='zoxide query'
-alias cdqi='zoxide query -i'
-
-alias cdr='zoxide remove'
-cdri() {
-    _zoxide_result="$(zoxide query -i -- "$@")" && zoxide remove "$_zoxide_result"
-}
-
-
-_zoxide_hook() {
-    zoxide add "$(pwd -L)"
-}
-
-chpwd_functions=(${chpwd_functions[@]} "_zoxide_hook")
+eval "$(zoxide init zsh --cmd cd)"
 
 # =========================================================== }}}

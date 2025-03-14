@@ -32,6 +32,11 @@ client.connect_signal("unmanage", function(c)
 end)
 
 client.connect_signal("manage", function(c)
+    setpadding()
+
+    c.maximized = false
+    c.fullscreen = false
+
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
     if not awesome.startup then awful.client.setslave(c) end
@@ -52,6 +57,7 @@ client.connect_signal("mouse::enter", function(c)
 end)
 
 client.connect_signal("focus", function(c)
+    setpadding()
     c.border_color = beautiful.border_focus
 end)
 client.connect_signal("unfocus", function(c)
@@ -59,7 +65,7 @@ client.connect_signal("unfocus", function(c)
 end)
 
 screen.connect_signal("arrange", function(s)
-    local max = s.selected_tag.layout.name == "max"
+
     local only_one = #s.tiled_clients == 1 -- use tiled_clients so that other floating windows don't affect the count
     -- but iterate over clients instead of tiled_clients as tiled_clients doesn't include maximized windows
     for _, c in pairs(s.clients) do

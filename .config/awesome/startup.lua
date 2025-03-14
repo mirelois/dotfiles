@@ -3,7 +3,7 @@ local awful = require('awful')
 --top bar
 -- awful.spawn.once("/home/utilizador/.config/polybar/startbar")
 
-awful.spawn.once("~/.config/eww/scripts/getweather")
+-- awful.spawn.once("~/.config/eww/scripts/getweather")
 
 --key settings
 awful.spawn("xdotool key Num_Lock ")
@@ -20,7 +20,7 @@ awful.spawn("pactl set-source-mute @DEFAULT_SOURCE@ 1")
 awful.spawn.once("lxpolkit")
 
 -- screen locker
-awful.spawn.once("betterlockscreen -u $image --fx")
+-- awful.spawn.once("betterlockscreen -u $image --fx")
 
 -- for widgets
 awful.spawn.once("eww daemon")
@@ -28,4 +28,4 @@ awful.spawn.once("eww daemon")
 -- compositor
 awful.spawn.once("picom")
 
-awful.spawn.once("discord")
+awful.spawn.once("/var/lib/flatpak/exports/bin/com.discordapp.Discord")

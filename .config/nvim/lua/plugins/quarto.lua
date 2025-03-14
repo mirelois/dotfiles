@@ -189,10 +189,6 @@ return {
                 print(out)
             end, {})
 
-            vim.api.nvim_create_user_command("QuartoInit", function()
-                local cmd = "kitty @launch --keep-focus --cwd=current ipython"
-                vim.fn.system(cmd)
-            end, {})
 
             local api = vim.api
             local ts = vim.treesitter
@@ -287,31 +283,32 @@ return {
         init = function()
             vim.b['quarto_is_python_chunk'] = false
             vim.g.slime_no_mappings = true
-            vim.g.slime_target = "kitty"
+            vim.g.slime_target = "tmux"
             vim.g.slime_bracketed_paste = 1
+            vim.cmd([[let g:slime_default_config = {"socket_name": "default", "target_pane": "{last}"}]])
             vim.g.slime_python_ipython = 1
         end,
-        -- config = function()
-        --     Quarto_is_in_python_chunk = function()
-        --         require('otter.tools.functions').is_otter_language_context 'python'
-        --     end
-        --
-        --     vim.cmd [[
-        --               let g:slime_dispatch_ipython_pause = 100
-        --               function SlimeOverride_EscapeText_quarto(text)
-        --               call v:lua.Quarto_is_in_python_chunk()
-        --               if exists('g:slime_python_ipython') && len(split(a:text,"\n")) > 1 && b:quarto_is_python_chunk && !(exists('b:quarto_is_r_mode') && b:quarto_is_r_mode)
-        --               return ["%cpaste -q\n", g:slime_dispatch_ipython_pause, a:text, "--", "\n"]
-        --               else
-        --               if exists('b:quarto_is_r_mode') && b:quarto_is_r_mode && b:quarto_is_python_chunk
-        --               return [a:text, "\n"]
-        --               else
-        --               return [a:text]
-        --               end
-        --               end
-        --               endfunction
-        --               ]]
-        -- end
+        config = function()
+            Quarto_is_in_python_chunk = function()
+                require('otter.tools.functions').is_otter_language_context 'python'
+            end
+
+            vim.cmd [[
+                      let g:slime_dispatch_ipython_pause = 100
+                      function SlimeOverride_EscapeText_quarto(text)
+                      call v:lua.Quarto_is_in_python_chunk()
+                      if exists('g:slime_python_ipython') && len(split(a:text,"\n")) > 1 && b:quarto_is_python_chunk && !(exists('b:quarto_is_r_mode') && b:quarto_is_r_mode)
+                      return ["%cpaste -q\n", g:slime_dispatch_ipython_pause, a:text, "--", "\n"]
+                      else
+                      if exists('b:quarto_is_r_mode') && b:quarto_is_r_mode && b:quarto_is_python_chunk
+                      return [a:text, "\n"]
+                      else
+                      return [a:text]
+                      end
+                      end
+                      endfunction
+                      ]]
+        end
     }
 
 

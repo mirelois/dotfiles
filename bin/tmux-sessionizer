@@ -3,7 +3,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(fuzzy_find.sh | fzf)
+    selected=$(zoxide query --interactive)
 fi
 
 if [[ -z $selected ]]; then
@@ -22,5 +22,8 @@ if ! tmux has-session -t=$selected_name 2> /dev/null; then
     tmux new-session -ds $selected_name -c $selected
 fi
 
+zoxide add $selected
+tmux attach -t $selected_name
 tmux switch-client -t $selected_name
+
 

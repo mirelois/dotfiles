@@ -195,7 +195,7 @@ return {
                 uncrustify = {
                     command = '/home/utilizador/uncrustify/build/uncrustify',
                     env = {
-                        UNCRUSTIFY_CONFIG = "/home/utilizador/.config/uncrustify/custom.cfg",
+                        UNCRUSTIFY_CONFIG = "/home/mirelois/.config/uncrustify/custom.cfg",
                     }
 
                 },
@@ -206,7 +206,7 @@ return {
                         "--style=google",
                         "--align-pointer=type",
                         "--align-reference=type",
-                        -- "--keep-one-line-statements",
+                        "--keep-one-line-statements",
                         "--max-code-length=200",
                         "--break-blocks",
                         "--pad-comma",

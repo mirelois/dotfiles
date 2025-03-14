@@ -3,7 +3,7 @@ local gears = require("gears")
 
 local awful = require("awful")
 
-local wallpaper_dir = "/home/utilizador/wallpapers/"
+local wallpaper_dir = "/home/mirelois/wallpapers/"
 
 local wallpapers, l = {}, 0
 

@@ -1,12 +1,12 @@
 local awful = require("awful")
 local gears = require("gears")
 
-local terminal = "wezterm connect unix"
+local terminal = "kitty"
 local terminal_no_connect = "wezterm start --always-new-process"
 local modkey = "Mod4"
 
 local rofi =
-[[ rofi -no-lazy-grab -show drun -modi run,drun,window -theme /home/utilizador/.config/rofi/launcher/style -drun-icon-theme \"candy-icons\" ]]
+[[ rofi -no-lazy-grab -show drun -modi run,drun,window -theme /home/mirelois/.config/rofi/launcher/style -drun-icon-theme \"candy-icons\" ]]
 
 local eww_window =
 [[eww open-many --no-daemonize weather_side time_side smol_calendar player_side sys_side sliders_side]]
@@ -187,7 +187,9 @@ keys = gears.table.join(keys,
     --Eww
     awful.key(
         { modkey, }, "p",
-        function() awful.spawn(eww_window) end,
+        function() 
+            awful.spawn(eww_window)
+        end,
         { description = "spawn eww window", group = "tag" }
     ),
     awful.key(
@@ -313,7 +315,7 @@ keys = gears.table.join(keys,
     ),
     awful.key(
         { modkey }, "q",
-        function() awful.spawn([[/home/utilizador/.config/eww/scripts/shutdown.sh]]) end,
+        function() awful.spawn([[/home/mirelois/.config/eww/scripts/shutdown.sh]]) end,
         { description = "quit awesome", group = "awesome" }
     )
 )
