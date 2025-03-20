@@ -436,29 +436,25 @@ mic_widget:buttons(gears.table.join(
 
 -- network {{{
 local update_network_widget = function(widget, stdout, stderr, exitreason, exitcode)
-    local is_not_connected = string.match(stdout, "ESSID:off")
 
-    if is_not_connected then
+    local is_not_connected = string.match(stdout, "Not connected")
+
+    if is_not_connected ~= nil then
         widget:set_text("")
         return
     end
 
-    local value, max = string.match(stdout, "Link Quality=(%d%d)/(%d%d)")
+    local value = string.match(stdout, "signal:[ ]*(-?%d+)[ ]*dBm")
 
-    if max == 0 then
-        widget:set_text("")
-        return
-    end
+    local ratio = ((tonumber(value) + 110) * 10 / 7)
 
-    local ratio = tonumber(value) / tonumber(max)
-
-    if ratio < 0.20 then
+    if ratio < 20 then
         widget:set_text("󰤯")
-    elseif ratio < 0.40 then
+    elseif ratio < 40 then
         widget:set_text("󰤟")
-    elseif ratio < 0.60 then
+    elseif ratio < 60 then
         widget:set_text("󰤢")
-    elseif ratio < 0.80 then
+    elseif ratio < 80 then
         widget:set_text("󰤥")
     else
         widget:set_text("󰤨")
@@ -511,6 +507,7 @@ local vpn_widget = wibox.widget {
         -- forced_width = beautiful.bar_height/2,
 
     },
+    fg = "#121212",
     widget = wibox.container.background,
 }
 
@@ -620,7 +617,7 @@ main_bar:setup {
 awful.widget.watch("amixer -c 0 -D pulse sget Master", 5, update_volume_widget, volume_widget)
 awful.widget.watch("amixer -c 0 -D pulse sget Capture", 5, update_mic_widget, mic_widget)
 awful.widget.watch("openvpn3 sessions-list", 20, update_vpn_widget, vpn_widget)
-awful.widget.watch("iwconfig wlo1", 20, update_network_widget, network_widget)
+awful.widget.watch("iw dev wlo1 link", 20, update_network_widget, network_widget)
 awful.widget.watch("acpi", 5, update_battery_widget, battery_widget)
 
 -- }}}

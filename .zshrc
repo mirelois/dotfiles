@@ -115,9 +115,9 @@ export LANG=en_US.UTF-8
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias n="nvim ."
 alias :q="exit"
+alias :Q="exit"
 alias fuzzy="nvim ~/bin/fuzzy_find.sh"
 alias icat="kitten icat"
-alias ksh="kitten ssh"
 alias a="tmux-sessionizer ~/"
 
 # [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
@@ -141,6 +141,7 @@ alias a="tmux-sessionizer ~/"
 
 pokemon-colorscripts -r
 
+set -o vi
 
 bindkey '' autosuggest-accept
 

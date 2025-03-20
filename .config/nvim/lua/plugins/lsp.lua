@@ -102,7 +102,7 @@ return {
     {
         "williamboman/mason-lspconfig.nvim",
         opts = {
-            ensure_installed = { "lua_ls", "rust_analyzer", "bashls", "pyright" },
+            ensure_installed = { "lua-language-server", "bash-language-server", "pyright" },
         },
         -- see :h mason-lspconfig.setup_handlers()
         config = function()
@@ -111,7 +111,9 @@ return {
                 -- and will be called for each installed server that doesn't have
                 -- a dedicated handler.
                 function(server_name) -- default handler (optional)
-                    require("lspconfig")[server_name].setup {}
+                    require("lspconfig")[server_name].setup {
+                        root_dir = function() return vim.fn.getcwd() end
+                    }
                 end,
                 ["pyright"] = function()
                     require 'lspconfig'.pyright.setup {

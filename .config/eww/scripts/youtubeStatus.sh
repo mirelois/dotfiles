@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-STATUS=$(playerctl status - p firefox)
+STATUS=$(playerctl status - p brave)
 
 if [[ $STATUS = "Paused" ]] ; then
     printf 

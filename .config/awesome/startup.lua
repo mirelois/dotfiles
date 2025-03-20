@@ -23,7 +23,7 @@ awful.spawn.once("lxpolkit")
 -- awful.spawn.once("betterlockscreen -u $image --fx")
 
 -- for widgets
-awful.spawn.once("eww daemon")
+awful.spawn.once("~/bin/eww daemon")
 
 -- compositor
 awful.spawn.once("picom")

@@ -8,10 +8,10 @@ return {
                 { '<A-j>', require('smart-splits').resize_down },
                 { '<A-k>', require('smart-splits').resize_up },
                 { '<A-l>', require('smart-splits').resize_right },
-                { '<C-K>', require('smart-splits').move_cursor_up },
-                { '<C-J>', require('smart-splits').move_cursor_down },
-                { '<C-H>', require('smart-splits').move_cursor_left},
-                { '<C-L>', require('smart-splits').move_cursor_right },
+                { '<C-S-K>', require('smart-splits').move_cursor_up },
+                { '<C-S-J>', require('smart-splits').move_cursor_down },
+                { '<C-S-H>', require('smart-splits').move_cursor_left },
+                { '<C-S-L>', require('smart-splits').move_cursor_right },
             }
         end,
         opts = {
@@ -105,6 +105,7 @@ return {
             log_level = 'info',
 
         },
+        lazy = false
     },
 
     -- {
@@ -117,12 +118,4 @@ return {
     --         { '<C-S-p>', '<CMD>NavigatorPrevious<CR>' },
     --     }
     -- },
-    {
-        'mikesmithgh/kitty-scrollback.nvim',
-        enabled = true,
-        lazy = true,
-        cmd = { 'KittyScrollbackGenerateKittens', 'KittyScrollbackCheckHealth' },
-        event = { 'User KittyScrollbackLaunch' },
-
-    },
 }

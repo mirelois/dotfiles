@@ -9,7 +9,7 @@ local rofi =
 [[ rofi -no-lazy-grab -show drun -modi run,drun,window -theme /home/mirelois/.config/rofi/launcher/style -drun-icon-theme \"candy-icons\" ]]
 
 local eww_window =
-[[eww open-many --no-daemonize weather_side time_side smol_calendar player_side sys_side sliders_side]]
+[[/home/mirelois/bin/eww open-many --no-daemonize weather_side time_side smol_calendar player_side sys_side sliders_side]]
 
 
 --{{{ Window bindings
@@ -183,6 +183,15 @@ local myclientkeys = gears.table.join(
 
 --{{{spawn stuff
 keys = gears.table.join(keys,
+    --Eww
+    awful.key(
+        { modkey, }, "space",
+        function() 
+            awful.spawn("playerctl play-pause")
+            -- awful.spawn("notify-send lmao")
+        end,
+        { description = "spawn eww window", group = "tag" }
+    ),
 
     --Eww
     awful.key(
@@ -194,7 +203,7 @@ keys = gears.table.join(keys,
     ),
     awful.key(
         { modkey, }, "Escape",
-        function() awful.spawn("eww close-all") end,
+        function() awful.spawn("/home/mirelois/bin/eww close-all") end,
         { description = "Close eww", group = "tag" }
     ),
     --
@@ -218,7 +227,7 @@ keys = gears.table.join(keys,
         { modkey }, "y",
         function()
             awful.spawn(
-                [[firefox --no-remote -P youtube --class "Youtube" https://www.youtube.com/]]
+                [[brave]]
             )
         end,
         { description = "lauch discord", group = "tag" }
@@ -227,9 +236,9 @@ keys = gears.table.join(keys,
     awful.key(
         {}, "Print",
         function()
-            awful.spawn("screenshot")
+            awful.spawn([[/home/mirelois/bin/screenshot]])
         end,
-        { description = "lauch discord", group = "tag" }
+        { description = "~/bin/screenshot", group = "tag" }
     ),
     awful.key(
         { "Shift" }, "Print",
@@ -269,12 +278,6 @@ keys = gears.table.join(keys,
         {}, "XF86AudioMute",
         function()
             awful.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")
-        end),
-
-    awful.key(
-        {}, "XF86AudioPlay",
-        function()
-            awful.spawn("playerctl play-pause")
         end),
 
     awful.key(

@@ -152,7 +152,7 @@
     (defpoll volume :interval "16ms"  "~/.config/eww/scripts/getvol")
     (defpoll mic :interval "16ms"  "~/.config/eww/scripts/getmic")
     (defpoll bright :interval "16ms"  "~/.config/eww/scripts/getbri")
-    (defpoll musicstat :interval "1s"  "~/.config/eww/scripts/generalStatus.sh")
+    (defpoll musicstat :interval "1s"  "~/.config/eww/scripts/youtubeStatus.sh")
     (defpoll cover :interval "2s"  "~/.config/eww/scripts/echoart")
     (defpoll title :interval "1s"  "~/.config/eww/scripts/echotitle")
     (defpoll artist :interval "1s"  "cat /tmp/xmonad/spotify/artist")

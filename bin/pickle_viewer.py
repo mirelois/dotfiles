@@ -15,7 +15,12 @@ print(file)
 with open(file, "rb") as fid:
     fig = pkl.load(fid)
 
-plt.show(block=True)
+    ax_master = fig.axes[0]
+    for ax in fig.axes:
+        if ax is not ax_master:
+            ax_master.get_shared_y_axes().join(ax_master, ax)
+
+    plt.show(block=True)
 
 exit()
 
