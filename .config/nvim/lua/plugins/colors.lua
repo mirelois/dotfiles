@@ -10,6 +10,7 @@ local highlight = {
 
 
 return {
+    { "norcalli/nvim-colorizer.lua" },
     {
         "rebelot/kanagawa.nvim",
 
@@ -83,7 +84,6 @@ return {
                 light = "lotus"
             },
         },
-
     },
 
     {
@@ -121,7 +121,7 @@ return {
     {
         'nvim-lualine/lualine.nvim',
         dependencies = { 'nvim-tree/nvim-web-devicons' },
-        opts = function()
+        config = function()
             local colors = {
                 blue   = '#80a0ff',
                 cyan   = '#79dac8',
@@ -148,7 +148,7 @@ return {
                 },
             }
 
-            return {
+            require("lualine").setup({
                 options = {
                     icons_enabled = true,
                     theme = bubbles_theme,
@@ -188,7 +188,11 @@ return {
                 inactive_winbar = {},
                 extensions = {}
 
-            }
+            })
+
+            if os.getenv('TMUX') then
+                vim.defer_fn(function() vim.o.laststatus = 0 end, 0)
+            end
         end
     },
 }

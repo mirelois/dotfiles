@@ -1,6 +1,13 @@
 return {
     {
+        'vimpostor/vim-tpipeline',
+        init = function()
+            vim.cmd([[set fcs=stlnc:─,stl:─,vert:│]])
+        end
+    },
+    {
         "mrjones2014/smart-splits.nvim",
+        lazy = false,
         keys = function()
             local split = require('smart-splits')
             return {
@@ -8,10 +15,10 @@ return {
                 { '<A-j>', require('smart-splits').resize_down },
                 { '<A-k>', require('smart-splits').resize_up },
                 { '<A-l>', require('smart-splits').resize_right },
-                { '<C-S-K>', require('smart-splits').move_cursor_up },
-                { '<C-S-J>', require('smart-splits').move_cursor_down },
-                { '<C-S-H>', require('smart-splits').move_cursor_left },
-                { '<C-S-L>', require('smart-splits').move_cursor_right },
+                { '<C-S-k>', require('smart-splits').move_cursor_up },
+                { '<C-S-j>', require('smart-splits').move_cursor_down },
+                { '<C-S-h>', require('smart-splits').move_cursor_left },
+                { '<C-S-l>', require('smart-splits').move_cursor_right },
             }
         end,
         opts = {
@@ -105,7 +112,6 @@ return {
             log_level = 'info',
 
         },
-        lazy = false
     },
 
     -- {

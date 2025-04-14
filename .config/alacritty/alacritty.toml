@@ -1,0 +1,60 @@
+
+[window]
+opacity = 0.7
+
+[terminal]
+shell = { program = "/bin/zsh"}
+
+[font]
+normal = {family = "Jetbrains mono", style = "Regular"}
+bold = {family = "Jetbrains mono", style = "ExtraBold"}
+italic = {family = "Jetbrains mono", style = "MediumItalic"}
+bold_italic = {family = "Jetbrains mono", style = "ExtraBold Italic"}
+
+[keyboard]
+bindings = [
+    { key = "h", mods = "Control | Shift", chars = "\u001b[72;6u" },
+    { key = "j", mods = "Control | Shift", chars = "\u001b[74;6u" },
+    { key = "k", mods = "Control | Shift", chars = "\u001b[75;6u" },
+    { key = "l", mods = "Control | Shift", chars = "\u001b[76;6u" },
+    { key = "n", mods = "Control | Shift", chars = "\u001b[110;6u" },
+    { key = "p", mods = "Control | Shift", chars = "\u001b[112;6u" },
+]
+
+# Kanagawa Wave Alacritty Colors
+
+[colors.primary]
+background = '#000000'
+foreground = '#CDCDCD'
+
+[colors.normal]
+black = '#090618'
+red = '#c34043'
+green = '#76946a'
+yellow = '#c0a36e'
+blue = '#7e9cd8'
+magenta = '#957fb8'
+cyan = '#6a9589'
+white = '#c8c093'
+
+[colors.bright]
+black = '#727169'
+red = '#e82424'
+green = '#98bb6c'
+yellow = '#e6c384'
+blue = '#7fb4ca'
+magenta = '#938aa9'
+cyan = '#7aa89f'
+white = '#dcd7ba'
+
+[colors.selection]
+background = '#2d4f67'
+foreground = '#c8c093'
+
+# [[colors.indexed_colors]]
+# index = 16
+# color = '#ffa066'
+
+[[colors.indexed_colors]]
+index = 17
+color = '#ff5d62'

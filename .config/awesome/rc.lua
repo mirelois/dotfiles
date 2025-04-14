@@ -14,7 +14,7 @@ local beautiful = require("beautiful")
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme.lua")
 
 -- Notification library
--- local naughty = require("naughty")
+local naughty = require("naughty")
 
 require("bar")
 
@@ -29,5 +29,5 @@ require("rules").setup(keys.clientkeys, keys.clientbuttons)
 
 require("signals")
 
-require("startup")
-
+-- require("startup")
+awful.spawn.with_shell("~/.config/awesome/autorun.sh")

@@ -9,8 +9,9 @@ local awful = require('awful')
 awful.spawn("xdotool key Num_Lock ")
 awful.spawn("xset s off -dpms")
 awful.spawn("xsetroot -cursor_name left_ptr")
-awful.spawn("setxkbmap -option compose:rctrl")
 awful.spawn("setxkbmap pt nodeadkeys")
+awful.spawn("setxkbmap -option compose:ralt")
+awful.spawn("setxkbmap -option ctrl:swapcaps")
 
 --set both mic and vol to mute
 awful.spawn("pactl set-sink-mute @DEFAULT_SINK@ 1")

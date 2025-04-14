@@ -515,7 +515,7 @@ local vpn_widget = wibox.widget {
 vpn_widget:buttons(gears.table.join(
     awful.button({}, 1, function()
         awful.spawn.easy_async_with_shell(
-            "/home/utilizador/.config/polybar/scripts/vpn_toggle.sh",
+            "/home/mirelois/.config/polybar/scripts/vpn_toggle.sh",
             function()
                 awful.spawn.easy_async_with_shell("openvpn3 sessions-list",
                     function(stdout, stderr, exitreason, exitcode)

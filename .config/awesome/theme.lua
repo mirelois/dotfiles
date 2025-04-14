@@ -68,8 +68,13 @@ local theme        = {
     mic_fg                               = "#7E9CD8",
 
     network_fg                           = "#E46876",
-}
 
+    notification_bg                      = "#121212",
+    notification_fg                      = "#DCDCDC",
+    notification_border_width            = 0,
+    notification_max_width               = 150
+
+}
 
 
 

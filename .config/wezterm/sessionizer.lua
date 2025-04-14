@@ -4,7 +4,7 @@ local act = wezterm.action
 
 local M = {}
 
-local fd = "/home/utilizador/.local/bin/fd"
+local fd = "/usr/bin/fd"
 
 local insertArgs = function(tbl, command, stdout, stderr, success)
     if not success then
@@ -21,31 +21,23 @@ local insertArgs = function(tbl, command, stdout, stderr, success)
 
 end
 
-M.toggle = function(window, pane)
+M.toggle = function(window, pane, options)
+
     local projects = {}
 
-    local success, stdout, stderr = wezterm.run_child_process({
-        fd,
-        "-HI",
-        ".",
-        "--max-depth=4",
-        "--prune",
-        os.getenv("HOME") .. "/find",
-        os.getenv("HOME") .. "/Documents",
-        os.getenv("HOME") .. "/Documents/HasLab",
-        os.getenv("HOME") .. "/dotfiles/.config",
-        os.getenv("HOME") .. "/dotfiles",
-    })
+    if options.override then
+        projects = options.override
+    else
 
-    insertArgs(projects, "fd", stdout, stderr, success)
+        local success, stdout, stderr = wezterm.run_child_process({
+            "zoxide",
+            "query",
+            "-l",
+        })
 
-    local success, stdout, stderr = wezterm.run_child_process({
-        "zoxide",
-        "query",
-        "-l",
-    })
+        insertArgs(projects, "zoxide", stdout, stderr, success)
+    end
 
-    insertArgs(projects, "zoxide", stdout, stderr, success)
 
     window:perform_action(
         act.InputSelector({

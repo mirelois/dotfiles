@@ -78,7 +78,7 @@ plugins=(
   git
   zsh-syntax-highlighting
   zsh-autosuggestions
-  #zsh-vi-mode
+  zsh-vi-mode
   asdf
   golang
 )
@@ -143,7 +143,12 @@ pokemon-colorscripts -r
 
 set -o vi
 
-bindkey '' autosuggest-accept
+function zvm_after_init() {
+    bindkey '' autosuggest-accept
+}
+
+bindkey "^P" up-line-or-search
+bindkey "^N" down-line-or-search
 
 eval "$(zoxide init zsh --cmd cd)"
 

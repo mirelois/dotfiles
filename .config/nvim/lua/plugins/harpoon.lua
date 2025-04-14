@@ -1,7 +1,7 @@
 -- local harpoon = require("harpoon")
 --
 --
-local show_output = true
+local show_output = false
 
 local input_cond = false
 
@@ -23,20 +23,36 @@ return {
         end
 
         return {
-            { "<leader>ha", function() harpoon:list():add() end },
-            { "<C-e>",      function() harpoon.ui:toggle_quick_menu(harpoon:list()) end },
+            { "<leader>ha",         function() harpoon:list():add() end },
+            { "<C-e>",              function() harpoon.ui:toggle_quick_menu(harpoon:list()) end },
 
-            { "<C-h>",      function() harpoon:list():select(1) end },
-            { "<C-j>",      function() harpoon:list():select(2) end },
-            { "<C-k>",      function() harpoon:list():select(3) end },
-            { "<C-l>",      function() harpoon:list():select(4) end },
+            { "C-h",                function() harpoon:list():select(1) end },
+            { "C-l",                function() harpoon:list():select(4) end },
+            { "C-j",                function() harpoon:list():select(2) end },
+            { "C-k",                function() harpoon:list():select(3) end },
+            { "<leader>1",          function() harpoon:list():select(1) end },
+            { "<leader>2",          function() harpoon:list():select(2) end },
+            { "<leader>3",          function() harpoon:list():select(3) end },
+            { "<leader>4",          function() harpoon:list():select(4) end },
+            { "<leader>5",          function() harpoon:list():select(5) end },
+            { "<leader>6",          function() harpoon:list():select(6) end },
+            { "<leader>7",          function() harpoon:list():select(7) end },
+            { "<leader>8",          function() harpoon:list():select(8) end },
+            { "<leader>9",          function() harpoon:list():select(9) end },
 
-            { "<leader>hA", function() harpoon:list("scripts"):add() end },
-            { "<M-C-e>",    function() harpoon.ui:toggle_quick_menu(harpoon:list("scripts")) end },
-            { "<M-C-h>",    function() select_scripts(1) end },
-            { "<M-C-j>",    function() select_scripts(2) end },
-            { "<M-C-k>",    function() select_scripts(3) end },
-            { "<M-C-l>",    function() select_scripts(4) end },
+            { "<leader><leader>ha", function() harpoon:list("scripts"):add() end },
+            { "<leader><C-e>",      function() harpoon.ui:toggle_quick_menu(harpoon:list("scripts")) end },
+
+            { "<leader><leader>1",  function() select_scripts(1) end },
+            { "<leader><leader>2",  function() select_scripts(2) end },
+            { "<leader><leader>3",  function() select_scripts(3) end },
+            { "<leader><leader>4",  function() select_scripts(4) end },
+            { "<leader><leader>5",  function() select_scripts(5) end },
+            { "<leader><leader>6",  function() select_scripts(6) end },
+            { "<leader><leader>7",  function() select_scripts(7) end },
+            { "<leader><leader>8",  function() select_scripts(8) end },
+            { "<leader><leader>9",  function() select_scripts(9) end },
+
             { "<leader>ho", function()
                 show_output = not show_output
                 print("Show outputset to:", show_output)
@@ -45,7 +61,7 @@ return {
                 input_cond = not input_cond
                 print("Input set to :", input_cond)
             end },
-            { "<leader>hp", function()
+            { "<leader><leader>0", function()
                 if last_script ~= nil then
                     harpoon:list("scripts"):select(last_script)
                 else
@@ -56,7 +72,9 @@ return {
         }
     end,
 
-    opts = function()
+    config = function()
+        local harpoon = require("harpoon")
+
         local function trim_spaces(str)
             return string.gsub(str, "^%s*(.-)%s*$", "%1")
         end
@@ -66,7 +84,7 @@ return {
         end
 
         local function get_parent_dir(str)
-            return string.gsub(str, "(.*/).*", "%1")
+            return string.gsub(str, "(.+/).*", "%1")
         end
 
         local function get_file_name(str)
@@ -114,7 +132,7 @@ return {
             end
         end
 
-        return {
+        harpoon:setup({
             scripts = {
 
 
@@ -150,7 +168,9 @@ return {
 
                     local name_no_ext = get_name(curr_file)
 
-                    local script_dir = get_parent_dir(list_item.value)
+                    local script_dir, err = get_parent_dir(list_item.value)
+
+                    if err == 0 then script_dir = "." end
 
                     local vars = ""
 
@@ -184,10 +204,7 @@ return {
                     end
                 end
             }
-        }
-    end,
-
-    config = function()
+        })
 
         local harpoon = require("harpoon")
 

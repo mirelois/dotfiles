@@ -11,12 +11,13 @@ vim.api.nvim_create_user_command("Read", function(tbl)
     local output
     if tbl.bang then
         vim.notify("lmao")
-        output = vim.system(args, {text = true}):wait().stdout
+        output = vim.system(args, { text = true }):wait().stdout
     else
-        output = vim.api.nvim_exec2(tbl.args, {output = true}).output
+        output = vim.api.nvim_exec2(tbl.args, { output = true }).output
     end
-    vim.api.nvim_put({output}, "c", true, true)
-end, {nargs = '*'})
+    vim.api.nvim_put({ output }, "c", true, true)
+end, { nargs = '*' })
+
 
 -- -- Open pdf files
 -- vim.api.nvim_create_autocmd("BufReadCmd", {

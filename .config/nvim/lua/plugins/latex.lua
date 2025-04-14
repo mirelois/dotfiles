@@ -10,7 +10,7 @@ return {
     },
     init = function()
         -- VimTeX configuration goes here, e.g.
-        vim.g.vimtex_view_method = 'sioyek'
+        vim.g.vimtex_view_method = 'zzathura'
     end,
     config = function()
         vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {

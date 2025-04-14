@@ -1,8 +1,7 @@
 local awful = require("awful")
 local gears = require("gears")
 
-local terminal = "kitty"
-local terminal_no_connect = "wezterm start --always-new-process"
+local terminal = "wezterm"
 local modkey = "Mod4"
 
 local rofi =
@@ -227,7 +226,7 @@ keys = gears.table.join(keys,
         { modkey }, "y",
         function()
             awful.spawn(
-                [[brave]]
+                [[brave-browser]]
             )
         end,
         { description = "lauch discord", group = "tag" }
@@ -306,11 +305,11 @@ keys = gears.table.join(keys,
         function() awful.spawn(terminal) end,
         { description = "open a terminal", group = "launcher" }
     ),
-    awful.key(
-        { modkey, "CTRL"}, "Return",
-        function() awful.spawn(terminal_no_connect) end,
-        { description = "open a terminal", group = "launcher" }
-    ),
+    -- awful.key(
+    --     { modkey, "CTRL"}, "Return",
+    --     function() awful.spawn(terminal_no_connect) end,
+    --     { description = "open a terminal", group = "launcher" }
+    -- ),
     awful.key(
         { modkey, "Control" }, "r",
         awesome.restart,

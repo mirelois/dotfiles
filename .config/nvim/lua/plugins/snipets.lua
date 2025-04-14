@@ -159,6 +159,11 @@ return {
         )
 
         ls.add_snippets("cpp", {
+            s("log", fmt([[
+            #ifdef DEBUG
+                Log::log_message(LogLevel1, "{}");
+            #endif //DEBUG 
+            ]], {i(1)})),
             s("fori", fmt([[
                             for(int {} = 0; {} < N; {}++){{
                                 {}
