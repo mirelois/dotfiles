@@ -72,7 +72,7 @@ local theme        = {
     notification_bg                      = "#121212",
     notification_fg                      = "#DCDCDC",
     notification_border_width            = 0,
-    notification_max_width               = 150
+    notification_max_width               = 350
 
 }
 

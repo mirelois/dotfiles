@@ -12,6 +12,8 @@ run xdotool key Num_Lock
 # run xsetroot -cursor_name left_ptr
 run localectl set-keymap pt-nodeadkeys
 run setxkbmap -option compose:ins
+setxkbmap -option ctrl:nocaps
+
 
 # sound setting
 run pactl set-sink-mute @DEFAULT_SINK@ 1
