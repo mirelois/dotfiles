@@ -47,8 +47,8 @@ nnoremap <leader>Y "+Y
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
 
-nnoremap <C-S-L> <C-w>l
-nnoremap <C-S-H> <C-w>h
+nnoremap <C-L> <C-w>l
+nnoremap <C-H> <C-w>h
 
 "inoremap {<CR> {<CR>}<Esc>ko
 

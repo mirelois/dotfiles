@@ -214,7 +214,7 @@ keys = gears.table.join(keys,
     ),
     awful.key(
         { modkey }, "d",
-        function() awful.spawn("discord") end,
+        function() awful.spawn("/var/lib/flatpak/exports/bin/com.discordapp.Discord") end,
         { description = "lauch discord", group = "tag" }
     ),
     awful.key(

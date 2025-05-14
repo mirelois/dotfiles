@@ -134,7 +134,7 @@ return {
 
             s("map", fmt([[vim.keymap.set("{}", "{}", "{}")]], { i(1), i(2), i(3) })),
 
-            s("key", fmt([[awful.key({{modkey}}, "{}", {})]], {i(1), i(2)}))
+            s("key", fmt([[awful.key({{modkey}}, "{}", {})]], { i(1), i(2) }))
         }
         )
 
@@ -159,11 +159,17 @@ return {
         )
 
         ls.add_snippets("cpp", {
+            s("guard", fmt([[
+            #ifndef {}
+            #define {}
+            #endif //{}
+            ]], { i(1), rep(1), rep(1) })),
+
             s("log", fmt([[
             #ifdef DEBUG
                 Log::log_message(LogLevel1, "{}");
-            #endif //DEBUG 
-            ]], {i(1)})),
+            #endif //DEBUG
+            ]], { i(1) })),
             s("fori", fmt([[
                             for(int {} = 0; {} < N; {}++){{
                                 {}

@@ -1,34 +1,29 @@
 #!/bin/bash
 
-run() {
-    if ! pgrep -f "$1"; then
-        "$@" &
-    fi
-}
-
-run # key settings
-run xdotool key Num_Lock
-# run xset s off -dpms
-# run xsetroot -cursor_name left_ptr
-run localectl set-keymap pt-nodeadkeys
-run setxkbmap -option compose:ins
-setxkbmap -option ctrl:nocaps
-
-
 # sound setting
-run pactl set-sink-mute @DEFAULT_SINK@ 1
-run pactl set-source-mute @DEFAULT_SOURCE@ 1
+pactl set-sink-mute @DEFAULT_SINK@ 1
+pactl set-source-mute @DEFAULT_SOURCE@ 1
 
 # password print
-run lxpolkit
+lxpolkit &
 
 # compositor
-run picom
+picom &
 
-run /var/lib/flatpak/exports/bin/com.discordapp.Discord
+/var/lib/flatpak/exports/bin/com.discordapp.Discord &
 # screen locker
 # betterlockscreen -u $image --fx
 
+# key settings
+xdotool key Num_Lock
+xset s off -dpms
+xsetroot -cursor_name left_ptr
+localectl set-keymap pt-nodeadkeys
+setxkbmap -option compose:ins
+setxkbmap -option ctrl:nocaps
+
+
+
 # eww
-run /home/mirelois/bin/eww daemon
+/home/mirelois/bin/eww daemon
 

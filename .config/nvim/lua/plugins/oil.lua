@@ -9,6 +9,8 @@ function _G.get_oil_winbar()
     end
 end
 
+local toggle_colums = false
+
 return {
     "stevearc/oil.nvim",
 
@@ -77,6 +79,16 @@ return {
             ["gy"] = "actions.copy_entry_path",
             ["g."] = "actions.toggle_hidden",
             ["g\\"] = "actions.toggle_trash",
+            ["gd"] = function()
+                local oil = require("oil")
+                if toggle_colums then
+                    oil.set_columns({ "icon", "permissions", "size", "mtime" })
+                else
+                    oil.set_columns({ "icon" })
+                end
+                toggle_colums = not toggle_colums
+            end,
+
         },
         -- Set to false to disable all of the above keymaps
         use_default_keymaps = false,
