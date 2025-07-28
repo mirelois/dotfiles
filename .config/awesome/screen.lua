@@ -20,12 +20,17 @@ local wallpaper = get_random_wallpaper()
 
 awful.screen.connect_for_each_screen(function(s)
 
-    gears.wallpaper.maximized(wallpaper, s)
-
     if s == screen.primary then
         awful.tag(main_screen_tags, s, awful.layout.layouts[1])
     else
         awful.tag({tostring(s.index)}, s, awful.layout.layouts[1])
     end
     -- Each screen has its own tag table.
+    gears.wallpaper.maximized(wallpaper, s)
+
 end)
+
+screen.connect_signal("added", function(s)
+    gears.wallpaper.maximized(wallpaper, s)
+end)
+

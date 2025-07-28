@@ -1,13 +1,20 @@
 #!/bin/bash
 
 if [[ $1 = "on" ]]; then
-    openvpn3 session-start --config ~/Documents/HasLab/DL/HASLab.ovpn
+    if [ -z $(openvpn3 sessions-list | grep "Client connected") ]; then
+        openvpn3 session-start --config ~/Documents/HasLab/DL/HASLab.ovpn
+        notify-send "Vpn on"
+    else
+        notify-send "vpn already on"
+        echo "vpn already on"
+    fi
     exit 0
 fi
 
 
 if [[ $1 = "off" ]]; then
     openvpn3 session-manage -c ~/Documents/HasLab/DL/HASLab.ovpn -D
+    notify-send "Vpn off"
     exit 0
 fi
 

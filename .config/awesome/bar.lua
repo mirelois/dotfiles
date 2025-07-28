@@ -20,8 +20,8 @@ require("awful.hotkeys_popup.keys")
 -- Create a textclock widget
 local s = screen.primary
 
-local s_width = s.geometry.width
-local s_height = s.geometry.height
+local s_width = screen.primary.geometry.width
+local s_height = screen.primary.geometry.height
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -175,10 +175,10 @@ local calendar_bar = wibox({
     width    = beautiful.calendar_width,
     height   = beautiful.calendar_height,
     -- shape = gears.shape.roun,
-    bg       = beautiful.bar_bg,
-    fg       = beautiful.calendar_fg,
     x        = s_width - beautiful.calendar_width - beautiful.bar_horizontal_gap,
     y        = beautiful.bar_height + 2 * beautiful.bar_top_gap,
+    bg       = beautiful.bar_bg,
+    fg       = beautiful.calendar_fg,
     visible  = false
 
 })
@@ -187,6 +187,12 @@ calendar_bar:setup {
     layout = wibox.container.place,
     cal,
 }
+
+screen.connect_signal("property::geometry", function(s)
+    calendar_bar.x = screen.primary.geometry.x + (screen.primary.geometry.width - beautiful.calendar_width - beautiful.bar_horizontal_gap)
+    calendar_bar.y = screen.primary.geometry.y + (beautiful.bar_height + 2 * beautiful.bar_top_gap)
+end)
+
 
 -- }}}
 
@@ -436,7 +442,6 @@ mic_widget:buttons(gears.table.join(
 
 -- network {{{
 local update_network_widget = function(widget, stdout, stderr, exitreason, exitcode)
-
     local is_not_connected = string.match(stdout, "Not connected")
 
     if is_not_connected ~= nil then
@@ -511,11 +516,11 @@ local vpn_widget = wibox.widget {
     widget = wibox.container.background,
 }
 
-
 vpn_widget:buttons(gears.table.join(
     awful.button({}, 1, function()
+        local cmd = "/home/mirelois/bin/vpn_toggle"
         awful.spawn.easy_async_with_shell(
-            "/home/mirelois/.config/polybar/scripts/vpn_toggle.sh",
+            cmd,
             function()
                 awful.spawn.easy_async_with_shell("openvpn3 sessions-list",
                     function(stdout, stderr, exitreason, exitcode)
@@ -531,6 +536,31 @@ vpn_widget:buttons(gears.table.join(
 
 -- }}}
 
+
+-- local prompt_widget = awful.widget.prompt {
+--     prompt = 'Execute: '
+-- }
+--
+-- local text_bar = awful.wibar {
+--     position = "bottom",
+--     screen = s
+-- }
+--
+-- text_bar:setup{
+--     widget = prompt_widget
+-- }
+--
+-- local keys = gears.table.join(
+--     awful.key(
+--         { modkey, }, "i",
+--         function(c)
+--             prompt_widget:run()
+--         end,
+--         { description = "minimize", group = "client" }
+--     )
+-- )
+--
+-- root.keys(keys)
 
 -- bar definition {{{
 local main_bar = awful.wibar {
@@ -614,10 +644,11 @@ main_bar:setup {
 
 -- watchers {{{
 
-awful.widget.watch("amixer -c 0 -D pulse sget Master", 5, update_volume_widget, volume_widget)
-awful.widget.watch("amixer -c 0 -D pulse sget Capture", 5, update_mic_widget, mic_widget)
+awful.widget.watch("amixer -c 0 -D pulse sget Master", 2, update_volume_widget,
+    volume_widget)
+awful.widget.watch("amixer -c 0 -D pulse sget Capture", 2, update_mic_widget, mic_widget)
 awful.widget.watch("openvpn3 sessions-list", 20, update_vpn_widget, vpn_widget)
 awful.widget.watch("iw dev wlo1 link", 20, update_network_widget, network_widget)
-awful.widget.watch("acpi", 5, update_battery_widget, battery_widget)
+awful.widget.watch("acpi", 60, update_battery_widget, battery_widget)
 
 -- }}}

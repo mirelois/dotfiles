@@ -1,6 +1,7 @@
 /* colors */
 
 * {
+  border:              #121212ff;
   background-alt:      #121212ff;
   background:      #121212ff;
   selected:      #ffd5cdff;

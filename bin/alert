@@ -1,0 +1,51 @@
+#!/bin/bash
+
+## Parse command-line options
+OPTS=$(getopt -o q,u,h --long quiet,urgent,help -n 'alert' -- "$@")
+
+if [ $? -ne 0 ]; then
+  echo "Failed to parse options" >&2
+  exit 1
+fi
+
+## Reset the positional parameters to the parsed options
+eval set -- "$OPTS"
+
+## Initialize variables
+SOUND=/usr/share/sounds/freedesktop/stereo/bell.oga
+
+## Process the options
+while true; do
+    case "$1" in
+        -u | --urgent)
+            SOUND=/home/mirelois/sounds/alarm_beep.wav
+            shift
+            ;;
+        -q | --quiet)
+            QUIET="true"
+            shift
+            ;;
+        -h | --help)
+            echo "Usage:"
+            echo "-u, --urgent: change alert sound to alarm beep"
+            echo "-q, --quiet: desable sound"
+            echo "-h, --help: show this help"
+            exit 0
+            ;;
+        --)
+            shift
+            break
+            ;;
+        *)
+            echo "Internal error!"
+            exit 1
+            ;;
+    esac
+done
+
+notify-send Alert! "$@"
+
+if [[ -z $QUIET ]]; then
+    paplay $SOUND
+fi
+

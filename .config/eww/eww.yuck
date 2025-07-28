@@ -37,19 +37,19 @@
     (defwidget sliders_side [] 
       (box :orientation "v" :space-evenly "false" :class "sliders-side" 
         (box :orientation "h" :class "slider-vol-side" :space-evenly "false" 
-          (box :class "label-vol-side" "")
+          (box :class "label-vol-side" "")
           (scale :min 0 :max 101 :value {volume} :onchange "pactl set-source-volume @DEFAULT_SOURCE@ {}%"))
         (box :orientation "h" :class "slider-mic-side" :space-evenly "false" 
           (box :class "label-mic-side" "")
           (scale :min 0 :max 101 :value {mic} :onchange "amixer sset Capture {}%"))
         (box :orientation "h" :class "slider-bright-side" :space-evenly "false" 
-          (box :class "label-bright-side" "")
+          (box :class "label-bright-side" "")
           (scale :min 0 :max 101 :value {bright} :onchange "brightnessctl s {}%"))
         (box :orientation "h" :class "slider-ram-side" :space-evenly "false" 
           (box :class "label-ram-side" "")
           (scale :min 0 :active "false" :max 101 :value {ram-used}))
         (box :orientation "h" :class "slider-CPU-side" :space-evenly "false" 
-          (box :class "label-CPU-side" "")
+          (box :class "label-CPU-side" "")
           (scale :min 0 :active "false" :max 101 :value {CPU-used}))
         (box :orientation "h" :class "slider-battery-side" :space-evenly "false" 
           (box :class "label-battery-side" {bat-icon})

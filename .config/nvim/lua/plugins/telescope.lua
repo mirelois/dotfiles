@@ -20,9 +20,10 @@ return {
         end
 
         return {
-            { '<leader>/',  builtin.treesitter },
-            { '<leader>pf', builtin.find_files },
-            { '<C-p>',      function() project_files() end },
+            { '<leader><leader>/', "<CMD>Telescope lsp_workspace_symbols<CR>" },
+            { '<leader>/',         builtin.treesitter },
+            { '<leader>pf',        builtin.find_files },
+            { '<C-p>',             function() project_files() end },
             { '<leader>ps', function()
                 builtin.grep_string({ search = vim.fn.input("Grep > ") });
             end }
@@ -30,4 +31,3 @@ return {
         }
     end
 }
-

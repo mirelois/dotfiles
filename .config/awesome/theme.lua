@@ -71,8 +71,12 @@ local theme        = {
 
     notification_bg                      = "#121212",
     notification_fg                      = "#DCDCDC",
+    notification_border_color            = "121212",
     notification_border_width            = 0,
-    notification_max_width               = 350
+    notification_max_width               = 350,
+    notification_font                    = "Ubunto Mono 11",
+    notification_shape                   = function(cr, width, height) gears.shape.rounded_rect(cr, width, height, 2) end,
+    notification_margin                  = 0
 
 }
 

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ -z $(openvpn3 sessions-list | grep "Client connected") ]; then
+    /home/mirelois/bin/vpn on
+else
+    /home/mirelois/bin/vpn off
+fi
+

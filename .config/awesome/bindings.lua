@@ -10,7 +10,6 @@ local rofi =
 local eww_window =
 [[/home/mirelois/bin/eww open-many --no-daemonize weather_side time_side smol_calendar player_side sys_side sliders_side]]
 
-
 --{{{ Window bindings
 local keys = gears.table.join(
     awful.key(
@@ -109,6 +108,11 @@ local keys = gears.table.join(
         { modkey, "Control" }, "h",
         function() awful.screen.focus_bydirection("left") end,
         { description = "move focus to screen left", group = "screen" }
+    ),
+    awful.key(
+        { modkey, "Control" }, "m",
+        function() awful.client.restore(awful.screen.focused()) end,
+        { description = "restore minimized window", group = "client" }
     )
 )
 --}}}
@@ -176,6 +180,14 @@ local myclientkeys = gears.table.join(
             c:raise()
         end,
         { description = "(un)maximize", group = "client" }
+    ),
+    awful.key(
+        { modkey, "Shift" }, "m",
+        function(c)
+            c.minimized = true
+            c:raise()
+        end,
+        { description = "minimize", group = "client" }
     )
 )
 --}}}

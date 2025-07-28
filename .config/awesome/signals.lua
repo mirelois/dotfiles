@@ -66,7 +66,6 @@ client.connect_signal("unfocus", function(c)
 end)
 
 screen.connect_signal("arrange", function(s)
-
     local only_one = #s.tiled_clients == 1 -- use tiled_clients so that other floating windows don't affect the count
     -- but iterate over clients instead of tiled_clients as tiled_clients doesn't include maximized windows
     for _, c in pairs(s.clients) do
@@ -76,4 +75,19 @@ screen.connect_signal("arrange", function(s)
             c.border_width = beautiful.border_width
         end
     end
+end)
+
+--cringe manual setting of height because nothing respects padding
+client.connect_signal("property::maximized", function(c)
+
+    -- if i dont do this the bottom window will loose padding as well
+    setpadding()
+
+    local s = awful.screen.focused()
+    if s == screen.primary then
+        local padding = beautiful.bar_top_gap + beautiful.bar_height + 2*beautiful.useless_gap
+        c.y = padding
+        c.height = s.geometry.height - padding
+    end
+
 end)

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+ssh deucalion "tail -f /projects/I20240002/goncalosousa/llm_training/testing.e*" > /tmp/ssh_output &
+
+tail -f lmao | read input; alert

@@ -1,15 +1,10 @@
 -- local harpoon = require("harpoon")
---
---
-local show_output = false
+
+local show_output = true
 
 local input_cond = false
 
 local last_script = nil
---
---
---
---
 
 return {
     "ThePrimeagen/harpoon",

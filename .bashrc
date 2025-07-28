@@ -32,10 +32,6 @@ HISTFILESIZE=2000
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
@@ -57,15 +53,6 @@ if [ -n "$force_color_prompt" ]; then
 	color_prompt=
     fi
 fi
-
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
@@ -95,10 +82,6 @@ alias la='ls -A'
 alias l='ls -CF'
 alias lh='ls --hyperlink=auto'
 
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
@@ -119,33 +102,4 @@ if ! shopt -oq posix; then
   fi
 fi
 
-#My custom aliases
-alias vpn="openvpn3 session-start --config Documents/Haslab/HASLab.ovpn"
-alias aliasing="nvim ~/.bashrc"
-alias configq="cd .config/qtile/ && nvim ."
-alias confign="cd .config/nvim/ && nvim ."
-alias v="nvim ."
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/utilizador/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/utilizador/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/utilizador/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/utilizador/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-bindkey "^P" up-line-or-search
-
-
-export NVM_DIR="/home/utilizador/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-. "$HOME/.cargo/env"
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+set -o vi

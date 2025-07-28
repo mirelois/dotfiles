@@ -20,10 +20,12 @@ xset s off -dpms
 xsetroot -cursor_name left_ptr
 localectl set-keymap pt-nodeadkeys
 setxkbmap -option compose:ins
-setxkbmap -option ctrl:nocaps
+# setxkbmap -option ctrl:nocaps
 
 
 
 # eww
 /home/mirelois/bin/eww daemon
+
+xset -r rate 200 25
 

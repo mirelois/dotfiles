@@ -2,6 +2,14 @@ vim.opt.signcolumn = 'yes'
 
 return {
     {
+        'SleepySwords/change-function.nvim',
+        dependencies = {
+            'MunifTanjim/nui.nvim',
+            'nvim-treesitter/nvim-treesitter',
+            'nvim-treesitter/nvim-treesitter-textobjects', -- Not required, however provides fallback `textobjects.scm`
+        }
+    },
+    {
         "hrsh7th/nvim-cmp",
         dependencies = {
             "hrsh7th/cmp-buffer",
@@ -92,6 +100,9 @@ return {
                 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
                 vim.keymap.set("n", "[g", vim.diagnostic.goto_next, opts)
                 vim.keymap.set("n", "]g", vim.diagnostic.goto_prev, opts)
+                vim.keymap.set("n", "<leader>ih", function ()
+                    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+                end, opts)
             end)
         end
     },
