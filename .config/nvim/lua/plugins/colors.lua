@@ -12,6 +12,16 @@ local highlight = {
 return {
     { "norcalli/nvim-colorizer.lua" },
     {
+        '0xferrous/ansi.nvim',
+        config = function()
+            require('ansi').setup({
+                auto_enable = false,      -- Auto-enable for configured filetypes
+                auto_enable_stdin = true, -- Auto-enable for piped stdin content
+                filetypes = { 'log', 'ansi', 'txt' },
+            })
+        end
+    },
+    {
         "rebelot/kanagawa.nvim",
 
         lazy = false,

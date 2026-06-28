@@ -40,7 +40,7 @@ local keys = gears.table.join(
     awful.key(
         { modkey }, "h",
         function()
-            awful.client.focus.bydirection("left")
+            awful.client.focus.global_bydirection("left")
             if client.focus then client.focus:raise() end
         end,
         { description = "move focus to the left", group = "client" }
@@ -48,7 +48,7 @@ local keys = gears.table.join(
     awful.key(
         { modkey }, "j",
         function()
-            awful.client.focus.bydirection("down")
+            awful.client.focus.global_bydirection("down")
             if client.focus then client.focus:raise() end
         end,
         { description = "move focus to the down", group = "client" }
@@ -56,7 +56,7 @@ local keys = gears.table.join(
     awful.key(
         { modkey }, "k",
         function()
-            awful.client.focus.bydirection("up")
+            awful.client.focus.global_bydirection("up")
             if client.focus then client.focus:raise() end
         end,
         { description = "move focus to the up", group = "client" }
@@ -64,97 +64,65 @@ local keys = gears.table.join(
     awful.key(
         { modkey }, "l",
         function()
-            awful.client.focus.bydirection("right")
+            awful.client.focus.global_bydirection("right")
             if client.focus then client.focus:raise() end
         end,
         { description = "move focus to the right", group = "client" }
     ),
     awful.key(
         { modkey, "Shift" }, "h",
-        function() awful.client.swap.bydirection("left") end,
+        function() awful.client.swap.global_bydirection("left") end,
         { description = "move swap to the left", group = "client" }
     ),
     awful.key(
         { modkey, "Shift" }, "j",
-        function() awful.client.swap.bydirection("down") end,
+        function() awful.client.swap.global_bydirection("down") end,
         { description = "move swap to the down", group = "client" }
     ),
     awful.key(
         { modkey, "Shift" }, "k",
-        function() awful.client.swap.bydirection("up") end,
+        function() awful.client.swap.global_bydirection("up") end,
         { description = "move swap to the up", group = "client" }
     ),
     awful.key(
         { modkey, "Shift" }, "l",
-        function() awful.client.swap.bydirection("right") end,
+        function() awful.client.swap.global_bydirection("right") end,
         { description = "move focus to the right", group = "client" }
     ),
-    awful.key(
-        { modkey, "Control" }, "j",
-        function() awful.screen.focus_bydirection("down") end,
-        { description = "move focus to screen up", group = "screen" }
-    ),
-    awful.key(
-        { modkey, "Control" }, "k",
-        function() awful.screen.focus_bydirection("up") end,
-        { description = "move focus to screen down", group = "screen" }
-    ),
-    awful.key(
-        { modkey, "Control" }, "l",
-        function() awful.screen.focus_bydirection("right") end,
-        { description = "move focus to screen right", group = "screen" }
-    ),
-    awful.key(
-        { modkey, "Control" }, "h",
-        function() awful.screen.focus_bydirection("left") end,
-        { description = "move focus to screen left", group = "screen" }
-    ),
-    awful.key(
-        { modkey, "Control" }, "m",
-        function() awful.client.restore(awful.screen.focused()) end,
-        { description = "restore minimized window", group = "client" }
-    )
+    awful.key({ modkey, "Ctrl" }, "m",
+        function()
+            if cl_menu then
+                cl_menu:hide()
+                cl_menu = nil
+            else
+                client_list = {}
+                local tag = awful.tag.selected()
+                for i = 1, #tag:clients() do
+                    cl = tag:clients()[i]
+                    if tag:clients()[i].minimized then
+                        prefix = "_ "
+                    else
+                        prefix = "* "
+                    end
+                    if not awful.rules.match(cl, { class = "Conky" }) then
+                        client_list[i] =
+                        { prefix .. cl.name,
+                            function()
+                                tag:clients()[i].minimized = not tag:clients()[i].minimized
+                            end,
+                            cl.icon
+                        }
+                    end
+                end
+                cl_menu = awful.menu({ items = client_list, theme = { width = 400 } })
+                cl_menu:show()
+            end
+        end)
 )
 --}}}
 
 --{{{ clientkeys
 local myclientkeys = gears.table.join(
-    awful.key(
-        { modkey, "Control", "Shift" }, "j",
-        function(c) 
-            local s = awful.screen.focused():get_next_in_direction("down")
-            c:move_to_screen(s)
-            -- awful.screen.focus_bydirection("down") 
-        end,
-        { description = "move focus to screen up", group = "screen" }
-    ),
-    awful.key(
-        { modkey, "Control", "Shift" }, "k",
-        function(c) 
-            local s = awful.screen.focused():get_next_in_direction("up")
-            c:move_to_screen(s)
-            -- awful.screen.focus_bydirection("down") 
-        end,
-        { description = "move focus to screen down", group = "screen" }
-    ),
-    awful.key(
-        { modkey, "Control", "Shift" }, "h",
-        function(c) 
-            local s = awful.screen.focused():get_next_in_direction("left")
-            c:move_to_screen(s)
-            -- awful.screen.focus_bydirection("down") 
-        end,
-        { description = "move focus to screen up", group = "screen" }
-    ),
-    awful.key(
-        { modkey, "Control", "Shift" }, "l",
-        function(c) 
-            local s = awful.screen.focused():get_next_in_direction("right")
-            c:move_to_screen(s)
-            -- awful.screen.focus_bydirection("down") 
-        end,
-        { description = "move client to screen", group = "screen" }
-    ),
     awful.key(
         {}, "F11",
         function(c)
@@ -197,7 +165,7 @@ keys = gears.table.join(keys,
     --Eww
     awful.key(
         { modkey, }, "space",
-        function() 
+        function()
             awful.spawn("playerctl play-pause")
             -- awful.spawn("notify-send lmao")
         end,
@@ -207,7 +175,7 @@ keys = gears.table.join(keys,
     --Eww
     awful.key(
         { modkey, }, "p",
-        function() 
+        function()
             awful.spawn(eww_window)
         end,
         { description = "spawn eww window", group = "tag" }
@@ -303,8 +271,6 @@ keys = gears.table.join(keys,
             awful.spawn("playerctl next")
         end),
 
-
-
     awful.key(
         { modkey, }, "r",
         function() awful.spawn(rofi) end,
@@ -317,16 +283,19 @@ keys = gears.table.join(keys,
         function() awful.spawn(terminal) end,
         { description = "open a terminal", group = "launcher" }
     ),
+
     -- awful.key(
     --     { modkey, "CTRL"}, "Return",
     --     function() awful.spawn(terminal_no_connect) end,
     --     { description = "open a terminal", group = "launcher" }
     -- ),
+
     awful.key(
         { modkey, "Control" }, "r",
         awesome.restart,
         { description = "reload awesome", group = "awesome" }
     ),
+
     awful.key(
         { modkey }, "q",
         function() awful.spawn([[/home/mirelois/.config/eww/scripts/shutdown.sh]]) end,

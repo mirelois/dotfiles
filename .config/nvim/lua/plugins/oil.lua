@@ -35,7 +35,7 @@ return {
             -- Window-local options to use for oil buffers
             win_options = {
                 winbar = "%!v:lua.get_oil_winbar()",
-                wrap = false,
+                -- wrap = false,
                 signcolumn = "no",
                 cursorcolumn = false,
                 foldcolumn = "0",

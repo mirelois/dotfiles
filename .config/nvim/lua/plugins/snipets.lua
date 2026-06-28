@@ -47,6 +47,7 @@ return {
 
         local s = ls.snippet
         local fmt = require("luasnip.extras.fmt").fmt
+        local fmta = require("luasnip.extras.fmt").fmta
         local f = ls.function_node
         local i = ls.insert_node
         local c = ls.choice_node
@@ -72,6 +73,27 @@ return {
         }
 
         ls.add_snippets("all", {
+            s("lorem", fmt([[
+    ,   .    
+ ,    .    .
+      .    .
+   .    ,   . 
+  ,     .   , 
+  ,   .
+
+    ,   ,  .   
+,   ,  .    . 
+    .   ,    ,
+  .    ,   .  
+  .      . 
+  ,     .  
+   ,    .  
+   .         
+.      .  ,  
+ ,    ,     
+.       .]], {})),
+
+
             s("currtime",
                 f(
                     function()
@@ -120,7 +142,8 @@ return {
     {}
 
     ```
-    ]], i(1)))
+    ]], i(1))),
+            s("break", t({ '```', '', '```{python}' })),
         })
 
         ls.add_snippets("lua", {
@@ -137,8 +160,6 @@ return {
             s("key", fmt([[awful.key({{modkey}}, "{}", {})]], { i(1), i(2) }))
         }
         )
-
-
         ls.add_snippets("c", {
             s("fori", fmt([[
     for(int {} = 0; {} < N; {}++){{
@@ -159,21 +180,47 @@ return {
         )
 
         ls.add_snippets("cpp", {
+            s("cout", fmt([[std::cout << "{}" << std::endl;]], i(1))),
             s("guard", fmt([[
             #ifndef {}
             #define {}
             #endif //{}
             ]], { i(1), rep(1), rep(1) })),
 
-            s("log", fmt([[
-            #ifdef DEBUG
-                Log::log_message(LogLevel1, "{}");
-            #endif //DEBUG
-            ]], { i(1) })),
+            s("logger", fmt([[
+            #if SPDLOG_ACTIVE_LEVEL != SPDLOG_LEVEL_OFF
+                static std::shared_ptr<spdlog::logger>& get_logger() {{
+                    static auto logger = Logger::getInstance().make_logger("{}");
+                    return logger;
+                }}
+            #endif
+            ]], {
+                c(1, {
+                    f(function()
+                        local file_name = vim.api.nvim_buf_get_name(0)
+                        return string.gsub(file_name, ".*/(.-)%..*", "%1")
+                    end),
+                    i(1)
+                })
+            })),
+            s("logc", fmt([[
+            #if SPDLOG_ACTIVE_LEVEL != SPDLOG_LEVEL_OFF
+                {}
+            #endif //SPDLOG_ACTIVE_LEVEL != SPDLOG_LEVEL_OFF
+            ]], {
+                i(1)
+            })),
             s("fori", fmt([[
-                            for(int {} = 0; {} < N; {}++){{
+                            for(int {} = 0; {} < {}; {}++){{
                                 {}
-                            }}]], { i(1, "i"), rep(1), rep(1), i(2) })),
+                            }}]], { i(1, "i"), rep(1), i(2), rep(1), i(3) })),
+            s("log", fmt([[SPDLOG_LOGGER_TRACE(get_logger(), {});]],
+                {
+                    c(1, {
+                        fmt([["{}", {}]], { i(1), i(2) }),
+                        fmt([["{}"]], i(1))
+                    })
+                }))
         }
         )
 
@@ -258,6 +305,38 @@ return {
             }))
 
         })
+
+        ls.add_snippets("tex", {
+
+
+            s("acr", fmt([[\newacronym{{{}}}{{{}}}{{{}}}]], {
+                f(function(acronym)
+                    local parts = vim.split(acronym[1][1], " ", true)
+
+                    local result = ""
+
+                    for _, part in ipairs(parts) do
+                        result = result .. part:sub(1, 1)
+                    end
+
+                    return result:lower()
+                end, { 1 }),
+                f(function(acronym)
+                    local parts = vim.split(acronym[1][1], " ", true)
+
+                    local result = ""
+
+                    for _, part in ipairs(parts) do
+                        result = result .. part:sub(1, 1)
+                    end
+
+                    return result:upper()
+                end, { 1 }),
+                i(1),
+            })
+            )
+        }
+        )
     end
 
 }

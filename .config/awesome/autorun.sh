@@ -10,7 +10,7 @@ lxpolkit &
 # compositor
 picom &
 
-/var/lib/flatpak/exports/bin/com.discordapp.Discord &
+# /var/lib/flatpak/exports/bin/com.discordapp.Discord &
 # screen locker
 # betterlockscreen -u $image --fx
 
@@ -22,7 +22,7 @@ localectl set-keymap pt-nodeadkeys
 setxkbmap -option compose:ins
 # setxkbmap -option ctrl:nocaps
 
-
+rm ./.config/BraveSoftware/Brave-Browser/SingletonLock
 
 # eww
 /home/mirelois/bin/eww daemon

@@ -47,8 +47,6 @@ client.connect_signal("manage", function(c)
         -- Prevent clients from being unreachable after screen count changes.
         awful.placement.no_offscreen(c)
     end
-
-    setpadding()
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.
@@ -86,8 +84,7 @@ client.connect_signal("property::maximized", function(c)
     local s = awful.screen.focused()
     if s == screen.primary then
         local padding = beautiful.bar_top_gap + beautiful.bar_height + 2*beautiful.useless_gap
-        c.y = padding
+        c.y = s.geometry.y + padding
         c.height = s.geometry.height - padding
     end
-
 end)

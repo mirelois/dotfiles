@@ -1,6 +1,6 @@
 return {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.8',
+    branch='master',
     -- or                              , branch = '0.1.x',
     dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-ui-select.nvim' },
     config = function()
@@ -22,8 +22,8 @@ return {
         return {
             { '<leader><leader>/', "<CMD>Telescope lsp_workspace_symbols<CR>" },
             { '<leader>/',         builtin.treesitter },
-            { '<leader>pf',        builtin.find_files },
-            { '<C-p>',             function() project_files() end },
+            { '<C-p>',             builtin.find_files },
+            { '<leader>pf',        function() project_files() end },
             { '<leader>ps', function()
                 builtin.grep_string({ search = vim.fn.input("Grep > ") });
             end }

@@ -1,0 +1,284 @@
+* {
+    font-family:'Monocraft', 'Font Awesome';
+    font-size: 15px;
+    border-radius: 35px;
+    font-weight: 300;
+    
+}
+
+window#waybar {
+    background-color: rgba(0, 0, 0, 0);
+    /* border-bottom: 3px solid rgba(100, 114, 125, 0.5); */
+    color: #ffffff;
+    transition-property: background-color;
+    transition-duration: .5s;
+    margin: 30px 30px;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/*
+window#waybar.empty {
+    background-color: transparent;
+}
+window#waybar.solo {
+    background-color: #FFFFFF;
+}
+*/
+
+window#waybar.termite {
+    background-color: #3F3F3F;
+}
+
+window#waybar.chromium {
+    background-color: #000000;
+    border: none;
+}
+
+button {
+    /* Use box-shadow instead of border so the text isn't offset */
+    box-shadow: inset 0 -3px transparent;
+    /* Avoid rounded borders under each button name */
+    border: none;
+    
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+button:hover {
+    background: inherit;
+    box-shadow: inset 0 -3px #957FB8;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    border-radius: 0;
+    background-color: transparent;
+    color: #DCDCDC;
+}
+
+#workspaces button.focused {
+    background-color: #232323;
+    box-shadow: inset 0 -3px #957FB8;
+;
+}
+
+#workspaces button.urgent {
+    background-color: #eb4d4b;
+}
+
+#mode {
+    background-color: #64727D;
+    box-shadow: inset 0 -3px #ffffff;
+}
+
+#clock{
+    background-color: #121212;
+    padding: 0px 12px;
+    color: #7FB4CA;
+}
+
+#utilities {
+    background-color: #121212;
+    
+
+}
+
+#hardware {
+    background-color: #121212;
+    
+}
+
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#power-profiles-daemon,
+#mpd {
+    padding: 0 10px;
+    color: #ffffff;
+}
+
+#window,
+#workspaces {
+    background-color: #121212;
+    padding: 0px 10px;
+    /* margin: 0 0px; */
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+/* .modules-left > widget:first-child > #workspaces { */
+/*     margin-left: 0; */
+/* } */
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
+
+
+#battery {
+    color: #7FB4CA;
+}
+
+@keyframes blink {
+    to {
+        color: #000000;
+    }
+}
+
+
+label:focus {
+    background-color: #000000;
+}
+
+#cpu {
+    color: #DCA561;
+}
+
+#custom-gear {
+    min-width: 35px;
+    color: #999999;
+}
+
+#custom-gear:hover {
+    background-color: #232323
+}
+
+#memory {
+    color: #957FB8
+}
+
+#disk {
+}
+
+#backlight {
+}
+
+#network {
+    color: #E46876;
+}
+
+#backlight {
+    color: #C8C093;
+}
+
+#backlight:hover {
+    background-color: #232323;
+}
+
+
+#network.disconnected {
+}
+
+#pulseaudio {
+    color: #98BB6C;
+}
+
+/* you can set a style on hover for any module like this */
+#pulseaudio:hover {
+    background-color: #232323;
+}
+
+#wireplumber {
+    color: #7E9CD8;
+}
+
+#wireplumber:hover {
+    background-color: #232323;
+}
+
+#wireplumber.muted {
+}
+
+#custom-media {
+    color: #2a5c45;
+    min-width: 100px;
+}
+
+#custom-media.custom-spotify {
+}
+
+#custom-media.custom-vlc {
+}
+
+#temperature {
+    color: #D27E99;
+}
+
+#temperature.critical {
+}
+
+#tray {
+}
+
+#tray menu{
+    background: #121212;
+    color: #DCDCDC;
+
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}
+
+#idle_inhibitor {
+}
+
+#idle_inhibitor.activated {
+    color: #2d3436;
+}
+
+#mpd {
+    color: #2a5c45;
+}
+
+#mpd.disconnected {
+}
+
+#mpd.stopped {
+}
+
+#mpd.paused {
+}
+
+#language {
+    color: #6A9589;
+    padding: 0 5px;
+    /* margin: 0 5px; */
+    /* min-width: 16px; */
+}
+
+
+#scratchpad {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#scratchpad.empty {
+	background-color: transparent;
+}
+
+#privacy {
+    padding: 0;
+}
+
+#privacy-item {
+    padding: 0 5px;
+    color: white;
+}
+

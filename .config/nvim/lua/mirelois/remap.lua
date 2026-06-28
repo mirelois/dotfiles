@@ -36,6 +36,9 @@ vim.keymap.set("x", "<leader>p", [["_dP]])
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set("v", "<leader>d", [["_d]])
+vim.keymap.set("n", "<leader>p", [["+p]])
+vim.keymap.set("n", "<C-S-v>", [["+p]])
+vim.keymap.set("n", "<leader>P", [["+P]])
 
 -- This is going to get me cancelled
 vim.keymap.set("i", "<C-c>", "<Esc>")
@@ -43,7 +46,7 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "Q", "<nop>") --disables Q
 -- vim.keymap.set("n", "<C-f>", ":silent !tmux neww tmux-sessionizer<CR>")
 
-vim.keymap.set("n", "<leader><leader>r", [[:source ~/.config/nvim/init.lua<CR>]])
+vim.keymap.set("n", "<leader><leader>r", [[:restart<CR>]])
 
 --start to replace word you are on
 vim.keymap.set("n", "<leader>*", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
@@ -63,5 +66,13 @@ vim.keymap.set("n", "<leader><Tab>", "ncw")
 --vim.keymap.set("v", [[<leader>']], [[c'<C-r>"'<Esc>]])
 
 vim.keymap.set("i", "{<CR>", "{<CR>}<Esc>ko")
+vim.keymap.set("t", "<leader><Esc>", [[<C-\><C-n>]])
 
 --vim.keymap.set("x", "<C-v>", "C-V")
+
+-- turn on very magic mode
+vim.keymap.set("c", "s/", [[s/\v]])
+vim.keymap.set("n", "/", [[/\v]])
+
+-- unset mic muter button
+vim.keymap.set("", "<D-c>", "")

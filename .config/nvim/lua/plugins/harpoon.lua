@@ -20,7 +20,6 @@ return {
         return {
             { "<leader>ha",         function() harpoon:list():add() end },
             { "<C-e>",              function() harpoon.ui:toggle_quick_menu(harpoon:list()) end },
-
             { "C-h",                function() harpoon:list():select(1) end },
             { "C-l",                function() harpoon:list():select(4) end },
             { "C-j",                function() harpoon:list():select(2) end },
@@ -167,13 +166,16 @@ return {
 
                     if err == 0 then script_dir = "." end
 
-                    local vars = ""
-
-                    vars = vars .. string.format("%s='%s' ", "cwd", cwd)
-                    vars = vars .. string.format("%s='%s' ", "curr_file", curr_file)
-                    vars = vars .. string.format("%s='%s' ", "curr_file_no_ext", curr_file_no_ext)
-                    vars = vars .. string.format("%s='%s' ", "curr_file_name", name)
-                    vars = vars .. string.format("%s='%s' ", "curr_file_name_no_ext", name_no_ext)
+                    local opts = {
+                        cwd = script_dir,
+                        env = {
+                            cwd = cwd,
+                            curr_file = curr_file,
+                            curr_file_no_ext = curr_file_no_ext,
+                            curr_file_name = name,
+                            curr_file_name_no_ext = name_no_ext,
+                        }
+                    }
 
                     -- command is of format: cd <FILE_PARENT_DIR> && <VARS_DEFINITION> ./<FILE_NAME>
 
@@ -185,18 +187,19 @@ return {
                         input_str = ""
                     end
 
-                    local command = "cd " .. script_dir .. " && " .. vars .. "./" .. file_name .. input_str
+                    local on_exit = function(obj)
+                        if show_output then
+                            print(obj.code)
+                            print(obj.signal)
+                            print(obj.stdout)
+                            print(obj.stderr)
+                        end
+                    end
+
                     -- local command = vars .. "./" .. list_item.value
 
-                    local output = vim.fn.system(command)
+                    vim.system({ "sh", file_name, input_str }, opts, on_exit)
 
-                    if show_output then
-                        local len = string.len(command)
-
-                        local s = "\n\n" .. string.rep("-", len) .. "\n\n[Output]\n"
-
-                        vim.notify("[Command]\n" .. command .. s .. output)
-                    end
                 end
             }
         })

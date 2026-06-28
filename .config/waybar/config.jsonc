@@ -1,0 +1,180 @@
+// -*- mode: jsonc -*-
+{
+    // "layer": "top", // Waybar at top layer
+    // "position": "bottom", // Waybar position (top|bottom|left|right)
+    "height": 34, // Waybar height (to be removed for auto height)
+    // "width": 1280, // Waybar width
+    "spacing": 16, // Gaps between modules (4px)
+    // Choose the order of the modules
+
+    "margin": 8,
+
+    "modules-left": [
+        "sway/workspaces",
+        // "sway/mode",
+        "sway/scratchpad"
+    ],
+    "modules-right": [
+        "tray",
+        "group/hardware",
+        "group/utilities",
+        "clock",
+    ],
+    // Modules configuration
+    "sway/workspaces": {
+        "disable-scroll": false,
+        "all-outputs": false,
+        "warp-on-scroll": true,
+        "format": "{icon}",  
+        "format-icons": {  
+            "1":  "1:",  
+            "2":  "2:",  
+            "3":  "3:<span font='21px'>󰈙</span>",  
+            "4":  "4:<span font='26px'></span>",  
+            "5":  "5:",  
+            "6":  "6:",  
+            "7":  "7:",  
+            "8":  "8:",  
+            "9":  "9:<span font='27px'>󰮂</span>",  
+            "10": "10:<span font='25px'>󰓓</span>",  
+        }
+    },
+
+    "group/hardware": {
+        "orientation": "horizontal",
+        "modules": [
+            "custom/gear",
+            "cpu",
+            "temperature",
+            "memory",
+            "sway/language",
+        ],
+        "drawer": {
+            "click-to-reveal": true,
+            "transition-duration": 200,
+            "transition-left-to-right": false,
+        }
+    },
+
+    "group/utilities": {
+        "orientation": "horizontal",
+        "modules": [
+            "pulseaudio",
+            "wireplumber",
+            "backlight",
+        ]
+    },
+
+    "sway/language": {
+        "format": " {} {variant}",
+        "on-click": "swaymsg input type:keyboard xkb_switch_layout next",
+    },
+
+    "temperature": {
+        // "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        // "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C ",
+        "format": "{temperatureC}°C "
+    },
+
+    "custom/gear": {
+        "format": "  ",
+    },
+
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "sway/scratchpad": {
+        "format": "{icon} {count}",
+        "show-empty": false,
+        "format-icons": ["", ""],
+        "tooltip": true,
+        "tooltip-format": "{app}: {title}"
+    },
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10,
+        "icons": {
+          "blueman": "bluetooth",
+        }
+    },
+    "clock": {
+        // "timezone": "America/New_York",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+                    "mode"          : "month",
+                    "mode-mon-col"  : 3,
+                    "weeks-pos"     : "right",
+                    "on-scroll"     : 1,
+                    "format": {
+                              "months":     "<span color='#957fb8'><b>{}</b></span>",
+                              "days":       "<span color='#ababab'><b>{}</b></span>",
+                              "weeks":      "<span color='#6A9589'><b>{}</b></span>",
+                              "weekdays":   "<span color='#7788af'><b>{}</b></span>",
+                              "today":      "<span color='#98BB6C'><b>{}</b></span>"
+                              }
+                    },
+        "actions":  {
+                    "on-click-right": "mode",
+                    "on-scroll-up": "shift_up",
+                    "on-scroll-down": "shift_down",
+                    "on-click-middle": "shift_reset",
+                    },
+    },
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false
+    },
+    "memory": {
+        "format": "{}% "
+    },
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"],
+        "format-wifi": "{signalStrength}% {icon}",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "⚠",
+        "format-alt": "{essid} {signalStrength}%"
+    },
+    "pulseaudio": {
+        "scroll-step": 1, // %, can be a float
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon} ",
+        "format-bluetooth-muted": "{icon} ",
+        "format-muted": "{icon}",
+        "format-icons": {
+            "headphone-muted": "󰟎",
+            "headphone": "",
+            "hands-free": "hf",
+            "headset": "󰋎",
+            "headset-muted": "󰋐",
+            "default": ["", "", ""],
+            "default-muted": "<span font='24px'>󰝟</span>",
+        },
+        "on-click": "amixer -D pulse sset Master toggle"
+    },
+    "wireplumber": {
+        "node-type": "Audio/Source",
+        "scroll-step": 1, // %, can be a float
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": "",
+        "format-icons": {
+            "default": [""]
+        },
+        "on-click": "amixer -D pulse sset Capture toggle"
+    },
+
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{percent}% {icon}",
+        "format-icons": ["󰃞", "󰃟", "󰃠"]
+    }
+}
+}

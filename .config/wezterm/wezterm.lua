@@ -23,12 +23,21 @@ config.keys = {
 -- This is where you actually apply your config choices
 
 -- For example, changing the color scheme:
+-- config.font = wezterm.font {
+--     family = 'Monocraft',
+--     -- harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
+--     weight = "Regular"
+-- }
+
+
+
 config.font = wezterm.font {
-    family = 'JetBrains Mono',
+    family = 'Monocraft',
     harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' },
     weight = "Regular"
 }
-config.font_size = 11
+
+config.font_size = 10
 
 config.freetype_load_flags = 'NO_HINTING'
 config.freetype_load_target = 'Light'
@@ -60,9 +69,27 @@ config.colors = { --{{{
     scrollbar_thumb = "#16161d",
     split = "#16161d",
 
-    ansi = { "#090618", "#c34043", "#76946a", "#c0a36e", "#7e9cd8", "#957fb8", "#6a9589", "#c8c093" },
-    brights = { "#727169", "#e82424", "#98bb6c", "#e6c384", "#7fb4ca", "#938aa9", "#7aa89f", "#dcd7ba" },
-    indexed = { [16] = "#ffa066", [17] = "#ff5d62" },
+    ansi = {
+        "#090618",
+        "#c34043",
+        "#76946a",
+        "#c0a36e",
+        "#7e9cd8",
+        "#957fb8",
+        "#6a9589",
+        "#c8c093",
+    },
+    brights = {
+        "#727169",
+        "#e82424",
+        "#98bb6c",
+        "#e6c384",
+        "#7fb4ca",
+        "#938aa9",
+        "#7aa89f",
+        "#dcd7ba",
+    },
+    indexed = { [16] = "#000000", [17] = "#ff5d62" },
 
     tab_bar = {
         -- The color of the strip that goes along the top of the window

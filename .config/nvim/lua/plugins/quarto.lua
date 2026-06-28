@@ -20,6 +20,7 @@ return {
 
     {
         'MeanderingProgrammer/markdown.nvim',
+        lazy = true,
         ft = { "markdown", "quarto" },
         init = function()
             vim.g.mkdp_auto_start = 0
@@ -147,6 +148,7 @@ return {
     {
         'quarto-dev/quarto-nvim',
         ft = "quarto",
+        lazy = true,
         dependencies = { 'jmbuhr/otter.nvim' },
         opts = {
             debug = true,
@@ -165,16 +167,14 @@ return {
             },
             codeRunner = {
                 enabled = true,
-                default_method = 'slime', -- 'molten' or 'slime'
-                ft_runners = {},          -- filetype to runner, ie. `{ python = "molten" }`.
+                default_method = 'slime',        -- 'molten' or 'slime'
+                ft_runners = {},                 -- filetype to runner, ie. `{ python = "molten" }`.
                 -- Takes precedence over `default_method`
-                never_run = { "yaml" },   -- filetypes which are never sent to a code runner
+                never_run = { "yaml", "latex" }, -- filetypes which are never sent to a code runner
             },
 
         },
         keys = {
-            { "<C-CR>",     ":QuartoSend<CR>" },
-            { "<S-CR>",     ":QuartoSend<CR>" },
             { "<leader>Q",  ":QuartoSendAll<CR>" },
             { "<leader>qa", ":QuartoSendAbove<CR>" },
             { "<leader>qb", ":QuartoSendBelow<CR>" },
@@ -185,6 +185,21 @@ return {
             vim.api.nvim_create_user_command("QuartoToJupyter", function()
                 local cmd = "quarto convert " .. vim.api.nvim_buf_get_name(0)
                 local out = vim.fn.system(cmd)
+                print(out)
+            end, {})
+
+            local function remove_extention(str)
+                return string.gsub(str, "(.-)%..*", "%1")
+            end
+
+            vim.api.nvim_create_user_command("QuartoToPython", function()
+                local file_path = vim.api.nvim_buf_get_name(0)
+                local cmd = "quarto convert " .. file_path
+                local out = vim.fn.system(cmd)
+                print(out)
+                local file_name = remove_extention(file_path)
+                cmd = [[jupytext --to py ]] .. file_name .. [[.ipynb]]
+                out = vim.fn.system(cmd)
                 print(out)
             end, {})
 

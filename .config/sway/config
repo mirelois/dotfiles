@@ -1,0 +1,351 @@
+# Default config for sway
+#
+# Copy this to ~/.config/sway/config and edit it to your liking.
+#
+# Read `man 5 sway` for a complete reference.
+
+### Variables
+#
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+# Your preferred terminal emulator
+set $term ghostty
+# Your preferred application launcher
+set $menu rofi # ./rofi.sh
+
+smart_borders on
+
+### Output configuration
+#
+# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+output * bg `find ~/wallpapers/ -type f | shuf -n 1` fill
+#
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+
+### Idle configurati
+#
+# Example configuration:
+#
+# exec swayidle -w \
+#          timeout 300 'swaylock -f -c 000000' \
+#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+#          before-sleep 'swaylock -f -c 000000'
+#
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+
+### Input configuration
+#
+# Example configuration:
+#
+  input type:touchpad {
+      dwt enabled
+      # tap enabled
+      natural_scroll enabled
+      middle_emulation enabled
+  }
+
+
+
+    input type:keyboard {
+          xkb_layout "pt(nodeadkeys),pt"
+          xkb_options ctrl:nocaps
+          xkb_options compose:ins
+          xkb_numlock enabled
+  }
+
+bindsym $mod+shift+space input type:keyboard xkb_switch_layout next
+
+#dark mode stuff
+exec_always {
+    export GTK_THEME="Adwaita:dark"
+    ./set_darkmode.sh
+
+}
+
+#
+# You can also configure each device individually.
+# Read `man 5 sway-input` for more information about this section.
+
+### Key bindings
+#
+# Basics:
+#
+    
+    bindsym $mod+q exec ~/.config/sway/shutdown.sh
+    
+    # Start a terminal
+    bindsym $mod+Return exec GTK_IM_MODULE=simple $term
+
+    # Kill focused window
+    bindsym $mod+w kill
+
+    # Start your launcher
+    bindsym $mod+r exec /home/mirelois/dotfiles/.config/sway/rofi.sh
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+    # Reload the configuration file
+    bindsym $mod+Shift+c reload
+
+    # Exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+#
+# Moving around:
+#
+    # Move your focus around
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+    # Or use $mod+[up|down|left|right]
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+    # Move the focused window with the same, but add Shift
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+    # Ditto, with arrow keys
+    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+
+    bindsym XF86Launch6 input type:keyboard xkb_switch_layout next
+
+# Workspaces:
+#
+
+    set $disp1 "DP-1"
+
+    set $ws1  1
+    set $ws2  2
+    set $ws3  3
+    set $ws4  4
+    set $ws5  5
+    set $ws6  6
+    set $ws7  7
+    set $ws8  8
+    set $ws9  9
+    set $ws10 10
+
+    workspace $ws1  output $disp1
+    workspace $ws2  output $disp1
+    workspace $ws3  output $disp1
+    workspace $ws4  output $disp1
+    workspace $ws5  output $disp1
+    workspace $ws6  output $disp1
+    workspace $ws7  output $disp1
+    workspace $ws8  output $disp1
+    workspace $ws9  output $disp1
+    workspace $ws10 output $disp1
+
+    # Switch to workspace
+    bindsym $mod+1 workspace $ws1
+    bindsym $mod+2 workspace $ws2
+    bindsym $mod+3 workspace $ws3
+    bindsym $mod+4 workspace $ws4
+    bindsym $mod+5 workspace $ws5
+    bindsym $mod+6 workspace $ws6
+    bindsym $mod+7 workspace $ws7
+    bindsym $mod+8 workspace $ws8
+    bindsym $mod+9 workspace $ws9
+    bindsym $mod+0 workspace $ws10
+    # Move focused container to workspace
+    bindsym $mod+Shift+1 move container to workspace $ws1
+    bindsym $mod+Shift+2 move container to workspace $ws2
+    bindsym $mod+Shift+3 move container to workspace $ws3
+    bindsym $mod+Shift+4 move container to workspace $ws4
+    bindsym $mod+Shift+5 move container to workspace $ws5
+    bindsym $mod+Shift+6 move container to workspace $ws6
+    bindsym $mod+Shift+7 move container to workspace $ws7
+    bindsym $mod+Shift+8 move container to workspace $ws8
+    bindsym $mod+Shift+9 move container to workspace $ws9
+    bindsym $mod+Shift+0 move container to workspace $ws10
+
+    bindsym $mod+Tab workspace back_and_forth
+    # Note: workspaces can have any name you want, not just numbers.
+    # We just use 1-10 as the default.
+#
+# Layout stuff:
+#
+    # You can "split" the current object of your focus with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    bindsym $mod+Shift+bar splith
+    bindsym $mod+Shift+minus splitv
+
+    # exec_always --no-startup-id /home/mirelois/.config/sway/i3-master-layout/i3-master-layout.py
+
+    # default_orientation auto
+
+    # Switch the current container between different layout styles
+    # bindsym $mod+s layout vertica
+    # bindsym $mod+s layout tabed
+    bindsym $mod+m layout toggle tabbed split
+    bindsym $mod+e layout toggle split
+
+    # Make the current focus fullscreen
+    bindsym $mod+f fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+t floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    # bindsym $mod+space focus mode_toggle
+    bindsym $mod+space exec playerctl play-pause
+
+    # Move focus to the parent container
+    bindsym $mod+a focus parent
+#
+# Scratchpad:
+#
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+minus move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+plus scratchpad show
+    bindsym $mod+KP_add scratchpad show
+#
+# Resizing containers:
+#
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+
+    # Ditto, with arrow keys
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Shift+r mode "resize"
+#
+# Utilities:
+#
+# Special keys to adjust volume via PulseAudio
+bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
+bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+
+bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+# mic button in keyboard
+bindsym --locked Super+c exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+
+bindsym --locked XF86AudioPause exec playerctl pause
+bindsym --locked XF86AudioPlay exec playerctl play
+bindsym --locked XF86AudioNext exec playerctl next
+bindsym --locked XF86AudioPrev exec playerctl previous
+# Special keys to adjust brightness via brightnessctl
+bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+# Special key to take a screenshot with grim
+bindsym Print exec /home/mirelois/.config/sway/screen_shot.sh
+
+
+default_border pixel 5
+
+gaps inner 5
+gaps outer -5
+
+# hide_edge_borders smart
+
+smart_gaps on
+
+exec /home/mirelois/dotfiles/.config/sway/set_darkmode.sh
+
+
+bindsym $mod+y exec firefox -P "personal" --name "firefox-personal"
+bindsym $mod+b exec firefox -P "work" --name "firefox-work"
+bindsym $mod+d exec discord
+
+# swaymsg -t get_tree
+for_window {
+    [app_id="firefox-work"] move window to workspace 5, focus
+    [app_id="firefox-personal"] move window to workspace 6, focus
+    [app_id="zotero"] move window to workspace 4, focus
+    [class="discord"] move window to workspace 7
+    [app_id="mattermost"] move window to workspace 7, focus
+    [app_id="Nautilus"] floating enable focus
+    [app_id="Calculator"] floating enable
+    [window_role="pop-up"] floating enable
+    [window_role="bubble"] floating enable
+    [window_role="dialog"] floating enable
+    [window_type="dialog"] floating enable
+}
+
+exec {
+    pactl set-sink-mute @DEFAULT_SINK@ 1;
+    pactl set-source-mute @DEFAULT_SOURCE@ 1;
+    #for setting u displays
+    kanshi
+    discord
+    #for notifications
+    dunst
+    #polkit for password promts
+    pkttyagent
+}
+
+client.focused #957fb8 #121212 #dcdcdc #957fb8 #957fb8
+client.focused_inactive #121212 #121212 #dcdcdc #121212 #121212
+client.unfocused #121212 #121212 #dcdcdc #121212 #121212
+
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+#bar {
+#    position top
+#
+#    # When the status_command prints a new line to stdout, swaybar updates.
+#    # The default just shows the current date and time.
+#    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+#
+#    colors {
+#        statusline #ffffff
+#        background #323232
+#        inactive_workspace #32323200 #32323200 #5c5c5c
+#    }
+#}
+
+exec_always {
+    gsettings set org.gnome.desktop.interface gtk-theme "YOUR_GTK_THEME"
+    gsettings set org.gnome.desktop.interface icon-theme "YOUR_ICON_THEME"
+    gsettings set org.gnome.desktop.interface cursor-theme "YOUR_CURSOR_THEME"
+    gsettings set org.gnome.desktop.interface font-name "Sans 12"
+}
+
+bar {
+    swaybar_command waybar
+    workspace_buttons yes
+}
+
+include /etc/sway/config.d/*

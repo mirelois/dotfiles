@@ -1,0 +1,18 @@
+theme = Kanagawa Wave
+
+keybind = ctrl+shift+j=unbind
+keybind = ctrl+shift+n=unbind
+keybind = ctrl+shift+p=unbind
+keybind = ctrl+enter=unbind
+keybind = ctrl+plus=unbind
+
+foreground = #dcdcdc
+background = #121212
+
+font-family = ""
+font-family = "Monocraft"
+
+background-opacity = 0.75
+background-blur = true
+
+confirm-close-surface = false

@@ -1,34 +1,35 @@
 return {
     {
         'nvim-treesitter/nvim-treesitter',
-        keys = function()
-            local ts_repeat_move = require "nvim-treesitter.textobjects.repeatable_move"
-
-            return {
-                { ";", ts_repeat_move.repeat_last_move_next,     mode = { "n", "x", "o" } },
-                { ",", ts_repeat_move.repeat_last_move_previous, mode = { "n", "x", "o" } },
-                { "f", ts_repeat_move.builtin_f,                 mode = { "n", "x", "o" } },
-                { "F", ts_repeat_move.builtin_F,                 mode = { "n", "x", "o" } },
-                { "t", ts_repeat_move.builtin_t,                 mode = { "n", "x", "o" } },
-                { "T", ts_repeat_move.builtin_T,                 mode = { "n", "x", "o" } },
-
-            }
-        end,
+        lazy = false,
+        branch = "main",
         config = function()
-            require 'nvim-treesitter.configs'.setup {
-                -- A list of parser names, or "all"
-                ensure_installed = { "javascript", "typescript", "c", "lua", "rust", "bash", "python" },
+            vim.api.nvim_create_autocmd('FileType', {
+                pattern = '*',
+                callback = function()
+                    local _ = pcall(vim.treesitter.start)
+                end,
+            })
 
-                -- Install parsers synchronously (only applied to `ensure_installed`)
-                sync_install = false,
+            --auto install
+            vim.api.nvim_create_autocmd('FileType', {
+                callback = function(ev)
+                    local lang = vim.treesitter.language.get_lang(ev.match)
+                    local available_langs = require('nvim-treesitter').get_available()
+                    local is_available = vim.tbl_contains(available_langs, lang)
+                    if is_available then
+                        local installed_langs = require('nvim-treesitter').get_installed()
+                        local installed = vim.tbl_contains(installed_langs, lang)
+                        if not installed then
+                            require('nvim-treesitter').install(lang):wait()
+                        end
+                        vim.treesitter.start()
+                        require('nvim-treesitter').indentexpr()
+                    end
+                end,
+            })
 
-                -- Automatically install missing parsers when entering buffer
-                -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-                auto_install = true,
-
-                ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
-                -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
-
+            require 'nvim-treesitter'.setup {
                 highlight = {
                     -- `false` will disable the whole extension
                     enable = true,
@@ -73,7 +74,7 @@ return {
                         selection_modes = {
                             ['@parameter.outer'] = 'v', -- charwise
                             ['@function.outer'] = 'V',  -- linewise
-                            ['@class.outer'] = 'V', -- blockwise
+                            ['@class.outer'] = 'V',     -- blockwise
                         },
                         -- If you set this to `true` (default is `false`) then any textobject is
                         -- extended to include preceding or succeeding whitespace. Succeeding
@@ -125,7 +126,7 @@ return {
         dependencies = {
             'nvim-treesitter/nvim-treesitter-context',
             "nvim-treesitter/nvim-treesitter-textobjects",
-            'nvim-treesitter/playground'
+            -- 'nvim-treesitter/playground'
         }
     },
 }

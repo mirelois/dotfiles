@@ -8,6 +8,7 @@ function setup(clientkeys, clientbuttons)
         {
             rule = {},
             properties = {
+                honor_padding = true,
                 maximized = false,
                 border_width = beautiful.border_width,
                 border_color = beautiful.border_normal,

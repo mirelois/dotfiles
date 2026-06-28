@@ -5,13 +5,13 @@
 * {
     background-color:       @background;
     text-color:             @selected;
-	font:				 	"Museo Sans 12";
+    font:"Monocraft 11";
 }
 
 window {
-    width:      			360px;
-    padding:    			25px;
-    border:					1px;
+    width:      435px;
+    padding:    25px;
+    border:1px;
     border-radius:          12px;
     border-color:           @border;
     location:               center;
@@ -19,6 +19,6 @@ window {
 }
 
 entry {
-    expand: 				true;
-    text-color:				@border;
+    expand: true;
+    text-color:@border;
 }
