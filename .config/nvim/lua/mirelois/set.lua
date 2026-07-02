@@ -49,7 +49,7 @@ vim.g.mapleader = " "
 vim.cmd('autocmd BufEnter * set formatoptions-=cro')
 vim.cmd('autocmd BufEnter * setlocal formatoptions-=cro')
 
-vim.cmd([[set makeprg=make\ \-C\ build]])
+vim.cmd([[set makeprg=make\ \-C\ ../build]])
 
 if vim.fn.has("termguicolors") then
     vim.opt.termguicolors = true

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sudo openvpn --config ~/Work/INESC/vpn_configs/inesctec_202509_fedora.ovpn

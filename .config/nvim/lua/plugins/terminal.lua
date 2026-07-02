@@ -15,10 +15,10 @@ return {
                 { '<A-j>', require('smart-splits').resize_down },
                 { '<A-k>', require('smart-splits').resize_up },
                 { '<A-l>', require('smart-splits').resize_right },
-                { '<C-S-k>', require('smart-splits').move_cursor_up },
-                { '<C-S-j>', require('smart-splits').move_cursor_down },
-                { '<C-S-h>', require('smart-splits').move_cursor_left },
-                { '<C-S-l>', require('smart-splits').move_cursor_right },
+                { '<C-k>', require('smart-splits').move_cursor_up },
+                { '<C-j>', require('smart-splits').move_cursor_down },
+                { '<C-h>', require('smart-splits').move_cursor_left },
+                { '<C-l>', require('smart-splits').move_cursor_right },
             }
         end,
         opts = {

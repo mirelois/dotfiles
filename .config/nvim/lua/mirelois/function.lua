@@ -18,6 +18,12 @@ vim.api.nvim_create_user_command("Read", function(tbl)
 end, { nargs = '*' })
 
 
+vim.api.nvim_create_user_command("Test", function(tbl)
+    local cwDir = vim.fn.getcwd()
+    local cwdContent = vim.split(vim.fn.glob(cwDir .. "/**"), '\n', {trimempty=true})
+    print(vim.inspect(cwdContent))
+end, {})
+
 -- -- Open pdf files
 -- vim.api.nvim_create_autocmd("BufReadCmd", {
 --   pattern = "*.pdf",

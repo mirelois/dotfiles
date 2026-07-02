@@ -1,7 +1,7 @@
 #!/bin/bash
 
-gsettings set org.gnome.desktop.interface color-scheme prefer-dark
 gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
 # This should work for all QT/KDE apps
 # if you have the Breeze Dark theme installed.

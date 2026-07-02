@@ -1,10 +1,20 @@
 theme = Kanagawa Wave
 
-keybind = ctrl+shift+j=unbind
-keybind = ctrl+shift+n=unbind
-keybind = ctrl+shift+p=unbind
-keybind = ctrl+enter=unbind
-keybind = ctrl+plus=unbind
+keybind = unconsumed:ctrl+shift+n=unbind
+keybind = unconsumed:ctrl+shift+p=unbind
+
+keybind = unconsumed:ctrl+shift+l=unbind
+keybind = unconsumed:ctrl+shift+h=unbind
+keybind = unconsumed:ctrl+shift+j=unbind
+keybind = unconsumed:ctrl+shift+k=unbind
+
+keybind = unconsumed:ctrl+l=unbind
+keybind = unconsumed:ctrl+h=unbind
+keybind = unconsumed:ctrl+j=unbind
+keybind = unconsumed:ctrl+k=unbind
+
+keybind = unconsumed:ctrl+enter=unbind
+keybind = unconsumed:ctrl+plus=unbind
 
 foreground = #dcdcdc
 background = #121212

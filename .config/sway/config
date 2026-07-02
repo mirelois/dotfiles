@@ -40,6 +40,10 @@ output * bg `find ~/wallpapers/ -type f | shuf -n 1` fill
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 
+output DP-1 {
+    resolution 2560x1440@120Hz
+}
+
 ### Input configuration
 #
 # Example configuration:
@@ -65,7 +69,7 @@ bindsym $mod+shift+space input type:keyboard xkb_switch_layout next
 #dark mode stuff
 exec_always {
     export GTK_THEME="Adwaita:dark"
-    ./set_darkmode.sh
+    /home/mirelois/.config/sway/set_darkmode.sh
 
 }
 
@@ -293,8 +297,12 @@ for_window {
     [app_id="firefox-personal"] move window to workspace 6, focus
     [app_id="zotero"] move window to workspace 4, focus
     [class="discord"] move window to workspace 7
+    [class="steam"] move window to workspace 10, focus
+    [class="steam_app"] move window to workspace 9, focus
     [app_id="mattermost"] move window to workspace 7, focus
+    [app_id="dolphin"] move window to workspace 4, focus
     [app_id="Nautilus"] floating enable focus
+    [app_id="kdesystemsettings"] floating enable
     [app_id="Calculator"] floating enable
     [window_role="pop-up"] floating enable
     [window_role="bubble"] floating enable
@@ -306,7 +314,7 @@ exec {
     pactl set-sink-mute @DEFAULT_SINK@ 1;
     pactl set-source-mute @DEFAULT_SOURCE@ 1;
     #for setting u displays
-    kanshi
+    #kanshi
     discord
     #for notifications
     dunst

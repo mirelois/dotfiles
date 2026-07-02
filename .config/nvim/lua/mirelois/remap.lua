@@ -76,3 +76,8 @@ vim.keymap.set("n", "/", [[/\v]])
 
 -- unset mic muter button
 vim.keymap.set("", "<D-c>", "")
+
+-- quickfix open
+vim.keymap.set("n", "<leader>cq", function() vim.cmd([[copen]]) end)
+
+
