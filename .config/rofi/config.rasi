@@ -5,4 +5,4 @@ configuration {
   icon-theme:         "candy-icons";
 }
 
-@theme "kanagawa"
+@theme "kanagawa-paper"
