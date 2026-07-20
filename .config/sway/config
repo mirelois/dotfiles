@@ -48,21 +48,21 @@ output DP-1 {
 #
 # Example configuration:
 #
-  input type:touchpad {
-      dwt enabled
-      # tap enabled
-      natural_scroll enabled
-      middle_emulation enabled
-  }
+input type:touchpad {
+    dwt enabled
+    # tap enabled
+    natural_scroll enabled
+    middle_emulation enabled
+}
 
 
 
-    input type:keyboard {
-          xkb_layout "pt(nodeadkeys),pt"
-          xkb_options ctrl:nocaps
-          xkb_options compose:ins
-          xkb_numlock enabled
-  }
+input type:keyboard {
+    xkb_layout "pt(nodeadkeys),pt"
+    xkb_options ctrl:nocaps
+    xkb_options compose:ins
+    xkb_numlock enabled
+}
 
 bindsym $mod+shift+space input type:keyboard xkb_switch_layout next
 
@@ -82,7 +82,8 @@ exec_always {
 # Basics:
 #
     
-    bindsym $mod+q exec ~/.config/sway/shutdown.sh
+    bindsym $mod+q exec ~/.config/sway/shutdown.sh "systemctl poweroff"
+    bindsym $mod+s exec ~/.config/sway/shutdown.sh "systemctl suspend"
     
     # Start a terminal
     bindsym $mod+Return exec GTK_IM_MODULE=simple $term
@@ -129,8 +130,6 @@ exec_always {
     bindsym $mod+Shift+Down move down
     bindsym $mod+Shift+Up move up
     bindsym $mod+Shift+Right move right
-
-    bindsym XF86Launch6 input type:keyboard xkb_switch_layout next
 
 # Workspaces:
 #
@@ -257,10 +256,13 @@ bindsym $mod+Shift+r mode "resize"
 # Utilities:
 #
 # Special keys to adjust volume via PulseAudio
-bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
-bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -1%
+bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +1%
+bindsym --locked Ctrl+XF86AudioLowerVolume exec pactl set-source-volume \@DEFAULT_SOURCE@ -1%
+bindsym --locked Ctrl+XF86AudioRaiseVolume exec pactl set-source-volume \@DEFAULT_SOURCE@ +1%
 
 bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
 # mic button in keyboard
 bindsym --locked Super+c exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
 
@@ -268,9 +270,13 @@ bindsym --locked XF86AudioPause exec playerctl pause
 bindsym --locked XF86AudioPlay exec playerctl play
 bindsym --locked XF86AudioNext exec playerctl next
 bindsym --locked XF86AudioPrev exec playerctl previous
+
 # Special keys to adjust brightness via brightnessctl
 bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+
+bindsym XF86Launch6 input type:keyboard xkb_switch_layout next
+
 # Special key to take a screenshot with grim
 bindsym Print exec /home/mirelois/.config/sway/screen_shot.sh
 
@@ -287,20 +293,27 @@ smart_gaps on
 exec /home/mirelois/dotfiles/.config/sway/set_darkmode.sh
 
 
-bindsym $mod+y exec firefox -P "personal" --name "firefox-personal"
+bindsym $mod+y exec firefox -P "personal" --name "firefox-personal" youtube.com
 bindsym $mod+b exec firefox -P "work" --name "firefox-work"
 bindsym $mod+d exec discord
 
 # swaymsg -t get_tree
 for_window {
     [app_id="firefox-work"] move window to workspace 5, focus
+
     [app_id="firefox-personal"] move window to workspace 6, focus
+
     [app_id="zotero"] move window to workspace 4, focus
-    [class="discord"] move window to workspace 7
-    [class="steam"] move window to workspace 10, focus
-    [class="steam_app"] move window to workspace 9, focus
-    [app_id="mattermost"] move window to workspace 7, focus
     [app_id="dolphin"] move window to workspace 4, focus
+
+    [class="discord"] move window to workspace 7
+        [app_id="mattermost"] move window to workspace 7, focus
+
+    [class="steam"] move window to workspace 10, focus
+    [class="prismlauncher"] move window to workspace 10, focus
+
+    [class="steam_app"] move window to workspace 9, focus
+
     [app_id="Nautilus"] floating enable focus
     [app_id="kdesystemsettings"] floating enable
     [app_id="Calculator"] floating enable

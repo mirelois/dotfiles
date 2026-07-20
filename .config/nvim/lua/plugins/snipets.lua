@@ -73,27 +73,59 @@ return {
         }
 
         ls.add_snippets("all", {
-            s("lorem", fmt([[
-    ,   .    
- ,    .    .
-      .    .
-   .    ,   . 
-  ,     .   , 
-  ,   .
+            s("lorem", fmt([[ Lorem ipsum dolor sit amet, consectetur
+            adipiscing elit. Praesent lobortis nec tortor vitae rhoncus.
+            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+            posuere cubilia curae; Praesent in nisi malesuada, tincidunt dui
+            vel, ultricies odio. Nulla facilisi. Fusce maximus purus sem, at
+            rhoncus eros dictum a. In a nisi egestas, scelerisque metus id,
+            dignissim tellus. In posuere maximus massa non ultricies. Donec
+            consequat eros lectus. Aenean non neque venenatis, tincidunt augue
+            vitae, tincidunt diam. Mauris convallis arcu at sapien fermentum
+            tristique. Fusce est felis, posuere ac arcu a, lacinia cursus
+            neque. Etiam rhoncus, ligula in euismod sagittis, ipsum elit ornare
+            quam, nec dictum lectus eros porttitor ipsum. Maecenas id eleifend
+            turpis. In sapien quam, tristique ac nunc id, porta ultrices elit.
+            Integer vitae mi sit amet dui elementum malesuada sit amet vitae
+            quam. Pellentesque fermentum augue in tellus tempor, ac viverra
+            lectus pharetra.
 
-    ,   ,  .   
-,   ,  .    . 
-    .   ,    ,
-  .    ,   .  
-  .      . 
-  ,     .  
-   ,    .  
-   .         
-.      .  ,  
- ,    ,     
-.       .]], {})),
+            Morbi neque tortor, cursus vitae nunc id, semper dapibus eros. Sed pellentesque
+            velit dui, eu hendrerit dolor egestas vitae. Nulla eleifend metus non dui
+            fermentum, quis aliquam ante dignissim. Integer sit amet mauris viverra lorem
+            pretium bibendum vel ac tellus. Cras porttitor fringilla condimentum. Donec eu
+            euismod magna, sed tincidunt dolor. Vivamus ac dictum mi. Sed viverra risus
+            diam, sit amet molestie enim pharetra vel. Curabitur vestibulum molestie
+            hendrerit. Donec eu viverra erat. Curabitur at arcu aliquet, condimentum diam
+            eget, aliquet nunc.
 
+            Quisque gravida nec sapien auctor ultricies. Praesent eu metus nec est
+            imperdiet placerat ac non ante. Vivamus a purus condimentum arcu rhoncus
+            laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
+            venenatis, est id vestibulum feugiat, lorem ante elementum arcu, non porta
+            lectus nisi sit amet dolor. Phasellus nec facilisis diam. Phasellus efficitur
+            lorem vel ante sodales auctor. Mauris imperdiet magna facilisis elit posuere
+            laoreet. In hac habitasse platea dictumst. Sed fermentum, nibh id scelerisque
+            laoreet, est ipsum ultricies nisl, eget congue eros urna sed augue. Nunc cursus
+            id lectus et ullamcorper. Cras dictum ante quis ex mattis, at maximus elit
+            viverra. Nullam nec luctus magna. Vestibulum eros tellus, fermentum non neque
+            ac, interdum dictum augue.
 
+            Phasellus eget gravida quam. Ut diam leo, bibendum quis lorem ac, placerat
+            commodo tortor. In tincidunt dictum dictum. Morbi tempus auctor sapien, et
+            fringilla felis interdum eget. Duis vel varius ante. Aliquam erat volutpat.
+            Donec ultricies varius elementum. Proin id accumsan dolor, viverra tincidunt
+            nunc. Pellentesque ultricies tincidunt mi non pellentesque. Nulla tempus felis
+            id orci ullamcorper tempus. Vivamus consequat sit amet dui sit amet
+            pellentesque. Ut feugiat ex vitae lectus tincidunt suscipit. Pellentesque justo
+            urna, tempus at nulla sit amet, vulputate facilisis odio. Mauris pretium in
+            nisl sit amet aliquam.
+
+            Praesent vehicula dictum eleifend. Vestibulum sollicitudin auctor eros quis
+            tempus. Etiam laoreet posuere condimentum. Quisque ut pretium libero. Sed
+            fringilla felis metus, et tincidunt mauris porttitor et. Maecenas laoreet, dui
+            ac pretium vestibulum, velit massa pretium quam, vel tincidunt nisi enim non
+            magna. Aenean viverra varius ante condimentum euismod.]], {})),
             s("currtime",
                 f(
                     function()
@@ -203,6 +235,22 @@ return {
                     i(1)
                 })
             })),
+            s("file-logger", fmt([[
+            #ifdef LOG_BYTES
+                static std::shared_ptr<spdlog::logger>& get_file_logger() {{
+                    static auto logger = ByteLogger::getInstance().make_logger("{}");
+                    return logger;
+                }}
+            #endif
+            ]], {
+                c(1, {
+                    f(function()
+                        local file_name = vim.api.nvim_buf_get_name(0)
+                        return "bytes_" .. string.gsub(file_name, ".*/(.-)%..*", "%1")
+                    end),
+                    i(1)
+                })
+            })),
             s("logc", fmt([[
             #if SPDLOG_ACTIVE_LEVEL != SPDLOG_LEVEL_OFF
                 {}
@@ -210,17 +258,24 @@ return {
             ]], {
                 i(1)
             })),
-            s("fori", fmt([[
-                            for(int {} = 0; {} < {}; {}++){{
-                                {}
-                            }}]], { i(1, "i"), rep(1), i(2), rep(1), i(3) })),
             s("log", fmt([[SPDLOG_LOGGER_TRACE(get_logger(), {});]],
                 {
                     c(1, {
                         fmt([["{}", {}]], { i(1), i(2) }),
                         fmt([["{}"]], i(1))
                     })
-                }))
+                })),
+            s("logbyte", fmt([[
+            #ifdef LOG_BYTES
+                get_file_logger()->info("{} {{}}", {});
+            #endif
+
+            ]],
+                {i(1), i(2)})),
+            s("fori", fmt([[
+            for(int {} = 0; {} < {}; {}++){{
+                {}
+            }}]], { i(1, "i"), rep(1), i(2), rep(1), i(3) })),
         }
         )
 

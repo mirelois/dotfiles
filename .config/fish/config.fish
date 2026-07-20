@@ -16,6 +16,8 @@ funcsave --quiet take
 
 alias n="nvim ."
 alias a="tmux-sessionizer ~"
+alias :q="quit"
+alias :Q="quit"
 
 fish_vi_key_bindings
 
